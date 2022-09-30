@@ -10,6 +10,10 @@ set(NTSH_DEFINES "")
 add_subdirectory(external/Module)
 add_subdirectory(external/Common)
 
+list(APPEND NTSH_DEFINES NTSH_CURRENT_MODULE_WINDOW)
+
+add_subdirectory(external/glfw)
+
 set(MODULE_SOURCES
 	src/ntsh_window_module.cpp)	
 set(MODULE_HEADERS
@@ -20,7 +24,7 @@ set(HEADERS ${MODULE_HEADERS})
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE NutshellEngine::Module NutshellEngine::Common)
+target_link_libraries(${PROJECT_NAME} PRIVATE NutshellEngine::Module NutshellEngine::Common glfw)
 
 target_compile_options(${PROJECT_NAME} PRIVATE
 	$<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
