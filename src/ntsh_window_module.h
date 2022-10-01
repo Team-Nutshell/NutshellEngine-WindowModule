@@ -10,9 +10,9 @@ public:
 	void destroy();
 
 	// Send a request to close the window
-	virtual void closeWindow();
+	void closeWindow();
 	// Returns true if there has been a request to close the window, else if there has been no request to close the window
-	virtual bool shouldClose();
+	bool shouldClose();
 
 	// Changes the size of the window to width and height
 	void setWindowSize(int width, int height);
