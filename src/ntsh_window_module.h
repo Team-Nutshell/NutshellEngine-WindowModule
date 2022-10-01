@@ -12,11 +12,8 @@ private:
 
 	// Resize callback
 	static void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
-		NTSH_UNUSED(width);
-		NTSH_UNUSED(height);
 		auto ptr = reinterpret_cast<NutshellWindowModule*>(glfwGetWindowUserPointer(window));
-		ptr->getWindowWidth();
-		ptr->getWindowHeight();
+		ptr->resizeInternal(width, height);
 	}
 public:
 	NutshellWindowModule() : NutshellWindowModuleInterface("Nutshell Window Test Module") {}
@@ -26,9 +23,9 @@ public:
 	void destroy();
 
 	// Send a request to close the window
-	virtual void closeWindow();
+	void closeWindow();
 	// Returns true if there has been a request to close the window, else if there has been no request to close the window
-	virtual bool shouldClose();
+	bool shouldClose();
 
 	// Changes the size of the window to width and height
 	void setWindowSize(int width, int height);
@@ -41,4 +38,8 @@ public:
 	bool isFullscreen();
 	// If the fullscreen parameter is true, puts the window in fullscreen, else, puts the window in windowed
 	void setFullscreen(bool fullscreen);
+
+public:
+	// Internal function
+	void resizeInternal(int newWidth, int newHeight);
 };
