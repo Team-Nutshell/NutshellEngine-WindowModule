@@ -25,4 +25,7 @@ public:
 	bool isFullscreen();
 	// If the fullscreen parameter is true, puts the window in fullscreen, else, puts the window in windowed
 	void setFullscreen(bool fullscreen);
+
+	// Sets the title of the window
+	void setTitle(const std::string& title);
 };

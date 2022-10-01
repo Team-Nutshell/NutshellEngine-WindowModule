@@ -51,6 +51,11 @@ void NutshellWindowModule::setFullscreen(bool fullscreen) {
 	NTSH_MODULE_WARNING("setFullscreen() function not implemented.");
 }
 
+void NutshellWindowModule::setTitle(const std::string& title) {
+	NTSH_UNUSED(title);
+	NTSH_MODULE_WARNING("setTitle() function not implemented.");
+}
+
 extern "C" NTSH_MODULE_API NutshellWindowModuleInterface * createModule() {
 	return new NutshellWindowModule;
 }
