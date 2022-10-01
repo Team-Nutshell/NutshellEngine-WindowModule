@@ -38,17 +38,11 @@ void NutshellWindowModule::setWindowSize(int width, int height) {
 }
 
 int NutshellWindowModule::getWindowWidth() {
-	int width;
-	int height;
-	glfwGetWindowSize(m_window, &width, &height);
-	return width;
+	return m_width;
 }
 
 int NutshellWindowModule::getWindowHeight() {
-	int width;
-	int height;
-	glfwGetWindowSize(m_window, &width, &height);
-	return height;
+	return m_height;
 }
 
 bool NutshellWindowModule::isFullscreen() {
@@ -68,6 +62,11 @@ void NutshellWindowModule::setFullscreen(bool fullscreen) {
 		GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
 		glfwSetWindowMonitor(m_window, primaryMonitor, m_x, m_y, m_width, m_height, GLFW_DONT_CARE);
 	}
+}
+
+void NutshellWindowModule::resizeInternal(int newWidth, int newHeight) {
+	m_width = newWidth;
+	m_height = newHeight;
 }
 
 extern "C" NTSH_MODULE_API NutshellWindowModuleInterface* createModule() {
