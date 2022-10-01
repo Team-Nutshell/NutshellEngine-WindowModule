@@ -6,13 +6,16 @@
 void NutshellWindowModule::init() {
     glfwInit();
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    m_window = glfwCreateWindow(1280, 720, m_name.c_str(), nullptr, nullptr);
+    m_window = glfwCreateWindow(m_width, m_height, m_name.c_str(), nullptr, nullptr);
+    glfwGetWindowPos(m_window, &m_x, &m_y);
     glfwSetWindowUserPointer(m_window, this);
+    
+    glfwSetFramebufferSizeCallback(m_window, framebufferSizeCallback);
 }
 
 void NutshellWindowModule::update(double dt) {
     NTSH_UNUSED(dt);
-    NTSH_MODULE_WARNING("update() function not implemented.");
+    glfwPollEvents();
 }
 
 void NutshellWindowModule::destroy() {
@@ -21,44 +24,56 @@ void NutshellWindowModule::destroy() {
 }
 
 void NutshellWindowModule::closeWindow() {
-    NTSH_MODULE_WARNING("closeWindow() function not implemented.");
+    glfwSetWindowShouldClose(m_window, true);
 }
 
 bool NutshellWindowModule::shouldClose() {
-    NTSH_MODULE_WARNING("shouldClose() function not implemented.");
-    return false;
+    return glfwWindowShouldClose(m_window);
 }
 
 void NutshellWindowModule::setWindowSize(int width, int height) {
-    NTSH_UNUSED(width);
-    NTSH_UNUSED(height);
-    NTSH_MODULE_WARNING("setWindowSize() function not implemented.");
+    glfwSetWindowSize(m_window, width, height);
+    m_width = width;
+    m_height = height;
 }
 
 int NutshellWindowModule::getWindowWidth() {
-    NTSH_MODULE_WARNING("getWindowWidth() function not implemented.");
-    return 0;
+    int width;
+    int height;
+    glfwGetWindowSize(m_window, &width, &height);
+    return width;
 }
 
 int NutshellWindowModule::getWindowHeight() {
-    NTSH_MODULE_WARNING("getWindowHeight() function not implemented.");
-    return 0;
+    int width;
+    int height;
+    glfwGetWindowSize(m_window, &width, &height);
+    return height;
 }
 
 bool NutshellWindowModule::isFullscreen() {
-    NTSH_MODULE_WARNING("isFullscreen() function not implemented.");
-    return false;
+    return glfwGetWindowMonitor(m_window) != nullptr;
 }
 
 void NutshellWindowModule::setFullscreen(bool fullscreen) {
-    NTSH_UNUSED(fullscreen);
-    NTSH_MODULE_WARNING("setFullscreen() function not implemented.");
+    if (!isFullscreen() && fullscreen) {
+        glfwGetWindowPos(m_window, &m_x, &m_y);
+        glfwGetWindowSize(m_window, &m_width, &m_height);
+
+        GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
+        glfwSetWindowMonitor(m_window, primaryMonitor, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+    }
+    else if (!fullscreen && isFullscreen()) {
+        GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
+        glfwSetWindowMonitor(m_window, primaryMonitor, m_x, m_y, m_width, m_height, GLFW_DONT_CARE);
+    }
 }
 
-extern "C" NTSH_MODULE_API NutshellWindowModuleInterface * createModule() {
+extern "C" NTSH_MODULE_API NutshellWindowModuleInterface* createModule() {
     return new NutshellWindowModule;
 }
 
-extern "C" NTSH_MODULE_API void destroyModule(NutshellWindowModuleInterface * m) {
+extern "C" NTSH_MODULE_API void destroyModule(NutshellWindowModuleInterface* m) {
     delete m;
 }
