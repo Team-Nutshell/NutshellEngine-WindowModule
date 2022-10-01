@@ -64,6 +64,11 @@ void NutshellWindowModule::setFullscreen(bool fullscreen) {
 	}
 }
 
+void NutshellWindowModule::setTitle(const std::string& title) {
+	NTSH_UNUSED(title);
+	NTSH_MODULE_WARNING("setTitle() function not implemented.");
+}
+
 void NutshellWindowModule::resizeInternal(int newWidth, int newHeight) {
 	m_width = newWidth;
 	m_height = newHeight;
