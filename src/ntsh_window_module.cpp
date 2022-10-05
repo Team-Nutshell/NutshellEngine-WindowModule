@@ -1,6 +1,7 @@
 #include "ntsh_window_module.h"
 #include "../external/Module/ntsh_module_defines.h"
 #include "../external/Module/ntsh_dynamic_library.h"
+#include "../external/Common/ntsh_engine_defines.h"
 #include "../external/Common/ntsh_engine_enums.h"
 
 void NutshellWindowModule::init() {
@@ -56,10 +57,10 @@ void NutshellWindowModule::setTitle(const std::string& title) {
 	NTSH_MODULE_WARNING("setTitle() function not implemented.");
 }
 
-extern "C" NTSH_MODULE_API NutshellWindowModuleInterface * createModule() {
+extern "C" NTSH_MODULE_API NutshellWindowModuleInterface* createModule() {
 	return new NutshellWindowModule;
 }
 
-extern "C" NTSH_MODULE_API void destroyModule(NutshellWindowModuleInterface * m) {
+extern "C" NTSH_MODULE_API void destroyModule(NutshellWindowModuleInterface* m) {
 	delete m;
 }
