@@ -57,6 +57,18 @@ void NutshellWindowModule::setTitle(const std::string& title) {
 	NTSH_MODULE_WARNING("setTitle() function not implemented.");
 }
 
+#ifdef NTSH_OS_WINDOWS
+HWND NutshellWindowModule::getWindowHandle() {
+	NTSH_MODULE_WARNING("getWindowHandle() function not implemented.");
+	return nullptr;
+}
+#elif NTSH_OS_LINUX
+Window NutshellWindowModule::getWindowHandle() {
+	NTSH_MODULE_WARNING("getWindowHandle() function not implemented.");
+	return nullptr;
+}
+#endif
+
 extern "C" NTSH_MODULE_API NutshellWindowModuleInterface* createModule() {
 	return new NutshellWindowModule;
 }
