@@ -65,7 +65,7 @@ HWND NutshellWindowModule::getWindowHandle() {
 #elif NTSH_OS_LINUX
 Window NutshellWindowModule::getWindowHandle() {
 	NTSH_MODULE_WARNING("getWindowHandle() function not implemented.");
-	return nullptr;
+	return 0;
 }
 #endif
 
