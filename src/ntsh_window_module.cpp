@@ -74,6 +74,18 @@ void NutshellWindowModule::resizeInternal(int newWidth, int newHeight) {
 	m_height = newHeight;
 }
 
+#ifdef NTSH_OS_WINDOWS
+HWND NutshellWindowModule::getWindowHandle() {
+	NTSH_MODULE_WARNING("getWindowHandle() function not implemented.");
+	return nullptr;
+}
+#elif NTSH_OS_LINUX
+Window NutshellWindowModule::getWindowHandle() {
+	NTSH_MODULE_WARNING("getWindowHandle() function not implemented.");
+	return 0;
+}
+#endif
+
 extern "C" NTSH_MODULE_API NutshellWindowModuleInterface* createModule() {
 	return new NutshellWindowModule;
 }
