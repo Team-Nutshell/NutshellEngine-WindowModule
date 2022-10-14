@@ -42,6 +42,14 @@ public:
 	// Sets the title of the window
 	void setTitle(const std::string& title);
 
+#ifdef NTSH_OS_WINDOWS
+	// Returns the native Win32 window handle
+	HWND getWindowHandle();
+#elif NTSH_OS_LINUX
+	// Returns the native X window handle
+	Window getWindowHandle();
+#endif
+
 public:
 	// Internal function
 	void resizeInternal(int newWidth, int newHeight);
