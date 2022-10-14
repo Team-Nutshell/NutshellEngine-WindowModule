@@ -3,6 +3,12 @@
 #include "../external/Module/ntsh_dynamic_library.h"
 #include "../external/Common/ntsh_engine_defines.h"
 #include "../external/Common/ntsh_engine_enums.h"
+#ifdef NTSH_OS_WINDOWS
+#define GLFW_EXPOSE_NATIVE_WIN32
+#elif NTSH_OS_LINUX
+#define GLFW_EXPOSE_NATIVE_X11
+#endif
+#include "../external/glfw/include/GLFW/glfw3native.h"
 
 void NutshellWindowModule::init() {
 	glfwInit();
@@ -76,13 +82,11 @@ void NutshellWindowModule::resizeInternal(int newWidth, int newHeight) {
 
 #ifdef NTSH_OS_WINDOWS
 HWND NutshellWindowModule::getWindowHandle() {
-	NTSH_MODULE_WARNING("getWindowHandle() function not implemented.");
-	return nullptr;
+	return glfwGetWin32Window(m_window);
 }
 #elif NTSH_OS_LINUX
 Window NutshellWindowModule::getWindowHandle() {
-	NTSH_MODULE_WARNING("getWindowHandle() function not implemented.");
-	return 0;
+	return glfwGetX11Window(m_window);
 }
 #endif
 

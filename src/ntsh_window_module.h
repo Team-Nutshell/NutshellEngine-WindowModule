@@ -3,18 +3,6 @@
 #include "../external/glfw/include/GLFW/glfw3.h"
 
 class NutshellWindowModule : public NutshellWindowModuleInterface {
-private:
-	GLFWwindow* m_window = nullptr;
-	int m_width = 1280;
-	int m_height = 720;
-	int m_x = 0;
-	int m_y = 0;
-
-	// Resize callback
-	static void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
-		auto ptr = reinterpret_cast<NutshellWindowModule*>(glfwGetWindowUserPointer(window));
-		ptr->resizeInternal(width, height);
-	}
 public:
 	NutshellWindowModule() : NutshellWindowModuleInterface("Nutshell Window Test Module") {}
 
@@ -53,4 +41,18 @@ public:
 public:
 	// Internal function
 	void resizeInternal(int newWidth, int newHeight);
+
+private:
+	// Resize callback
+	static void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
+		auto ptr = reinterpret_cast<NutshellWindowModule*>(glfwGetWindowUserPointer(window));
+		ptr->resizeInternal(width, height);
+	}
+
+private:
+	GLFWwindow* m_window = nullptr;
+	int m_width = 1280;
+	int m_height = 720;
+	int m_x = 0;
+	int m_y = 0;
 };
