@@ -11,31 +11,34 @@ public:
 	void destroy();
 
 	// Send a request to close the window
-	void closeWindow();
+	void close();
 	// Returns true if there has been a request to close the window, else if there has been no request to close the window
 	bool shouldClose();
 
 	// Changes the size of the window to width and height
-	void setWindowSize(int width, int height);
+	void setSize(int width, int height);
 	// Returns the width of the window
-	int getWindowWidth();
+	int getWidth();
 	// Returns the height of the window
-	int getWindowHeight();
+	int getHeight();
 
 	// Returns true if the window is in fullscreen mode, else, return false
 	bool isFullscreen();
 	// If the fullscreen parameter is true, puts the window in fullscreen, else, puts the window in windowed
 	void setFullscreen(bool fullscreen);
 
+	// Poll events
+	void pollEvents();
+
 	// Sets the title of the window
 	void setTitle(const std::string& title);
 
 #ifdef NTSH_OS_WINDOWS
 	// Returns the native Win32 window handle
-	HWND getWindowHandle();
+	HWND getNativeHandle();
 #elif NTSH_OS_LINUX
 	// Returns the native X window handle
-	Window getWindowHandle();
+	Window getNativeHandle();
 #endif
 
 public:
