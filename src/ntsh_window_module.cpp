@@ -89,7 +89,7 @@ HWND NutshellWindowModule::getNativeHandle() {
 	return glfwGetWin32Window(m_window);
 }
 #elif NTSH_OS_LINUX
-Window NutshellWindowModule::getWindowHandle() {
+Window NutshellWindowModule::getNativeHandle() {
 	return glfwGetX11Window(m_window);
 }
 #endif
