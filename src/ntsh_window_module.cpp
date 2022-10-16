@@ -30,7 +30,7 @@ void NutshellWindowModule::destroy() {
 	glfwTerminate();
 }
 
-void NutshellWindowModule::closeWindow() {
+void NutshellWindowModule::close() {
 	glfwSetWindowShouldClose(m_window, true);
 }
 
@@ -38,17 +38,17 @@ bool NutshellWindowModule::shouldClose() {
 	return glfwWindowShouldClose(m_window);
 }
 
-void NutshellWindowModule::setWindowSize(int width, int height) {
+void NutshellWindowModule::setSize(int width, int height) {
 	glfwSetWindowSize(m_window, width, height);
 	m_width = width;
 	m_height = height;
 }
 
-int NutshellWindowModule::getWindowWidth() {
+int NutshellWindowModule::getWidth() {
 	return m_width;
 }
 
-int NutshellWindowModule::getWindowHeight() {
+int NutshellWindowModule::getHeight() {
 	return m_height;
 }
 
@@ -71,6 +71,10 @@ void NutshellWindowModule::setFullscreen(bool fullscreen) {
 	}
 }
 
+void NutshellWindowModule::pollEvents() {
+	glfwPollEvents();
+}
+
 void NutshellWindowModule::setTitle(const std::string& title) {
 	glfwSetWindowTitle(m_window, title.c_str());
 }
@@ -81,7 +85,7 @@ void NutshellWindowModule::resizeInternal(int newWidth, int newHeight) {
 }
 
 #ifdef NTSH_OS_WINDOWS
-HWND NutshellWindowModule::getWindowHandle() {
+HWND NutshellWindowModule::getNativeHandle() {
 	return glfwGetWin32Window(m_window);
 }
 #elif NTSH_OS_LINUX
