@@ -17,7 +17,7 @@ void NutshellWindowModule::destroy() {
 	NTSH_MODULE_WARNING("destroy() function not implemented.");
 }
 
-void NutshellWindowModule::closeWindow() {
+void NutshellWindowModule::close() {
 	NTSH_MODULE_WARNING("closeWindow() function not implemented.");
 }
 
@@ -26,18 +26,18 @@ bool NutshellWindowModule::shouldClose() {
 	return false;
 }
 
-void NutshellWindowModule::setWindowSize(int width, int height) {
+void NutshellWindowModule::setSize(int width, int height) {
 	NTSH_UNUSED(width);
 	NTSH_UNUSED(height);
 	NTSH_MODULE_WARNING("setWindowSize() function not implemented.");
 }
 
-int NutshellWindowModule::getWindowWidth() {
+int NutshellWindowModule::getWidth() {
 	NTSH_MODULE_WARNING("getWindowWidth() function not implemented.");
 	return 0;
 }
 
-int NutshellWindowModule::getWindowHeight() {
+int NutshellWindowModule::getHeight() {
 	NTSH_MODULE_WARNING("getWindowHeight() function not implemented.");
 	return 0;
 }
@@ -52,9 +52,8 @@ void NutshellWindowModule::setFullscreen(bool fullscreen) {
 	NTSH_MODULE_WARNING("setFullscreen() function not implemented.");
 }
 
-bool NutshellWindowModule::gotResized() {
-	NTSH_MODULE_WARNING("gotResized() function not implemented.");
-	return false;
+void NutshellWindowModule::pollEvents() {
+	NTSH_MODULE_WARNING("pollEvents() function not implemented.");
 }
 
 void NutshellWindowModule::setTitle(const std::string& title) {
@@ -63,13 +62,13 @@ void NutshellWindowModule::setTitle(const std::string& title) {
 }
 
 #ifdef NTSH_OS_WINDOWS
-HWND NutshellWindowModule::getWindowHandle() {
-	NTSH_MODULE_WARNING("getWindowHandle() function not implemented.");
+HWND NutshellWindowModule::getNativeHandle() {
+	NTSH_MODULE_WARNING("getNativeHandle() function not implemented.");
 	return nullptr;
 }
 #elif NTSH_OS_LINUX
-Window NutshellWindowModule::getWindowHandle() {
-	NTSH_MODULE_WARNING("getWindowHandle() function not implemented.");
+Window NutshellWindowModule::getNativeHandle() {
+	NTSH_MODULE_WARNING("getNativeHandle() function not implemented.");
 	return 0;
 }
 #endif
