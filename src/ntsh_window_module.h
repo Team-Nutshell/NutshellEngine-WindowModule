@@ -1,9 +1,12 @@
 #pragma once
 #include "../external/Common/module_interfaces/ntsh_window_module_interface.h"
+#include "qtwindow.h"
+#include <qapplication.h>
+#include <memory>
 
 class NutshellWindowModule : public NutshellWindowModuleInterface {
 public:
-	NutshellWindowModule() : NutshellWindowModuleInterface("Nutshell Window Test Module") {}
+	NutshellWindowModule() : NutshellWindowModuleInterface("Nutshell Window Qt5 Module") {}
 
 	void init();
 	void update(double dt);
@@ -39,4 +42,9 @@ public:
 	// Returns the native X window handle
 	Window getNativeHandle();
 #endif
+
+private:
+	std::unique_ptr<QApplication> m_application;
+
+	std::unique_ptr<QtWindow> m_window;
 };

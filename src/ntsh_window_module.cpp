@@ -3,73 +3,81 @@
 #include "../external/Module/ntsh_dynamic_library.h"
 #include "../external/Common/ntsh_engine_defines.h"
 #include "../external/Common/ntsh_engine_enums.h"
+#include <thread>
 
 void NutshellWindowModule::init() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	int argc = 0;
+	m_application = std::make_unique<QApplication>(argc, nullptr);
+
+	m_window = std::make_unique<QtWindow>();
+	m_window->resize(1280, 720);
+	m_window->show();
 }
 
 void NutshellWindowModule::update(double dt) {
 	NTSH_UNUSED(dt);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	m_application->processEvents();
 }
 
 void NutshellWindowModule::destroy() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	m_window->close();
 }
 
 void NutshellWindowModule::close() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	m_window->close();
 }
 
 bool NutshellWindowModule::shouldClose() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return false;
+	return m_window->shouldClose();
 }
 
 void NutshellWindowModule::setSize(int width, int height) {
-	NTSH_UNUSED(width);
-	NTSH_UNUSED(height);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	m_window->resize(width, height);
 }
 
 int NutshellWindowModule::getWidth() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return 0;
+	if (m_window->isMinimized()) {
+		return 0;
+	}
+	return m_window->width();
 }
 
 int NutshellWindowModule::getHeight() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return 0;
+	if (m_window->isMinimized()) {
+		return 0;
+	}
+	return m_window->height();
 }
 
 bool NutshellWindowModule::isFullscreen() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return false;
+	return m_window->isFullScreen();
 }
 
 void NutshellWindowModule::setFullscreen(bool fullscreen) {
-	NTSH_UNUSED(fullscreen);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	if (fullscreen) {
+		m_window->showFullScreen();
+	}
+	else {
+		m_window->showNormal();
+	}
 }
 
 void NutshellWindowModule::pollEvents() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	m_application->processEvents();
 }
 
 void NutshellWindowModule::setTitle(const std::string& title) {
-	NTSH_UNUSED(title);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	m_window->setWindowTitle(QString::fromStdString(title));
 }
 
 #ifdef NTSH_OS_WINDOWS
 HWND NutshellWindowModule::getNativeHandle() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return nullptr;
+	return reinterpret_cast<HWND>(m_window->winId());
 }
 #elif NTSH_OS_LINUX
 Window NutshellWindowModule::getNativeHandle() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return 0;
+	return reinterpret_cast<Window>(m_window->winId());
 }
 #endif
 
