@@ -12,17 +12,19 @@ add_subdirectory(external/Common)
 
 list(APPEND NTSH_DEFINES NTSH_CURRENT_MODULE_WINDOW)
 
+find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
+
 set(MODULE_SOURCES
-	src/ntsh_window_module.cpp)	
+	src/ntsh_window_module.cpp src/qtwindow.cpp)	
 set(MODULE_HEADERS
-	src/ntsh_window_module.h)
+	src/ntsh_window_module.h src/qtwindow.h)
 
 set(SOURCES ${MODULE_SOURCES})
 set(HEADERS ${MODULE_HEADERS})
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE NutshellEngine::Module NutshellEngine::Common)
+target_link_libraries(${PROJECT_NAME} PRIVATE NutshellEngine::Module NutshellEngine::Common Qt5::Core Qt5::Gui Qt5::Widgets)
 
 target_compile_options(${PROJECT_NAME} PRIVATE
 	$<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
