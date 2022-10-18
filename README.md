@@ -1,2 +1,2 @@
-# NutshellEngine-WindowModule
-NutshellEngine's Window Module resources.
+# NutshellEngine-WindowModule - glfw
+NutshellEngine Window Module using glfw.
