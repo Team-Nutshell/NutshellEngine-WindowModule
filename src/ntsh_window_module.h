@@ -4,7 +4,7 @@
 
 class NutshellWindowModule : public NutshellWindowModuleInterface {
 public:
-	NutshellWindowModule() : NutshellWindowModuleInterface("Nutshell Window Test Module") {}
+	NutshellWindowModule() : NutshellWindowModuleInterface("Nutshell Window GLFW Module") {}
 
 	void init();
 	void update(double dt);
