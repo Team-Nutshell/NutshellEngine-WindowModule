@@ -10,9 +10,9 @@ public:
 	void update(double dt);
 	void destroy();
 
-	// Send a request to close the window
+	// Sends a request to close the window
 	void close();
-	// Returns true if there has been a request to close the window, else if there has been no request to close the window
+	// Returns true if there has been a request to close the window, else, returns false
 	bool shouldClose();
 
 	// Changes the size of the window to width and height
@@ -22,12 +22,12 @@ public:
 	// Returns the height of the window
 	int getHeight();
 
-	// Returns true if the window is in fullscreen mode, else, return false
+	// Returns true if the window is in fullscreen mode, else, returns false
 	bool isFullscreen();
 	// If the fullscreen parameter is true, puts the window in fullscreen, else, puts the window in windowed
 	void setFullscreen(bool fullscreen);
 
-	// Poll events
+	// Polls events
 	void pollEvents();
 
 	// Sets the title of the window
