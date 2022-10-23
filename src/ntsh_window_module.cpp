@@ -1,8 +1,8 @@
 #include "ntsh_window_module.h"
-#include "../external/Module/ntsh_module_defines.h"
-#include "../external/Module/ntsh_dynamic_library.h"
-#include "../external/Common/ntsh_engine_defines.h"
-#include "../external/Common/ntsh_engine_enums.h"
+#include "../external/Module/utils/ntsh_module_defines.h"
+#include "../external/Module/utils/ntsh_dynamic_library.h"
+#include "../external/Common/utils/ntsh_engine_defines.h"
+#include "../external/Common/utils/ntsh_engine_enums.h"
 #ifdef NTSH_OS_WINDOWS
 #define GLFW_EXPOSE_NATIVE_WIN32
 #elif NTSH_OS_LINUX
