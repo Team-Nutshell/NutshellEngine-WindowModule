@@ -17,9 +17,9 @@ public:
 	NtshInputState getKeyState(NtshInputKeyboardKey key);
 	NtshInputState getButtonState(NtshInputMouseButton button);
 
-	void setMousePosition(int x, int y);
-	int getMouseXPosition();
-	int getMouseYPosition();
+	void setCursorPosition(int x, int y);
+	int getCursorXPosition();
+	int getCursorYPosition();
 
 private:
 	NtshInputState nextInputState(NtshInputState inputState);
@@ -35,8 +35,8 @@ protected:
 private:
 	bool m_shouldClose = false;
 
-	int m_mouseX = 0;
-	int m_mouseY = 0;
+	int m_cursorX = 0;
+	int m_cursorY = 0;
 	
 	std::unordered_map<NtshInputKeyboardKey, Qt::Key> m_keyMap = { { NtshInputKeyboardKey::A, Qt::Key_A },
 		{ NtshInputKeyboardKey::B, Qt::Key_B },

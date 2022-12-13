@@ -81,16 +81,31 @@ NtshInputState NutshellWindowModule::getButtonState(NtshInputMouseButton button)
 	return m_window->getButtonState(button);
 }
 
-void NutshellWindowModule::setMousePosition(int x, int y) {
-	m_window->setMousePosition(x, y);
+void NutshellWindowModule::setCursorPosition(int x, int y) {
+	m_window->setCursorPosition(x, y);
 }
 
-int NutshellWindowModule::getMouseXPosition() {
-	return m_window->getMouseXPosition();
+int NutshellWindowModule::getCursorXPosition() {
+	return m_window->getCursorXPosition();
 }
 
-int NutshellWindowModule::getMouseYPosition() {
-	return m_window->getMouseYPosition();
+int NutshellWindowModule::getCursorYPosition() {
+	return m_window->getCursorYPosition();
+}
+
+bool NutshellWindowModule::isCursorVisible() {
+	return m_cursorVisible;
+}
+
+void NutshellWindowModule::setCursorVisibility(bool visible) {
+	if (!isCursorVisible() && visible) {
+		QApplication::setOverrideCursor(QCursor());
+		m_cursorVisible = true;
+	}
+	else if (isCursorVisible() && !visible) {
+		QApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
+		m_cursorVisible = false;
+	}
 }
 
 #ifdef NTSH_OS_WINDOWS
