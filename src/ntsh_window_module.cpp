@@ -61,6 +61,34 @@ void NutshellWindowModule::setTitle(const std::string& title) {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
+NtshInputState NutshellWindowModule::getKeyState(NtshInputKeyboardKey key) {
+	NTSH_UNUSED(key);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return NtshInputState::None;
+}
+
+NtshInputState NutshellWindowModule::getButtonState(NtshInputMouseButton button) {
+	NTSH_UNUSED(button);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return NtshInputState::None;
+}
+
+void NutshellWindowModule::setMousePosition(int x, int y) {
+	NTSH_UNUSED(x);
+	NTSH_UNUSED(y);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+int NutshellWindowModule::getMouseXPosition() {
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return -1;
+}
+
+int NutshellWindowModule::getMouseYPosition() {
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return -1;
+}
+
 #ifdef NTSH_OS_WINDOWS
 HWND NutshellWindowModule::getNativeHandle() {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
