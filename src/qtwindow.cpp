@@ -33,6 +33,8 @@ NtshInputState QtWindow::getButtonState(NtshInputMouseButton button) {
 void QtWindow::setCursorPosition(int x, int y) {
 	QPoint screenPosition = mapToGlobal(QPoint(x, y));
 	QCursor::setPos(screenPosition.x(), screenPosition.y());
+	m_cursorX = x;
+	m_cursorY = y;
 }
 
 int QtWindow::getCursorXPosition() {
