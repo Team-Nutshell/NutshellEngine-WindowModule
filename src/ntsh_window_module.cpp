@@ -73,20 +73,30 @@ NtshInputState NutshellWindowModule::getButtonState(NtshInputMouseButton button)
 	return NtshInputState::None;
 }
 
-void NutshellWindowModule::setMousePosition(int x, int y) {
+void NutshellWindowModule::setCursorPosition(int x, int y) {
 	NTSH_UNUSED(x);
 	NTSH_UNUSED(y);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-int NutshellWindowModule::getMouseXPosition() {
+int NutshellWindowModule::getCursorXPosition() {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return -1;
 }
 
-int NutshellWindowModule::getMouseYPosition() {
+int NutshellWindowModule::getCursorYPosition() {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return -1;
+}
+
+bool NutshellWindowModule::isCursorVisible() {
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return false;
+}
+
+void NutshellWindowModule::setCursorVisibility(bool visible) {
+	NTSH_UNUSED(visible);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
 #ifdef NTSH_OS_WINDOWS
