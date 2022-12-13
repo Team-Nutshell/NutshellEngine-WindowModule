@@ -18,10 +18,22 @@ void NutshellWindowModule::init() {
 	glfwSetWindowUserPointer(m_window, this);
 	
 	glfwSetFramebufferSizeCallback(m_window, framebufferSizeCallback);
+	glfwSetKeyCallback(m_window, keyboardKeyCallback);
+	glfwSetMouseButtonCallback(m_window, mouseButtonCallback);
+	glfwSetCursorPosCallback(m_window, mousePositionCallback);
 }
 
 void NutshellWindowModule::update(double dt) {
 	NTSH_UNUSED(dt);
+
+	for (auto& key : m_keyStateMap) {
+		key.second = nextInputState(key.second);
+	}
+
+	for (auto& key : m_mouseButtonStateMap) {
+		key.second = nextInputState(key.second);
+	}
+
 	glfwPollEvents();
 }
 
@@ -79,9 +91,65 @@ void NutshellWindowModule::setTitle(const std::string& title) {
 	glfwSetWindowTitle(m_window, title.c_str());
 }
 
+NtshInputState NutshellWindowModule::getKeyState(NtshInputKeyboardKey key) {
+	return m_keyStateMap[m_keyMap[key]];
+}
+
+NtshInputState NutshellWindowModule::getButtonState(NtshInputMouseButton button) {
+	return m_mouseButtonStateMap[m_mouseButtonMap[button]];
+}
+
+void NutshellWindowModule::setMousePosition(int x, int y) {
+	glfwSetCursorPos(m_window, static_cast<double>(x), static_cast<double>(y));
+}
+
+int NutshellWindowModule::getMouseXPosition() {
+	return m_mouseX;
+}
+
+int NutshellWindowModule::getMouseYPosition() {
+	return m_mouseY;
+}
+
 void NutshellWindowModule::resizeInternal(int newWidth, int newHeight) {
 	m_width = newWidth;
 	m_height = newHeight;
+}
+
+void NutshellWindowModule::keyboardKeyInternal(int key, int action) {
+	NtshInputState currentState = m_keyStateMap[key];
+	if ((currentState == NtshInputState::None || currentState == NtshInputState::Released) && action == GLFW_PRESS ) {
+		m_keyStateMap[key] = NtshInputState::Pressed;
+	}
+	else if ((currentState == NtshInputState::Pressed || currentState == NtshInputState::Held) && action == GLFW_RELEASE) {
+		m_keyStateMap[key] = NtshInputState::Released;
+	}
+}
+
+void NutshellWindowModule::mouseButtonInternal(int button, int action) {
+	NtshInputState currentState = m_mouseButtonStateMap[button];
+	if ((currentState == NtshInputState::None || currentState == NtshInputState::Released) && action == GLFW_PRESS) {
+		m_mouseButtonStateMap[button] = NtshInputState::Pressed;
+	}
+	else if ((currentState == NtshInputState::Pressed || currentState == NtshInputState::Held) && action == GLFW_RELEASE) {
+		m_mouseButtonStateMap[button] = NtshInputState::Released;
+	}
+}
+
+void NutshellWindowModule::mousePositionInternal(int x, int y) {
+	m_mouseX = x;
+	m_mouseY = y;
+}
+
+NtshInputState NutshellWindowModule::nextInputState(NtshInputState inputState) {
+	if (inputState == NtshInputState::Pressed) {
+		return NtshInputState::Held;
+	}
+	else if (inputState == NtshInputState::Released) {
+		return NtshInputState::None;
+	}
+
+	return inputState;
 }
 
 #ifdef NTSH_OS_WINDOWS
