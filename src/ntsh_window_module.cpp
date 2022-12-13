@@ -17,6 +17,8 @@ void NutshellWindowModule::init() {
 void NutshellWindowModule::update(double dt) {
 	NTSH_UNUSED(dt);
 
+	m_window->updateInputs(dt);
+
 	m_application->processEvents();
 }
 
@@ -69,6 +71,26 @@ void NutshellWindowModule::pollEvents() {
 
 void NutshellWindowModule::setTitle(const std::string& title) {
 	m_window->setWindowTitle(QString::fromStdString(title));
+}
+
+NtshInputState NutshellWindowModule::getKeyState(NtshInputKeyboardKey key) {
+	return m_window->getKeyState(key);
+}
+
+NtshInputState NutshellWindowModule::getButtonState(NtshInputMouseButton button) {
+	return m_window->getButtonState(button);
+}
+
+void NutshellWindowModule::setMousePosition(int x, int y) {
+	m_window->setMousePosition(x, y);
+}
+
+int NutshellWindowModule::getMouseXPosition() {
+	return m_window->getMouseXPosition();
+}
+
+int NutshellWindowModule::getMouseYPosition() {
+	return m_window->getMouseYPosition();
 }
 
 #ifdef NTSH_OS_WINDOWS
