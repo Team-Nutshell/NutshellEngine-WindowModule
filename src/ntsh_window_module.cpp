@@ -117,22 +117,26 @@ void NutshellWindowModule::resizeInternal(int newWidth, int newHeight) {
 }
 
 void NutshellWindowModule::keyboardKeyInternal(int key, int action) {
-	NtshInputState currentState = m_keyStateMap[key];
-	if ((currentState == NtshInputState::None || currentState == NtshInputState::Released) && action == GLFW_PRESS ) {
-		m_keyStateMap[key] = NtshInputState::Pressed;
-	}
-	else if ((currentState == NtshInputState::Pressed || currentState == NtshInputState::Held) && action == GLFW_RELEASE) {
-		m_keyStateMap[key] = NtshInputState::Released;
+	if (m_keyStateMap.find(key) != m_keyStateMap.end()) {
+		NtshInputState currentState = m_keyStateMap[key];
+		if ((currentState == NtshInputState::None || currentState == NtshInputState::Released) && action == GLFW_PRESS) {
+			m_keyStateMap[key] = NtshInputState::Pressed;
+		}
+		else if ((currentState == NtshInputState::Pressed || currentState == NtshInputState::Held) && action == GLFW_RELEASE) {
+			m_keyStateMap[key] = NtshInputState::Released;
+		}
 	}
 }
 
 void NutshellWindowModule::mouseButtonInternal(int button, int action) {
-	NtshInputState currentState = m_mouseButtonStateMap[button];
-	if ((currentState == NtshInputState::None || currentState == NtshInputState::Released) && action == GLFW_PRESS) {
-		m_mouseButtonStateMap[button] = NtshInputState::Pressed;
-	}
-	else if ((currentState == NtshInputState::Pressed || currentState == NtshInputState::Held) && action == GLFW_RELEASE) {
-		m_mouseButtonStateMap[button] = NtshInputState::Released;
+	if (m_mouseButtonStateMap.find(button) != m_mouseButtonStateMap.end()) {
+		NtshInputState currentState = m_mouseButtonStateMap[button];
+		if ((currentState == NtshInputState::None || currentState == NtshInputState::Released) && action == GLFW_PRESS) {
+			m_mouseButtonStateMap[button] = NtshInputState::Pressed;
+		}
+		else if ((currentState == NtshInputState::Pressed || currentState == NtshInputState::Held) && action == GLFW_RELEASE) {
+			m_mouseButtonStateMap[button] = NtshInputState::Released;
+		}
 	}
 }
 
