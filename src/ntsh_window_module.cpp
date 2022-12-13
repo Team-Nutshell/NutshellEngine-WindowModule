@@ -20,7 +20,7 @@ void NutshellWindowModule::init() {
 	glfwSetFramebufferSizeCallback(m_window, framebufferSizeCallback);
 	glfwSetKeyCallback(m_window, keyboardKeyCallback);
 	glfwSetMouseButtonCallback(m_window, mouseButtonCallback);
-	glfwSetCursorPosCallback(m_window, mousePositionCallback);
+	glfwSetCursorPosCallback(m_window, cursorPositionCallback);
 }
 
 void NutshellWindowModule::update(double dt) {
@@ -99,16 +99,31 @@ NtshInputState NutshellWindowModule::getButtonState(NtshInputMouseButton button)
 	return m_mouseButtonStateMap[m_mouseButtonMap[button]];
 }
 
-void NutshellWindowModule::setMousePosition(int x, int y) {
+void NutshellWindowModule::setCursorPosition(int x, int y) {
 	glfwSetCursorPos(m_window, static_cast<double>(x), static_cast<double>(y));
 }
 
-int NutshellWindowModule::getMouseXPosition() {
-	return m_mouseX;
+int NutshellWindowModule::getCursorXPosition() {
+	return m_cursorX;
 }
 
-int NutshellWindowModule::getMouseYPosition() {
-	return m_mouseY;
+int NutshellWindowModule::getCursorYPosition() {
+	return m_cursorY;
+}
+
+bool NutshellWindowModule::isCursorVisible() {
+	return m_cursorVisible;
+}
+
+void NutshellWindowModule::setCursorVisibility(bool visible) {
+	if (!isCursorVisible() && visible) {
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		m_cursorVisible = true;
+	}
+	else if (isCursorVisible() && !visible) {
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		m_cursorVisible = false;
+	}
 }
 
 void NutshellWindowModule::resizeInternal(int newWidth, int newHeight) {
@@ -140,9 +155,9 @@ void NutshellWindowModule::mouseButtonInternal(int button, int action) {
 	}
 }
 
-void NutshellWindowModule::mousePositionInternal(int x, int y) {
-	m_mouseX = x;
-	m_mouseY = y;
+void NutshellWindowModule::cursorPositionInternal(int x, int y) {
+	m_cursorX = x;
+	m_cursorY = y;
 }
 
 NtshInputState NutshellWindowModule::nextInputState(NtshInputState inputState) {

@@ -39,12 +39,17 @@ public:
 	// Gets the state of the mouse button. None is the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
 	NtshInputState getButtonState(NtshInputMouseButton button) ;
 
-	// Sets the mouse position
-	void setMousePosition(int x, int y);
-	// Gets the mouse horizontal position
-	int getMouseXPosition();
-	// Gets the mouse vertical position
-	int getMouseYPosition();
+	// Sets the mouse cursor position
+	void setCursorPosition(int x, int y);
+	// Gets the mouse cursor horizontal position
+	int getCursorXPosition();
+	// Gets the mouse cursor vertical position
+	int getCursorYPosition();
+
+	// Returns true if the mouse cursor is visible, else, returns false
+	bool isCursorVisible();
+	// If the mouse cursor is visible, hides it, else, shows it
+	void setCursorVisibility(bool visible);
 
 #ifdef NTSH_OS_WINDOWS
 	// Returns the native Win32 window handle
@@ -54,7 +59,7 @@ public:
 	Window getNativeHandle();
 #endif
 
-public:
+private:
 	// Window resize internal function used by callback
 	void resizeInternal(int newWidth, int newHeight);
 
@@ -65,7 +70,7 @@ public:
 	void mouseButtonInternal(int button, int action);
 
 	// Mouse position internal function used by callback
-	void mousePositionInternal(int x, int y);
+	void cursorPositionInternal(int x, int y);
 
 	// Returns the next input state (Pressed -> Held, Released -> None)
 	NtshInputState nextInputState(NtshInputState inputState);
@@ -92,10 +97,10 @@ private:
 		ptr->mouseButtonInternal(button, action);
 	}
 
-	// Mouse position callback
-	static void mousePositionCallback(GLFWwindow* window, double x, double y) {
+	// Mouse cursor position callback
+	static void cursorPositionCallback(GLFWwindow* window, double x, double y) {
 		auto ptr = reinterpret_cast<NutshellWindowModule*>(glfwGetWindowUserPointer(window));
-		ptr->mousePositionInternal(static_cast<int>(x), static_cast<int>(y));
+		ptr->cursorPositionInternal(static_cast<int>(x), static_cast<int>(y));
 	}
 
 private:
@@ -104,8 +109,9 @@ private:
 	int m_height = 720;
 	int m_x = 0;
 	int m_y = 0;
-	int m_mouseX = 0;
-	int m_mouseY = 0;
+	int m_cursorX = 0;
+	int m_cursorY = 0;
+	bool m_cursorVisible = true;
 
 	std::unordered_map<NtshInputKeyboardKey, int> m_keyMap = { { NtshInputKeyboardKey::A, GLFW_KEY_A },
 		{ NtshInputKeyboardKey::B, GLFW_KEY_B },
