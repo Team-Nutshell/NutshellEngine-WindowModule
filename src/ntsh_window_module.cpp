@@ -101,6 +101,8 @@ NtshInputState NutshellWindowModule::getButtonState(NtshInputMouseButton button)
 
 void NutshellWindowModule::setCursorPosition(int x, int y) {
 	glfwSetCursorPos(m_window, static_cast<double>(x), static_cast<double>(y));
+	m_cursorX = x;
+	m_cursorY = y;
 }
 
 int NutshellWindowModule::getCursorXPosition() {
