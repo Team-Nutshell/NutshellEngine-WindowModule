@@ -30,17 +30,17 @@ NtshInputState QtWindow::getButtonState(NtshInputMouseButton button) {
 	return m_mouseButtonStateMap[m_mouseButtonMap[button]];
 }
 
-void QtWindow::setMousePosition(int x, int y) {
+void QtWindow::setCursorPosition(int x, int y) {
 	QPoint screenPosition = mapToGlobal(QPoint(x, y));
 	QCursor::setPos(screenPosition.x(), screenPosition.y());
 }
 
-int QtWindow::getMouseXPosition() {
-	return m_mouseX;
+int QtWindow::getCursorXPosition() {
+	return m_cursorX;
 }
 
-int QtWindow::getMouseYPosition() {
-	return m_mouseY;
+int QtWindow::getCursorYPosition() {
+	return m_cursorY;
 }
 
 NtshInputState QtWindow::nextInputState(NtshInputState inputState) {
@@ -100,6 +100,6 @@ void QtWindow::mouseReleaseEvent(QMouseEvent* event) {
 }
 
 void QtWindow::mouseMoveEvent(QMouseEvent* event) {
-	m_mouseX = event->pos().x();
-	m_mouseY = event->pos().y();
+	m_cursorX = event->pos().x();
+	m_cursorY = event->pos().y();
 }
