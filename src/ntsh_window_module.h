@@ -37,7 +37,7 @@ public:
 	// Gets the state of the keyboard key. None is the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
 	NtshInputState getKeyState(NtshInputKeyboardKey key);
 	// Gets the state of the mouse button. None is the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
-	NtshInputState getButtonState(NtshInputMouseButton button) ;
+	NtshInputState getButtonState(NtshInputMouseButton button);
 
 	// Sets the mouse cursor position
 	void setCursorPosition(int x, int y);
