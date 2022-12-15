@@ -99,12 +99,12 @@ void NutshellWindowModule::setCursorVisibility(bool visible) {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-#ifdef NTSH_OS_WINDOWS
+#if defined(NTSH_OS_WINDOWS)
 HWND NutshellWindowModule::getNativeHandle() {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return nullptr;
 }
-#elif NTSH_OS_LINUX
+#elif defined(NTSH_OS_LINUX)
 Window NutshellWindowModule::getNativeHandle() {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return 0;
