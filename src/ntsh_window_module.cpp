@@ -108,11 +108,11 @@ void NutshellWindowModule::setCursorVisibility(bool visible) {
 	}
 }
 
-#ifdef NTSH_OS_WINDOWS
+#if defined(NTSH_OS_WINDOWS)
 HWND NutshellWindowModule::getNativeHandle() {
 	return reinterpret_cast<HWND>(m_window->winId());
 }
-#elif NTSH_OS_LINUX
+#elif defined(NTSH_OS_LINUX)
 Window NutshellWindowModule::getNativeHandle() {
 	return reinterpret_cast<Window>(m_window->winId());
 }
