@@ -51,10 +51,10 @@ public:
 	// If the mouse cursor is visible, hides it, else, shows it
 	void setCursorVisibility(bool visible);
 
-#ifdef NTSH_OS_WINDOWS
+#if defined(NTSH_OS_WINDOWS)
 	// Returns the native Win32 window handle
 	HWND getNativeHandle();
-#elif NTSH_OS_LINUX
+#elif defined(NTSH_OS_LINUX)
 	// Returns the native X window handle
 	Window getNativeHandle();
 #endif

@@ -3,9 +3,9 @@
 #include "../external/Module/utils/ntsh_dynamic_library.h"
 #include "../external/Common/utils/ntsh_engine_defines.h"
 #include "../external/Common/utils/ntsh_engine_enums.h"
-#ifdef NTSH_OS_WINDOWS
+#if defined(NTSH_OS_WINDOWS)
 #define GLFW_EXPOSE_NATIVE_WIN32
-#elif NTSH_OS_LINUX
+#elif defined(NTSH_OS_LINUX)
 #define GLFW_EXPOSE_NATIVE_X11
 #endif
 #include "../external/glfw/include/GLFW/glfw3native.h"
@@ -173,11 +173,11 @@ NtshInputState NutshellWindowModule::nextInputState(NtshInputState inputState) {
 	return inputState;
 }
 
-#ifdef NTSH_OS_WINDOWS
+#if defined(NTSH_OS_WINDOWS)
 HWND NutshellWindowModule::getNativeHandle() {
 	return glfwGetWin32Window(m_window);
 }
-#elif NTSH_OS_LINUX
+#elif defined(NTSH_OS_LINUX)
 Window NutshellWindowModule::getNativeHandle() {
 	return glfwGetX11Window(m_window);
 }
