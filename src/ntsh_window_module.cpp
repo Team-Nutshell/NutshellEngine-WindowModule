@@ -94,18 +94,11 @@ int NutshellWindowModule::getCursorYPosition() {
 }
 
 bool NutshellWindowModule::isCursorVisible() {
-	return m_cursorVisible;
+	return m_window->isCursorVisible();
 }
 
 void NutshellWindowModule::setCursorVisibility(bool visible) {
-	if (!isCursorVisible() && visible) {
-		QApplication::setOverrideCursor(QCursor());
-		m_cursorVisible = true;
-	}
-	else if (isCursorVisible() && !visible) {
-		QApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
-		m_cursorVisible = false;
-	}
+	m_window->setCursorVisibility(visible);
 }
 
 #if defined(NTSH_OS_WINDOWS)

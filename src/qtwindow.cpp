@@ -45,6 +45,21 @@ int QtWindow::getCursorYPosition() {
 	return m_cursorY;
 }
 
+bool QtWindow::isCursorVisible() {
+	return m_cursorVisible;
+}
+
+void QtWindow::setCursorVisibility(bool visible) {
+	if (!isCursorVisible() && visible) {
+		setCursor(QCursor());
+		m_cursorVisible = true;
+	}
+	else if (isCursorVisible() && !visible) {
+		setCursor(QCursor(Qt::BlankCursor));
+		m_cursorVisible = false;
+	}
+}
+
 NtshInputState QtWindow::nextInputState(NtshInputState inputState) {
 	if (inputState == NtshInputState::Pressed) {
 		return NtshInputState::Held;

@@ -65,6 +65,4 @@ private:
 	std::unique_ptr<QApplication> m_application;
 
 	std::unique_ptr<QtWindow> m_window;
-
-	bool m_cursorVisible = true;
 };
