@@ -3,183 +3,143 @@
 #include "../external/Module/utils/ntsh_dynamic_library.h"
 #include "../external/Common/utils/ntsh_engine_defines.h"
 #include "../external/Common/utils/ntsh_engine_enums.h"
-#if defined(NTSH_OS_WINDOWS)
-#define GLFW_EXPOSE_NATIVE_WIN32
-#elif defined(NTSH_OS_LINUX)
-#define GLFW_EXPOSE_NATIVE_X11
-#endif
-#include "../external/glfw/include/GLFW/glfw3native.h"
 
 void NutshellWindowModule::init() {
 	glfwInit();
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	m_window = glfwCreateWindow(m_width, m_height, m_name.c_str(), nullptr, nullptr);
-	glfwGetWindowPos(m_window, &m_x, &m_y);
-	glfwSetWindowUserPointer(m_window, this);
-	
-	glfwSetFramebufferSizeCallback(m_window, framebufferSizeCallback);
-	glfwSetKeyCallback(m_window, keyboardKeyCallback);
-	glfwSetMouseButtonCallback(m_window, mouseButtonCallback);
-	glfwSetCursorPosCallback(m_window, cursorPositionCallback);
 }
 
 void NutshellWindowModule::update(double dt) {
 	NTSH_UNUSED(dt);
 
-	for (auto& key : m_keyStateMap) {
-		key.second = nextInputState(key.second);
+	for (size_t i = 0; i < m_windows.size(); i++) {
+		m_windows[i]->updateInputs(dt);
 	}
 
-	for (auto& key : m_mouseButtonStateMap) {
-		key.second = nextInputState(key.second);
-	}
-
-	glfwPollEvents();
+	pollEvents();
 }
 
 void NutshellWindowModule::destroy() {
-	glfwDestroyWindow(m_window);
+	for (size_t i = 0; i < m_windows.size(); i++) {
+		m_windows[i]->shouldClose();
+	}
 	glfwTerminate();
 }
 
-void NutshellWindowModule::close() {
-	glfwSetWindowShouldClose(m_window, true);
+NtshWindowId NutshellWindowModule::open() {
+	m_windows[m_id] = std::make_unique<GLFWWindow>();
+	m_windows[m_id]->open(m_name);
+
+	return m_id++;
 }
 
-bool NutshellWindowModule::shouldClose() {
-	return glfwWindowShouldClose(m_window);
+void NutshellWindowModule::close(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	m_windows[windowId]->close();
 }
 
-void NutshellWindowModule::setSize(int width, int height) {
-	glfwSetWindowSize(m_window, width, height);
-	m_width = width;
-	m_height = height;
+bool NutshellWindowModule::shouldClose(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->shouldClose();
 }
 
-int NutshellWindowModule::getWidth() {
-	return m_width;
+uint64_t NutshellWindowModule::windowCount() {
+	return m_windows.size();
 }
 
-int NutshellWindowModule::getHeight() {
-	return m_height;
+void NutshellWindowModule::setSize(NtshWindowId windowId, int width, int height) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	m_windows[windowId]->setSize(width, height);
 }
 
-bool NutshellWindowModule::isFullscreen() {
-	return glfwGetWindowMonitor(m_window) != nullptr;
+int NutshellWindowModule::getWidth(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getWidth();
 }
 
-void NutshellWindowModule::setFullscreen(bool fullscreen) {
-	if (!isFullscreen() && fullscreen) {
-		glfwGetWindowPos(m_window, &m_x, &m_y);
-		glfwGetWindowSize(m_window, &m_width, &m_height);
+int NutshellWindowModule::getHeight(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getHeight();
+}
 
-		GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
-		const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
-		glfwSetWindowMonitor(m_window, primaryMonitor, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
-	}
-	else if (!fullscreen && isFullscreen()) {
-		GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
-		glfwSetWindowMonitor(m_window, primaryMonitor, m_x, m_y, m_width, m_height, GLFW_DONT_CARE);
-	}
+void NutshellWindowModule::setPosition(NtshWindowId windowId, int x, int y) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	m_windows[windowId]->setPosition(x, y);
+}
+
+int NutshellWindowModule::getPositionX(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getPositionX();
+}
+
+int NutshellWindowModule::getPositionY(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getPositionY();
+}
+
+bool NutshellWindowModule::isFullscreen(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->isFullscreen();
+}
+
+void NutshellWindowModule::setFullscreen(NtshWindowId windowId, bool fullscreen) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	m_windows[windowId]->setFullscreen(fullscreen);
 }
 
 void NutshellWindowModule::pollEvents() {
 	glfwPollEvents();
 }
 
-void NutshellWindowModule::setTitle(const std::string& title) {
-	glfwSetWindowTitle(m_window, title.c_str());
+void NutshellWindowModule::setTitle(NtshWindowId windowId, const std::string& title) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	m_windows[windowId]->setTitle(title);
 }
 
-NtshInputState NutshellWindowModule::getKeyState(NtshInputKeyboardKey key) {
-	return m_keyStateMap[m_keyMap[key]];
+NtshInputState NutshellWindowModule::getKeyState(NtshWindowId windowId, NtshInputKeyboardKey key) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getKeyState(key);
 }
 
-NtshInputState NutshellWindowModule::getButtonState(NtshInputMouseButton button) {
-	return m_mouseButtonStateMap[m_mouseButtonMap[button]];
+NtshInputState NutshellWindowModule::getMouseButtonState(NtshWindowId windowId, NtshInputMouseButton mouseButton) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getMouseButtonState(mouseButton);
 }
 
-void NutshellWindowModule::setCursorPosition(int x, int y) {
-	glfwSetCursorPos(m_window, static_cast<double>(x), static_cast<double>(y));
-	m_cursorX = x;
-	m_cursorY = y;
+void NutshellWindowModule::setCursorPosition(NtshWindowId windowId, int x, int y) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	m_windows[windowId]->setCursorPosition(x, y);
 }
 
-int NutshellWindowModule::getCursorXPosition() {
-	return m_cursorX;
+int NutshellWindowModule::getCursorXPosition(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getCursorXPosition();
 }
 
-int NutshellWindowModule::getCursorYPosition() {
-	return m_cursorY;
+int NutshellWindowModule::getCursorYPosition(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getCursorYPosition();
 }
 
-bool NutshellWindowModule::isCursorVisible() {
-	return m_cursorVisible;
+bool NutshellWindowModule::isCursorVisible(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->isCursorVisible();
 }
 
-void NutshellWindowModule::setCursorVisibility(bool visible) {
-	if (!isCursorVisible() && visible) {
-		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-		m_cursorVisible = true;
-	}
-	else if (isCursorVisible() && !visible) {
-		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-		m_cursorVisible = false;
-	}
-}
-
-void NutshellWindowModule::resizeInternal(int newWidth, int newHeight) {
-	m_width = newWidth;
-	m_height = newHeight;
-}
-
-void NutshellWindowModule::keyboardKeyInternal(int key, int action) {
-	if (m_keyStateMap.find(key) != m_keyStateMap.end()) {
-		NtshInputState currentState = m_keyStateMap[key];
-		if ((currentState == NtshInputState::None || currentState == NtshInputState::Released) && action == GLFW_PRESS) {
-			m_keyStateMap[key] = NtshInputState::Pressed;
-		}
-		else if ((currentState == NtshInputState::Pressed || currentState == NtshInputState::Held) && action == GLFW_RELEASE) {
-			m_keyStateMap[key] = NtshInputState::Released;
-		}
-	}
-}
-
-void NutshellWindowModule::mouseButtonInternal(int button, int action) {
-	if (m_mouseButtonStateMap.find(button) != m_mouseButtonStateMap.end()) {
-		NtshInputState currentState = m_mouseButtonStateMap[button];
-		if ((currentState == NtshInputState::None || currentState == NtshInputState::Released) && action == GLFW_PRESS) {
-			m_mouseButtonStateMap[button] = NtshInputState::Pressed;
-		}
-		else if ((currentState == NtshInputState::Pressed || currentState == NtshInputState::Held) && action == GLFW_RELEASE) {
-			m_mouseButtonStateMap[button] = NtshInputState::Released;
-		}
-	}
-}
-
-void NutshellWindowModule::cursorPositionInternal(int x, int y) {
-	m_cursorX = x;
-	m_cursorY = y;
-}
-
-NtshInputState NutshellWindowModule::nextInputState(NtshInputState inputState) {
-	if (inputState == NtshInputState::Pressed) {
-		return NtshInputState::Held;
-	}
-	else if (inputState == NtshInputState::Released) {
-		return NtshInputState::None;
-	}
-
-	return inputState;
+void NutshellWindowModule::setCursorVisibility(NtshWindowId windowId, bool visible) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	m_windows[windowId]->setCursorVisibility(visible);
 }
 
 #if defined(NTSH_OS_WINDOWS)
-HWND NutshellWindowModule::getNativeHandle() {
-	return glfwGetWin32Window(m_window);
+HWND NutshellWindowModule::getNativeHandle(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getNativeHandle();
 }
 #elif defined(NTSH_OS_LINUX)
-Window NutshellWindowModule::getNativeHandle() {
-	return glfwGetX11Window(m_window);
+Window NutshellWindowModule::getNativeHandle(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->getNativeHandle();
 }
 #endif
 

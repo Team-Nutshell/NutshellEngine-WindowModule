@@ -15,9 +15,9 @@ list(APPEND NTSH_DEFINES NTSH_CURRENT_MODULE_WINDOW)
 add_subdirectory(external/glfw)
 
 set(MODULE_SOURCES
-	src/ntsh_window_module.cpp)	
+	src/ntsh_window_module.cpp src/glfwwindow.cpp)	
 set(MODULE_HEADERS
-	src/ntsh_window_module.h)
+	src/ntsh_window_module.h src/glfwwindow.h)
 
 set(SOURCES ${MODULE_SOURCES})
 set(HEADERS ${MODULE_HEADERS})
