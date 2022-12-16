@@ -21,6 +21,9 @@ public:
 	int getCursorXPosition();
 	int getCursorYPosition();
 
+	bool isCursorVisible();
+	void setCursorVisibility(bool visible);
+
 private:
 	NtshInputState nextInputState(NtshInputState inputState);
 
@@ -37,6 +40,8 @@ private:
 
 	int m_cursorX = 0;
 	int m_cursorY = 0;
+
+	bool m_cursorVisible = true;
 	
 	std::unordered_map<NtshInputKeyboardKey, Qt::Key> m_keyMap = { { NtshInputKeyboardKey::A, Qt::Key_A },
 		{ NtshInputKeyboardKey::B, Qt::Key_B },
