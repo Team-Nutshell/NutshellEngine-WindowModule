@@ -6,6 +6,12 @@ QtWindow::QtWindow(QWidget* parent) : QWidget(parent) {
 	setMouseTracking(true);
 }
 
+void QtWindow::open(const std::string& name) {
+	setWindowTitle(QString::fromStdString(name));
+	resize(1280, 720);
+	show();
+}
+
 bool QtWindow::shouldClose() {
 	return m_shouldClose;
 }
@@ -26,8 +32,8 @@ NtshInputState QtWindow::getKeyState(NtshInputKeyboardKey key) {
 	return m_keyStateMap[m_keyMap[key]];
 }
 
-NtshInputState QtWindow::getButtonState(NtshInputMouseButton button) {
-	return m_mouseButtonStateMap[m_mouseButtonMap[button]];
+NtshInputState QtWindow::getMouseButtonState(NtshInputMouseButton mouseButton) {
+	return m_mouseButtonStateMap[m_mouseButtonMap[mouseButton]];
 }
 
 void QtWindow::setCursorPosition(int x, int y) {
@@ -45,10 +51,6 @@ int QtWindow::getCursorYPosition() {
 	return m_cursorY;
 }
 
-bool QtWindow::isCursorVisible() {
-	return m_cursorVisible;
-}
-
 void QtWindow::setCursorVisibility(bool visible) {
 	if (!isCursorVisible() && visible) {
 		setCursor(QCursor());
@@ -58,6 +60,10 @@ void QtWindow::setCursorVisibility(bool visible) {
 		setCursor(QCursor(Qt::BlankCursor));
 		m_cursorVisible = false;
 	}
+}
+
+bool QtWindow::isCursorVisible() {
+	return m_cursorVisible;
 }
 
 NtshInputState QtWindow::nextInputState(NtshInputState inputState) {

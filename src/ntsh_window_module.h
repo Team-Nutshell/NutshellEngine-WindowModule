@@ -13,56 +13,70 @@ public:
 	void update(double dt);
 	void destroy();
 
-	// Sends a request to close the window
-	void close();
-	// Returns true if there has been a request to close the window, else, returns false
-	bool shouldClose();
+	// Opens a new window and returns a unique identifier
+	NtshWindowId open();
+	// Sends a request to close the window with identifier windowId
+	void close(NtshWindowId windowId);
+	// Returns true if there has been a request to close the window with identifier windowId, else, returns false
+	bool shouldClose(NtshWindowId windowId);
 
-	// Changes the size of the window to width and height
-	void setSize(int width, int height);
-	// Returns the width of the window
-	int getWidth();
-	// Returns the height of the window
-	int getHeight();
+	// Returns the number of opened windows
+	uint64_t windowCount();
 
-	// Returns true if the window is in fullscreen mode, else, returns false
-	bool isFullscreen();
-	// If the fullscreen parameter is true, puts the window in fullscreen, else, puts the window in windowed
-	void setFullscreen(bool fullscreen);
+	// Changes the size of the window with identifier windowId to width and height
+	void setSize(NtshWindowId windowId, int width, int height);
+	// Returns the width of the window with identifier windowId
+	int getWidth(NtshWindowId windowId);
+	// Returns the height of the window with identifier windowId
+	int getHeight(NtshWindowId windowId);
 
-	// Polls events
+	// Changes the position of the window with identifier windowId to x and y
+	void setPosition(NtshWindowId windowId, int x, int y);
+	// Returns the horizontal position of the window with identifier windowId
+	int getPositionX(NtshWindowId windowId);
+	// Returns the vertical position of the window with identifier windowId
+	int getPositionY(NtshWindowId windowId);
+
+	// If the fullscreen parameter is true, puts the window with identifier windowId in fullscreen, else, puts the window with identifier windowId in windowed
+	void setFullscreen(NtshWindowId windowId, bool fullscreen);
+	// Returns true if the window with identifier windowId is in fullscreen mode, else, returns false
+	bool isFullscreen(NtshWindowId windowId);
+
+	// Polls events of the windows
 	void pollEvents();
 
-	// Sets the title of the window
-	void setTitle(const std::string& title);
+	// Sets the title of the window with identifier windowId
+	void setTitle(NtshWindowId windowId, const std::string& title);
 
 	// Gets the state of the keyboard key. None is the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
-	NtshInputState getKeyState(NtshInputKeyboardKey key);
+	NtshInputState getKeyState(NtshWindowId windowId, NtshInputKeyboardKey key);
 	// Gets the state of the mouse button. None is the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
-	NtshInputState getButtonState(NtshInputMouseButton button);
+	NtshInputState getMouseButtonState(NtshWindowId windowId, NtshInputMouseButton mouseButton);
 
 	// Sets the mouse cursor position
-	void setCursorPosition(int x, int y);
+	void setCursorPosition(NtshWindowId windowId, int x, int y);
 	// Gets the mouse cursor horizontal position
-	int getCursorXPosition();
+	int getCursorXPosition(NtshWindowId windowId);
 	// Gets the mouse cursor vertical position
-	int getCursorYPosition();
+	int getCursorYPosition(NtshWindowId windowId);
 
-	// Returns true if the mouse cursor is visible, else, returns false
-	bool isCursorVisible();
-	// If the mouse cursor is visible, hides it, else, shows it
-	void setCursorVisibility(bool visible);
+	// If the mouse cursor is visible in the window with identifier windowId, hides it, else, shows it
+	void setCursorVisibility(NtshWindowId windowId, bool visible);
+	// Returns true if the mouse cursor is visible in the window with identifier windowId, else, returns false
+	bool isCursorVisible(NtshWindowId windowId);
 
 #if defined(NTSH_OS_WINDOWS)
-	// Returns the native Win32 window handle
-	HWND getNativeHandle();
+	// Returns the native Win32 window handle of the window with identifier windowId
+	HWND getNativeHandle(NtshWindowId windowId);
 #elif defined(NTSH_OS_LINUX)
-	// Returns the native X window handle
-	Window getNativeHandle();
+	// Returns the native X window handle of the window with identifier windowId
+	Window getNativeHandle(NtshWindowId windowId);
 #endif
 
 private:
 	std::unique_ptr<QApplication> m_application;
 
-	std::unique_ptr<QtWindow> m_window;
+	std::unordered_map<NtshWindowId, std::unique_ptr<QtWindow>> m_windows;
+
+	NtshWindowId m_id = 0;
 };
