@@ -10,19 +10,20 @@ class QtWindow : public QWidget {
 public:
 	QtWindow(QWidget* parent = nullptr);
 
+	void open(const std::string& name);
 	bool shouldClose();
 
 	void updateInputs(double dt);
 
 	NtshInputState getKeyState(NtshInputKeyboardKey key);
-	NtshInputState getButtonState(NtshInputMouseButton button);
+	NtshInputState getMouseButtonState(NtshInputMouseButton mouseButton);
 
 	void setCursorPosition(int x, int y);
 	int getCursorXPosition();
 	int getCursorYPosition();
 
-	bool isCursorVisible();
 	void setCursorVisibility(bool visible);
+	bool isCursorVisible();
 
 private:
 	NtshInputState nextInputState(NtshInputState inputState);
