@@ -15,6 +15,7 @@ void GLFWWindow::open(const std::string& name) {
 	glfwGetWindowPos(m_window, &m_x, &m_y);
 	glfwSetWindowUserPointer(m_window, this);
 
+	glfwSetWindowPosCallback(m_window, windowPosCallback);
 	glfwSetFramebufferSizeCallback(m_window, framebufferSizeCallback);
 	glfwSetKeyCallback(m_window, keyboardKeyCallback);
 	glfwSetMouseButtonCallback(m_window, mouseButtonCallback);
@@ -69,10 +70,6 @@ int GLFWWindow::getPositionY() {
 	return m_y;
 }
 
-bool GLFWWindow::isFullscreen() {
-	return glfwGetWindowMonitor(m_window) != nullptr;
-}
-
 void GLFWWindow::setFullscreen(bool fullscreen) {
 	if (!isFullscreen() && fullscreen) {
 		glfwGetWindowPos(m_window, &m_x, &m_y);
@@ -86,6 +83,10 @@ void GLFWWindow::setFullscreen(bool fullscreen) {
 		GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
 		glfwSetWindowMonitor(m_window, primaryMonitor, m_x, m_y, m_width, m_height, GLFW_DONT_CARE);
 	}
+}
+
+bool GLFWWindow::isFullscreen() {
+	return glfwGetWindowMonitor(m_window) != nullptr;
 }
 
 void GLFWWindow::setTitle(const std::string& title) {
@@ -106,16 +107,12 @@ void GLFWWindow::setCursorPosition(int x, int y) {
 	m_cursorY = y;
 }
 
-int GLFWWindow::getCursorXPosition() {
+int GLFWWindow::getCursorPositionX() {
 	return m_cursorX;
 }
 
-int GLFWWindow::getCursorYPosition() {
+int GLFWWindow::getCursorPositionY() {
 	return m_cursorY;
-}
-
-bool GLFWWindow::isCursorVisible() {
-	return m_cursorVisible;
 }
 
 void GLFWWindow::setCursorVisibility(bool visible) {
@@ -127,6 +124,15 @@ void GLFWWindow::setCursorVisibility(bool visible) {
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 		m_cursorVisible = false;
 	}
+}
+
+bool GLFWWindow::isCursorVisible() {
+	return m_cursorVisible;
+}
+
+void GLFWWindow::windowPosInternal(int newXPos, int newYPos) {
+	m_x = newXPos;
+	m_y = newYPos;
 }
 
 void GLFWWindow::resizeInternal(int newWidth, int newHeight) {

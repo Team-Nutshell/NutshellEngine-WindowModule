@@ -27,8 +27,8 @@ public:
 	int getPositionX();
 	int getPositionY();
 
-	bool isFullscreen();
 	void setFullscreen(bool fullscreen);
+	bool isFullscreen();
 
 	void setTitle(const std::string& title);
 
@@ -36,11 +36,11 @@ public:
 	NtshInputState getMouseButtonState(NtshInputMouseButton mouseButton);
 
 	void setCursorPosition(int x, int y);
-	int getCursorXPosition();
-	int getCursorYPosition();
+	int getCursorPositionX();
+	int getCursorPositionY();
 
-	bool isCursorVisible();
 	void setCursorVisibility(bool visible);
+	bool isCursorVisible();
 
 #if defined(NTSH_OS_WINDOWS)
 	// Returns the native Win32 window handle
@@ -51,6 +51,9 @@ public:
 #endif
 
 private:
+	// Window position internal function used by callback
+	void windowPosInternal(int newXPos, int newYPos);
+
 	// Window resize internal function used by callback
 	void resizeInternal(int newWidth, int newHeight);
 
@@ -67,6 +70,12 @@ private:
 	NtshInputState nextInputState(NtshInputState inputState);
 
 private:
+	// Position callback
+	static void windowPosCallback(GLFWwindow* window, int xpos, int ypos) {
+		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		ptr->windowPosInternal(xpos, ypos);
+	}
+
 	// Resize callback
 	static void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
 		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));

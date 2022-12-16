@@ -77,14 +77,14 @@ int NutshellWindowModule::getPositionY(NtshWindowId windowId) {
 	return m_windows[windowId]->getPositionY();
 }
 
-bool NutshellWindowModule::isFullscreen(NtshWindowId windowId) {
-	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
-	return m_windows[windowId]->isFullscreen();
-}
-
 void NutshellWindowModule::setFullscreen(NtshWindowId windowId, bool fullscreen) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->setFullscreen(fullscreen);
+}
+
+bool NutshellWindowModule::isFullscreen(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->isFullscreen();
 }
 
 void NutshellWindowModule::pollEvents() {
@@ -111,24 +111,24 @@ void NutshellWindowModule::setCursorPosition(NtshWindowId windowId, int x, int y
 	m_windows[windowId]->setCursorPosition(x, y);
 }
 
-int NutshellWindowModule::getCursorXPosition(NtshWindowId windowId) {
+int NutshellWindowModule::getCursorPositionX(NtshWindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
-	return m_windows[windowId]->getCursorXPosition();
+	return m_windows[windowId]->getCursorPositionX();
 }
 
-int NutshellWindowModule::getCursorYPosition(NtshWindowId windowId) {
+int NutshellWindowModule::getCursorPositionY(NtshWindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
-	return m_windows[windowId]->getCursorYPosition();
-}
-
-bool NutshellWindowModule::isCursorVisible(NtshWindowId windowId) {
-	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
-	return m_windows[windowId]->isCursorVisible();
+	return m_windows[windowId]->getCursorPositionY();
 }
 
 void NutshellWindowModule::setCursorVisibility(NtshWindowId windowId, bool visible) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->setCursorVisibility(visible);
+}
+
+bool NutshellWindowModule::isCursorVisible(NtshWindowId windowId) {
+	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->isCursorVisible();
 }
 
 #if defined(NTSH_OS_WINDOWS)
