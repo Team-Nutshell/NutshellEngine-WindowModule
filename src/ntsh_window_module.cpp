@@ -17,95 +17,142 @@ void NutshellWindowModule::destroy() {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-void NutshellWindowModule::close() {
+NtshWindowId NutshellWindowModule::open() {
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return 0;
+}
+
+void NutshellWindowModule::close(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-bool NutshellWindowModule::shouldClose() {
+bool NutshellWindowModule::shouldClose(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return false;
 }
 
-void NutshellWindowModule::setSize(int width, int height) {
+uint64_t NutshellWindowModule::windowCount() {
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return 0;
+}
+
+void NutshellWindowModule::setSize(NtshWindowId windowId, int width, int height) {
+	NTSH_UNUSED(windowId);
 	NTSH_UNUSED(width);
 	NTSH_UNUSED(height);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-int NutshellWindowModule::getWidth() {
+int NutshellWindowModule::getWidth(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return 0;
 }
 
-int NutshellWindowModule::getHeight() {
+int NutshellWindowModule::getHeight(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return 0;
 }
 
-bool NutshellWindowModule::isFullscreen() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return false;
-}
-
-void NutshellWindowModule::setFullscreen(bool fullscreen) {
-	NTSH_UNUSED(fullscreen);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-}
-
-void NutshellWindowModule::pollEvents() {
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-}
-
-void NutshellWindowModule::setTitle(const std::string& title) {
-	NTSH_UNUSED(title);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-}
-
-NtshInputState NutshellWindowModule::getKeyState(NtshInputKeyboardKey key) {
-	NTSH_UNUSED(key);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return NtshInputState::None;
-}
-
-NtshInputState NutshellWindowModule::getButtonState(NtshInputMouseButton button) {
-	NTSH_UNUSED(button);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return NtshInputState::None;
-}
-
-void NutshellWindowModule::setCursorPosition(int x, int y) {
+void NutshellWindowModule::setPosition(NtshWindowId windowId, int x, int y) {
+	NTSH_UNUSED(windowId);
 	NTSH_UNUSED(x);
 	NTSH_UNUSED(y);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-int NutshellWindowModule::getCursorXPosition() {
+int NutshellWindowModule::getPositionX(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return -1;
 }
 
-int NutshellWindowModule::getCursorYPosition() {
+int NutshellWindowModule::getPositionY(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return -1;
 }
 
-bool NutshellWindowModule::isCursorVisible() {
+bool NutshellWindowModule::isFullscreen(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return false;
 }
 
-void NutshellWindowModule::setCursorVisibility(bool visible) {
+void NutshellWindowModule::setFullscreen(NtshWindowId windowId, bool fullscreen) {
+	NTSH_UNUSED(windowId);
+	NTSH_UNUSED(fullscreen);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+void NutshellWindowModule::pollEvents(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+void NutshellWindowModule::setTitle(NtshWindowId windowId, const std::string& title) {
+	NTSH_UNUSED(windowId);
+	NTSH_UNUSED(title);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+NtshInputState NutshellWindowModule::getKeyState(NtshWindowId windowId, NtshInputKeyboardKey key) {
+	NTSH_UNUSED(windowId);
+	NTSH_UNUSED(key);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return NtshInputState::None;
+}
+
+NtshInputState NutshellWindowModule::getButtonState(NtshWindowId windowId, NtshInputMouseButton button) {
+	NTSH_UNUSED(windowId);
+	NTSH_UNUSED(button);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return NtshInputState::None;
+}
+
+void NutshellWindowModule::setCursorPosition(NtshWindowId windowId, int x, int y) {
+	NTSH_UNUSED(windowId);
+	NTSH_UNUSED(x);
+	NTSH_UNUSED(y);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+int NutshellWindowModule::getCursorXPosition(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return -1;
+}
+
+int NutshellWindowModule::getCursorYPosition(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return -1;
+}
+
+bool NutshellWindowModule::isCursorVisible(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return false;
+}
+
+void NutshellWindowModule::setCursorVisibility(NtshWindowId windowId, bool visible) {
+	NTSH_UNUSED(windowId);
 	NTSH_UNUSED(visible);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
 #if defined(NTSH_OS_WINDOWS)
-HWND NutshellWindowModule::getNativeHandle() {
+HWND NutshellWindowModule::getNativeHandle(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return nullptr;
 }
 #elif defined(NTSH_OS_LINUX)
-Window NutshellWindowModule::getNativeHandle() {
+Window NutshellWindowModule::getNativeHandle(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return 0;
 }
