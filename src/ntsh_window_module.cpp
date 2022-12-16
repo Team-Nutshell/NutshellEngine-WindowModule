@@ -88,8 +88,7 @@ void NutshellWindowModule::setFullscreen(NtshWindowId windowId, bool fullscreen)
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-void NutshellWindowModule::pollEvents(NtshWindowId windowId) {
-	NTSH_UNUSED(windowId);
+void NutshellWindowModule::pollEvents() {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
@@ -106,9 +105,9 @@ NtshInputState NutshellWindowModule::getKeyState(NtshWindowId windowId, NtshInpu
 	return NtshInputState::None;
 }
 
-NtshInputState NutshellWindowModule::getButtonState(NtshWindowId windowId, NtshInputMouseButton button) {
+NtshInputState NutshellWindowModule::getMouseButtonState(NtshWindowId windowId, NtshInputMouseButton mouseButton) {
 	NTSH_UNUSED(windowId);
-	NTSH_UNUSED(button);
+	NTSH_UNUSED(mouseButton);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return NtshInputState::None;
 }
