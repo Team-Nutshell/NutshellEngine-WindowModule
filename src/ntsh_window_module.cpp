@@ -76,16 +76,16 @@ int NutshellWindowModule::getPositionY(NtshWindowId windowId) {
 	return -1;
 }
 
-bool NutshellWindowModule::isFullscreen(NtshWindowId windowId) {
-	NTSH_UNUSED(windowId);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return false;
-}
-
 void NutshellWindowModule::setFullscreen(NtshWindowId windowId, bool fullscreen) {
 	NTSH_UNUSED(windowId);
 	NTSH_UNUSED(fullscreen);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+bool NutshellWindowModule::isFullscreen(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return false;
 }
 
 void NutshellWindowModule::pollEvents() {
@@ -119,28 +119,28 @@ void NutshellWindowModule::setCursorPosition(NtshWindowId windowId, int x, int y
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-int NutshellWindowModule::getCursorXPosition(NtshWindowId windowId) {
+int NutshellWindowModule::getCursorPositionX(NtshWindowId windowId) {
 	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return -1;
 }
 
-int NutshellWindowModule::getCursorYPosition(NtshWindowId windowId) {
+int NutshellWindowModule::getCursorPositionY(NtshWindowId windowId) {
 	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return -1;
-}
-
-bool NutshellWindowModule::isCursorVisible(NtshWindowId windowId) {
-	NTSH_UNUSED(windowId);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return false;
 }
 
 void NutshellWindowModule::setCursorVisibility(NtshWindowId windowId, bool visible) {
 	NTSH_UNUSED(windowId);
 	NTSH_UNUSED(visible);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+bool NutshellWindowModule::isCursorVisible(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
+	return false;
 }
 
 #if defined(NTSH_OS_WINDOWS)
