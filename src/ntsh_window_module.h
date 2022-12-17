@@ -14,10 +14,10 @@ public:
 	void destroy();
 
 	// Opens a new window and returns a unique identifier
-	NtshWindowId open();
+	NtshWindowId open(int width, int height, const std::string& title);
 	// Returns true if the window with identifier windowId is open, else, returns false
 	bool isOpen(NtshWindowId windowId);
-	// Closes the window with identifier windowId
+	// Flags the window to be closed at the next update
 	void close(NtshWindowId windowId);
 
 	// Returns the number of opened windows

@@ -13,7 +13,7 @@
 
 class GLFWWindow {
 public:
-	GLFWWindow(const std::string& name);
+	GLFWWindow(int width, int height, const std::string& title);
 	~GLFWWindow();
 
 	void close();
