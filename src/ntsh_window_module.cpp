@@ -17,7 +17,10 @@ void NutshellWindowModule::destroy() {
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-NtshWindowId NutshellWindowModule::open() {
+NtshWindowId NutshellWindowModule::open(int width, int height, const std::string& title) {
+	NTSH_UNUSED(width);
+	NTSH_UNUSED(height);
+	NTSH_UNUSED(title);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return 0;
 }
