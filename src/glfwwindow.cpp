@@ -10,7 +10,7 @@
 #endif
 #include "../external/glfw/include/GLFW/glfw3native.h"
 
-void GLFWWindow::open(const std::string& name) {
+GLFWWindow::GLFWWindow(const std::string& name) {
 	m_window = glfwCreateWindow(m_width, m_height, name.c_str(), nullptr, nullptr);
 	glfwGetWindowPos(m_window, &m_x, &m_y);
 	glfwSetWindowUserPointer(m_window, this);
@@ -20,6 +20,11 @@ void GLFWWindow::open(const std::string& name) {
 	glfwSetKeyCallback(m_window, keyboardKeyCallback);
 	glfwSetMouseButtonCallback(m_window, mouseButtonCallback);
 	glfwSetCursorPosCallback(m_window, cursorPositionCallback);
+	glfwSetWindowCloseCallback(m_window, windowCloseCallback);
+}
+
+GLFWWindow::~GLFWWindow() {
+	glfwDestroyWindow(m_window);
 }
 
 void GLFWWindow::close() {
@@ -167,6 +172,10 @@ void GLFWWindow::mouseButtonInternal(int button, int action) {
 void GLFWWindow::cursorPositionInternal(int x, int y) {
 	m_cursorX = x;
 	m_cursorY = y;
+}
+
+void GLFWWindow::windowCloseInternal() {
+	close();
 }
 
 NtshInputState GLFWWindow::nextInputState(NtshInputState inputState) {
