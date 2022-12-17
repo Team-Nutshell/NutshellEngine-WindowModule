@@ -32,9 +32,9 @@ void NutshellWindowModule::destroy() {
 	}
 }
 
-NtshWindowId NutshellWindowModule::open() {
+NtshWindowId NutshellWindowModule::open(int width, int height, const std::string& title) {
 	m_windows[m_id] = std::make_unique<QtWindow>();
-	m_windows[m_id]->open(m_name);
+	m_windows[m_id]->open(width, height, title);
 
 	return m_id++;
 }
