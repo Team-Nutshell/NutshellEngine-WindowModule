@@ -22,15 +22,15 @@ NtshWindowId NutshellWindowModule::open() {
 	return 0;
 }
 
-void NutshellWindowModule::close(NtshWindowId windowId) {
-	NTSH_UNUSED(windowId);
-	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
-}
-
-bool NutshellWindowModule::shouldClose(NtshWindowId windowId) {
+bool NutshellWindowModule::isOpen(NtshWindowId windowId) {
 	NTSH_UNUSED(windowId);
 	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 	return false;
+}
+
+void NutshellWindowModule::close(NtshWindowId windowId) {
+	NTSH_UNUSED(windowId);
+	NTSH_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
 uint64_t NutshellWindowModule::windowCount() {
