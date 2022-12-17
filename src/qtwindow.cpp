@@ -16,6 +16,10 @@ bool QtWindow::shouldClose() {
 	return m_shouldClose;
 }
 
+void QtWindow::closeWindow() {
+	m_shouldClose = true;
+}
+
 void QtWindow::updateInputs(double dt) {
 	NTSH_UNUSED(dt);
 
@@ -78,7 +82,7 @@ NtshInputState QtWindow::nextInputState(NtshInputState inputState) {
 }
 
 void QtWindow::closeEvent(QCloseEvent* event) {
-	m_shouldClose = true;
+	closeWindow();
 	event->ignore();
 }
 
