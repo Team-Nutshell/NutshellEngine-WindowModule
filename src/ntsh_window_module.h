@@ -15,10 +15,10 @@ public:
 
 	// Opens a new window and returns a unique identifier
 	NtshWindowId open();
-	// Sends a request to close the window with identifier windowId
+	// Returns true if the window with identifier windowId is open, else, returns false
+	bool isOpen(NtshWindowId windowId);
+	// Closes the window with identifier windowId
 	void close(NtshWindowId windowId);
-	// Returns true if there has been a request to close the window with identifier windowId, else, returns false
-	bool shouldClose(NtshWindowId windowId);
 
 	// Returns the number of opened windows
 	uint64_t windowCount();
@@ -56,9 +56,9 @@ public:
 	// Sets the mouse cursor position
 	void setCursorPosition(NtshWindowId windowId, int x, int y);
 	// Gets the mouse cursor horizontal position
-	int getCursorXPosition(NtshWindowId windowId);
+	int getCursorPositionX(NtshWindowId windowId);
 	// Gets the mouse cursor vertical position
-	int getCursorYPosition(NtshWindowId windowId);
+	int getCursorPositionY(NtshWindowId windowId);
 
 	// If the mouse cursor is visible in the window with identifier windowId, hides it, else, shows it
 	void setCursorVisibility(NtshWindowId windowId, bool visible);

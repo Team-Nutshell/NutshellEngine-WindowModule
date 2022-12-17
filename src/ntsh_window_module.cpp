@@ -14,7 +14,12 @@ void NutshellWindowModule::update(double dt) {
 	NTSH_UNUSED(dt);
 
 	for (size_t i = 0; i < m_windows.size(); i++) {
-		m_windows[i]->updateInputs(dt);
+		if (m_windows[i]->shouldClose()) {
+			i = m_windows.erase(i);
+		}
+		else {
+			m_windows[i]->updateInputs(dt);
+		}
 	}
 
 	m_application->processEvents();
@@ -23,6 +28,7 @@ void NutshellWindowModule::update(double dt) {
 void NutshellWindowModule::destroy() {
 	for (size_t i = 0; i < m_windows.size(); i++) {
 		m_windows[i]->close();
+		m_windows.erase(i);
 	}
 }
 
@@ -33,14 +39,13 @@ NtshWindowId NutshellWindowModule::open() {
 	return m_id++;
 }
 
-void NutshellWindowModule::close(NtshWindowId windowId) {
-	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
-	m_windows[windowId]->close();
+bool NutshellWindowModule::isOpen(NtshWindowId windowId) {
+	return (m_windows.find(windowId) != m_windows.end()) ? !m_windows[windowId]->shouldClose() : false;
 }
 
-bool NutshellWindowModule::shouldClose(NtshWindowId windowId) {
+void NutshellWindowModule::close(NtshWindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
-	return m_windows[windowId]->shouldClose();
+	m_windows[windowId]->closeWindow();
 }
 
 uint64_t NutshellWindowModule::windowCount() {
@@ -122,12 +127,12 @@ void NutshellWindowModule::setCursorPosition(NtshWindowId windowId, int x, int y
 	m_windows[windowId]->setCursorPosition(x, y);
 }
 
-int NutshellWindowModule::getCursorXPosition(NtshWindowId windowId) {
+int NutshellWindowModule::getCursorPositionX(NtshWindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getCursorXPosition();
 }
 
-int NutshellWindowModule::getCursorYPosition(NtshWindowId windowId) {
+int NutshellWindowModule::getCursorPositionY(NtshWindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getCursorYPosition();
 }

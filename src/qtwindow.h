@@ -12,6 +12,7 @@ public:
 
 	void open(const std::string& name);
 	bool shouldClose();
+	void closeWindow();
 
 	void updateInputs(double dt);
 
