@@ -14,12 +14,11 @@ void NutshellWindowModule::update(double dt) {
 
 	for (size_t i = 0; i < m_windows.size(); i++) {
 		if (m_windows[i]->shouldClose()) {
-			m_windows.erase(i);
+			i = m_windows.erase(i);
 		}
-	}
-
-	for (size_t i = 0; i < m_windows.size(); i++) {
-		m_windows[i]->updateInputs(dt);
+		else {
+			m_windows[i]->updateInputs(dt);
+		}
 	}
 
 	pollEvents();
