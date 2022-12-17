@@ -10,7 +10,7 @@ class QtWindow : public QWidget {
 public:
 	QtWindow(QWidget* parent = nullptr);
 
-	void open(const std::string& name);
+	void open(int width, int height, const std::string& title);
 	bool shouldClose();
 	void closeWindow();
 

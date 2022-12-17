@@ -6,9 +6,9 @@ QtWindow::QtWindow(QWidget* parent) : QWidget(parent) {
 	setMouseTracking(true);
 }
 
-void QtWindow::open(const std::string& name) {
-	setWindowTitle(QString::fromStdString(name));
-	resize(1280, 720);
+void QtWindow::open(int width, int height, const std::string& title) {
+	setWindowTitle(QString::fromStdString(title));
+	resize(width, height);
 	show();
 }
 
