@@ -13,6 +13,12 @@ void NutshellWindowModule::update(double dt) {
 	NTSH_UNUSED(dt);
 
 	for (size_t i = 0; i < m_windows.size(); i++) {
+		if (m_windows[i]->shouldClose()) {
+			m_windows.erase(i);
+		}
+	}
+
+	for (size_t i = 0; i < m_windows.size(); i++) {
 		m_windows[i]->updateInputs(dt);
 	}
 
@@ -21,26 +27,24 @@ void NutshellWindowModule::update(double dt) {
 
 void NutshellWindowModule::destroy() {
 	for (size_t i = 0; i < m_windows.size(); i++) {
-		m_windows[i]->shouldClose();
+		m_windows[i]->close();
 	}
 	glfwTerminate();
 }
 
 NtshWindowId NutshellWindowModule::open() {
-	m_windows[m_id] = std::make_unique<GLFWWindow>();
-	m_windows[m_id]->open(m_name);
+	m_windows[m_id] = std::make_unique<GLFWWindow>(m_name);
 
 	return m_id++;
+}
+
+bool NutshellWindowModule::isOpen(NtshWindowId windowId) {
+	return (m_windows.find(windowId) != m_windows.end()) ? !m_windows[windowId]->shouldClose() : false;
 }
 
 void NutshellWindowModule::close(NtshWindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->close();
-}
-
-bool NutshellWindowModule::shouldClose(NtshWindowId windowId) {
-	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
-	return m_windows[windowId]->shouldClose();
 }
 
 uint64_t NutshellWindowModule::windowCount() {

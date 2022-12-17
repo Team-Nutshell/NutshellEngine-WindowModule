@@ -15,10 +15,10 @@ public:
 
 	// Opens a new window and returns a unique identifier
 	NtshWindowId open();
-	// Sends a request to close the window with identifier windowId
+	// Returns true if the window with identifier windowId is open, else, returns false
+	bool isOpen(NtshWindowId windowId);
+	// Closes the window with identifier windowId
 	void close(NtshWindowId windowId);
-	// Returns true if there has been a request to close the window with identifier windowId, else, returns false
-	bool shouldClose(NtshWindowId windowId);
 
 	// Returns the number of opened windows
 	uint64_t windowCount();

@@ -13,7 +13,9 @@
 
 class GLFWWindow {
 public:
-	void open(const std::string& name);
+	GLFWWindow(const std::string& name);
+	~GLFWWindow();
+
 	void close();
 	bool shouldClose();
 
@@ -66,6 +68,9 @@ private:
 	// Mouse position internal function used by callback
 	void cursorPositionInternal(int x, int y);
 
+	// Window close internal function used by callback
+	void windowCloseInternal();
+
 	// Returns the next input state (Pressed -> Held, Released -> None)
 	NtshInputState nextInputState(NtshInputState inputState);
 
@@ -101,6 +106,12 @@ private:
 	static void cursorPositionCallback(GLFWwindow* window, double x, double y) {
 		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->cursorPositionInternal(static_cast<int>(x), static_cast<int>(y));
+	}
+
+	// Window close callback
+	static void windowCloseCallback(GLFWwindow* window) {
+		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		ptr->windowCloseInternal();
 	}
 
 private:
