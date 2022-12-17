@@ -31,8 +31,8 @@ void NutshellWindowModule::destroy() {
 	glfwTerminate();
 }
 
-NtshWindowId NutshellWindowModule::open() {
-	m_windows[m_id] = std::make_unique<GLFWWindow>(m_name);
+NtshWindowId NutshellWindowModule::open(int width, int height, const std::string& title) {
+	m_windows[m_id] = std::make_unique<GLFWWindow>(width, height, title);
 
 	return m_id++;
 }

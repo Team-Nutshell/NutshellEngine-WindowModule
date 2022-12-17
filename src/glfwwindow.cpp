@@ -10,8 +10,8 @@
 #endif
 #include "../external/glfw/include/GLFW/glfw3native.h"
 
-GLFWWindow::GLFWWindow(const std::string& name) {
-	m_window = glfwCreateWindow(m_width, m_height, name.c_str(), nullptr, nullptr);
+GLFWWindow::GLFWWindow(int width, int height, const std::string& title) {
+	m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 	glfwGetWindowPos(m_window, &m_x, &m_y);
 	glfwSetWindowUserPointer(m_window, this);
 
