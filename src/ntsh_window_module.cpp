@@ -49,7 +49,14 @@ void NutshellWindowModule::close(NtshWindowId windowId) {
 }
 
 uint64_t NutshellWindowModule::windowCount() {
-	return m_windows.size();
+	uint64_t count = 0;
+	for (size_t i = 0; i < m_windows.size(); i++) {
+		if (!m_windows[i]->shouldClose()) {
+			count++;
+		}
+	}
+
+	return count;
 }
 
 void NutshellWindowModule::setSize(NtshWindowId windowId, int width, int height) {
