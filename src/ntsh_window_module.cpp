@@ -12,12 +12,13 @@ void NutshellWindowModule::init() {
 void NutshellWindowModule::update(double dt) {
 	NTSH_UNUSED(dt);
 
-	for (size_t i = 0; i < m_windows.size(); i++) {
-		if (m_windows[i]->shouldClose()) {
-			i = m_windows.erase(i);
+	for (auto it = m_windows.begin(); it != m_windows.end(); ) {
+		if (it->second->shouldClose()) {
+			it = m_windows.erase(it);
 		}
 		else {
-			m_windows[i]->updateInputs(dt);
+			it->second->updateInputs(dt);
+			it++;
 		}
 	}
 
@@ -25,8 +26,8 @@ void NutshellWindowModule::update(double dt) {
 }
 
 void NutshellWindowModule::destroy() {
-	for (size_t i = 0; i < m_windows.size(); i++) {
-		m_windows[i]->close();
+	for (auto it = m_windows.begin(); it != m_windows.end(); it++) {
+		it->second->close();
 	}
 	glfwTerminate();
 }
@@ -48,8 +49,8 @@ void NutshellWindowModule::close(NtshWindowId windowId) {
 
 uint64_t NutshellWindowModule::windowCount() {
 	uint64_t count = 0;
-	for (size_t i = 0; i < m_windows.size(); i++) {
-		if (!m_windows[i]->shouldClose()) {
+	for (auto it = m_windows.begin(); it != m_windows.end(); it++) {
+		if (!it->second->shouldClose()) {
 			count++;
 		}
 	}
