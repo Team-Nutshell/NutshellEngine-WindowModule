@@ -12,6 +12,8 @@
 
 GLFWWindow::GLFWWindow(int width, int height, const std::string& title) {
 	m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+	m_width = width;
+	m_height = height;
 	glfwGetWindowPos(m_window, &m_x, &m_y);
 	glfwSetWindowUserPointer(m_window, this);
 
