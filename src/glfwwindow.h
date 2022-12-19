@@ -116,8 +116,8 @@ private:
 
 private:
 	GLFWwindow* m_window = nullptr;
-	int m_width = 1280;
-	int m_height = 720;
+	int m_width;
+	int m_height;
 	int m_x = 0;
 	int m_y = 0;
 	int m_cursorX = 0;
