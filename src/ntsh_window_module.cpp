@@ -33,18 +33,18 @@ void NutshellWindowModule::destroy() {
 	}
 }
 
-NtshWindowId NutshellWindowModule::open(int width, int height, const std::string& title) {
+Ntsh::WindowId NutshellWindowModule::open(int width, int height, const std::string& title) {
 	m_windows[m_id] = std::make_unique<QtWindow>();
 	m_windows[m_id]->open(width, height, title);
 
 	return m_id++;
 }
 
-bool NutshellWindowModule::isOpen(NtshWindowId windowId) {
+bool NutshellWindowModule::isOpen(Ntsh::WindowId windowId) {
 	return (m_windows.find(windowId) != m_windows.end()) ? !m_windows[windowId]->shouldClose() : false;
 }
 
-void NutshellWindowModule::close(NtshWindowId windowId) {
+void NutshellWindowModule::close(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->closeWindow();
 }
@@ -60,12 +60,12 @@ uint64_t NutshellWindowModule::windowCount() {
 	return count;
 }
 
-void NutshellWindowModule::setSize(NtshWindowId windowId, int width, int height) {
+void NutshellWindowModule::setSize(Ntsh::WindowId windowId, int width, int height) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->resize(width, height);
 }
 
-int NutshellWindowModule::getWidth(NtshWindowId windowId) {
+int NutshellWindowModule::getWidth(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	if (m_windows[windowId]->isMinimized()) {
 		return 0;
@@ -73,7 +73,7 @@ int NutshellWindowModule::getWidth(NtshWindowId windowId) {
 	return m_windows[windowId]->width();
 }
 
-int NutshellWindowModule::getHeight(NtshWindowId windowId) {
+int NutshellWindowModule::getHeight(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	if (m_windows[windowId]->isMinimized()) {
 		return 0;
@@ -81,22 +81,22 @@ int NutshellWindowModule::getHeight(NtshWindowId windowId) {
 	return m_windows[windowId]->height();
 }
 
-void NutshellWindowModule::setPosition(NtshWindowId windowId, int x, int y) {
+void NutshellWindowModule::setPosition(Ntsh::WindowId windowId, int x, int y) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->move(x, y);
 }
 
-int NutshellWindowModule::getPositionX(NtshWindowId windowId) {
+int NutshellWindowModule::getPositionX(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->x();
 }
 
-int NutshellWindowModule::getPositionY(NtshWindowId windowId) {
+int NutshellWindowModule::getPositionY(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->y();
 }
 
-void NutshellWindowModule::setFullscreen(NtshWindowId windowId, bool fullscreen) {
+void NutshellWindowModule::setFullscreen(Ntsh::WindowId windowId, bool fullscreen) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	if (fullscreen) {
 		m_windows[windowId]->showFullScreen();
@@ -106,7 +106,7 @@ void NutshellWindowModule::setFullscreen(NtshWindowId windowId, bool fullscreen)
 	}
 }
 
-bool NutshellWindowModule::isFullscreen(NtshWindowId windowId) {
+bool NutshellWindowModule::isFullscreen(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->isFullScreen();
 }
@@ -115,53 +115,53 @@ void NutshellWindowModule::pollEvents() {
 	m_application->processEvents();
 }
 
-void NutshellWindowModule::setTitle(NtshWindowId windowId, const std::string& title) {
+void NutshellWindowModule::setTitle(Ntsh::WindowId windowId, const std::string& title) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->setWindowTitle(QString::fromStdString(title));
 }
 
-NtshInputState NutshellWindowModule::getKeyState(NtshWindowId windowId, NtshInputKeyboardKey key) {
+Ntsh::InputState NutshellWindowModule::getKeyState(Ntsh::WindowId windowId, Ntsh::InputKeyboardKey key) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getKeyState(key);
 }
 
-NtshInputState NutshellWindowModule::getMouseButtonState(NtshWindowId windowId, NtshInputMouseButton mouseButton) {
+Ntsh::InputState NutshellWindowModule::getMouseButtonState(Ntsh::WindowId windowId, Ntsh::InputMouseButton mouseButton) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getMouseButtonState(mouseButton);
 }
 
-void NutshellWindowModule::setCursorPosition(NtshWindowId windowId, int x, int y) {
+void NutshellWindowModule::setCursorPosition(Ntsh::WindowId windowId, int x, int y) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->setCursorPosition(x, y);
 }
 
-int NutshellWindowModule::getCursorPositionX(NtshWindowId windowId) {
+int NutshellWindowModule::getCursorPositionX(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getCursorXPosition();
 }
 
-int NutshellWindowModule::getCursorPositionY(NtshWindowId windowId) {
+int NutshellWindowModule::getCursorPositionY(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getCursorYPosition();
 }
 
-void NutshellWindowModule::setCursorVisibility(NtshWindowId windowId, bool visible) {
+void NutshellWindowModule::setCursorVisibility(Ntsh::WindowId windowId, bool visible) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->setCursorVisibility(visible);
 }
 
-bool NutshellWindowModule::isCursorVisible(NtshWindowId windowId) {
+bool NutshellWindowModule::isCursorVisible(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->isCursorVisible();
 }
 
 #if defined(NTSH_OS_WINDOWS)
-HWND NutshellWindowModule::getNativeHandle(NtshWindowId windowId) {
+HWND NutshellWindowModule::getNativeHandle(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return reinterpret_cast<HWND>(m_windows[windowId]->winId());
 }
 #elif defined(NTSH_OS_LINUX)
-Window NutshellWindowModule::getNativeHandle(NtshWindowId windowId) {
+Window NutshellWindowModule::getNativeHandle(Ntsh::WindowId windowId) {
 	NTSH_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return reinterpret_cast<Window>(m_windows[windowId]->winId());
 }
