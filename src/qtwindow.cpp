@@ -1,5 +1,5 @@
 #include "qtwindow.h"
-#include "../external/Common/ntsh_engine_defines.h"
+#include "../external/Common/utils/ntshengn_defines.h"
 #include <QCursor>
 
 QtWindow::QtWindow(QWidget* parent) : QWidget(parent) {
@@ -21,7 +21,7 @@ void QtWindow::closeWindow() {
 }
 
 void QtWindow::updateInputs(double dt) {
-	NTSH_UNUSED(dt);
+	NTSHENGN_UNUSED(dt);
 
 	for (auto& key : m_keyStateMap) {
 		key.second = nextInputState(key.second);
@@ -32,11 +32,11 @@ void QtWindow::updateInputs(double dt) {
 	}
 }
 
-Ntsh::InputState QtWindow::getKeyState(Ntsh::InputKeyboardKey key) {
+NtshEngn::InputState QtWindow::getKeyState(NtshEngn::InputKeyboardKey key) {
 	return m_keyStateMap[m_keyMap[key]];
 }
 
-Ntsh::InputState QtWindow::getMouseButtonState(Ntsh::InputMouseButton mouseButton) {
+NtshEngn::InputState QtWindow::getMouseButtonState(NtshEngn::InputMouseButton mouseButton) {
 	return m_mouseButtonStateMap[m_mouseButtonMap[mouseButton]];
 }
 
@@ -70,12 +70,12 @@ bool QtWindow::isCursorVisible() {
 	return m_cursorVisible;
 }
 
-Ntsh::InputState QtWindow::nextInputState(Ntsh::InputState inputState) {
-	if (inputState == Ntsh::InputState::Pressed) {
-		return Ntsh::InputState::Held;
+NtshEngn::InputState QtWindow::nextInputState(NtshEngn::InputState inputState) {
+	if (inputState == NtshEngn::InputState::Pressed) {
+		return NtshEngn::InputState::Held;
 	}
-	else if (inputState == Ntsh::InputState::Released) {
-		return Ntsh::InputState::None;
+	else if (inputState == NtshEngn::InputState::Released) {
+		return NtshEngn::InputState::None;
 	}
 
 	return inputState;
@@ -89,9 +89,9 @@ void QtWindow::closeEvent(QCloseEvent* event) {
 void QtWindow::keyPressEvent(QKeyEvent* event) {
 	Qt::Key key = static_cast<Qt::Key>(event->key());
 	if (m_keyStateMap.find(key) != m_keyStateMap.end()) {
-		Ntsh::InputState currentState = m_keyStateMap[key];
-		if (currentState == Ntsh::InputState::None || currentState == Ntsh::InputState::Released) {
-			m_keyStateMap[key] = Ntsh::InputState::Pressed;
+		NtshEngn::InputState currentState = m_keyStateMap[key];
+		if (currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) {
+			m_keyStateMap[key] = NtshEngn::InputState::Pressed;
 		}
 	}
 }
@@ -99,9 +99,9 @@ void QtWindow::keyPressEvent(QKeyEvent* event) {
 void QtWindow::keyReleaseEvent(QKeyEvent* event) {
 	Qt::Key key = static_cast<Qt::Key>(event->key());
 	if (m_keyStateMap.find(key) != m_keyStateMap.end()) {
-		Ntsh::InputState currentState = m_keyStateMap[key];
-		if (currentState == Ntsh::InputState::Pressed || currentState == Ntsh::InputState::Held) {
-			m_keyStateMap[key] = Ntsh::InputState::Released;
+		NtshEngn::InputState currentState = m_keyStateMap[key];
+		if (currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) {
+			m_keyStateMap[key] = NtshEngn::InputState::Released;
 		}
 	}
 }
@@ -109,9 +109,9 @@ void QtWindow::keyReleaseEvent(QKeyEvent* event) {
 void QtWindow::mousePressEvent(QMouseEvent* event) {
 	Qt::MouseButton button = event->button();
 	if (m_mouseButtonStateMap.find(button) != m_mouseButtonStateMap.end()) {
-		Ntsh::InputState currentState = m_mouseButtonStateMap[button];
-		if (currentState == Ntsh::InputState::None || currentState == Ntsh::InputState::Released) {
-			m_mouseButtonStateMap[button] = Ntsh::InputState::Pressed;
+		NtshEngn::InputState currentState = m_mouseButtonStateMap[button];
+		if (currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) {
+			m_mouseButtonStateMap[button] = NtshEngn::InputState::Pressed;
 		}
 	}
 }
@@ -119,9 +119,9 @@ void QtWindow::mousePressEvent(QMouseEvent* event) {
 void QtWindow::mouseReleaseEvent(QMouseEvent* event) {
 	Qt::MouseButton button = event->button();
 	if (m_mouseButtonStateMap.find(button) != m_mouseButtonStateMap.end()) {
-		Ntsh::InputState currentState = m_mouseButtonStateMap[button];
-		if (currentState == Ntsh::InputState::Pressed || currentState == Ntsh::InputState::Held) {
-			m_mouseButtonStateMap[button] = Ntsh::InputState::Released;
+		NtshEngn::InputState currentState = m_mouseButtonStateMap[button];
+		if (currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) {
+			m_mouseButtonStateMap[button] = NtshEngn::InputState::Released;
 		}
 	}
 }
