@@ -1,12 +1,13 @@
 #pragma once
 #include "../external/glfw/include/GLFW/glfw3.h"
-#include "../external/Common/utils/ntsh_engine_defines.h"
-#include "../external/Common/utils/ntsh_engine_input_enums.h"
-#if defined(NTSH_OS_WINDOWS)
-#include <windows.h>
-#elif defined(NTSH_OS_LINUX)
-#include <X11/Xlib.h>
+#include "../external/Common/utils/ntshengn_defines.h"
+#include "../external/Common/resources/ntshengn_resources_window.h"
+#if defined(NTSHENGN_OS_WINDOWS)
+#define GLFW_EXPOSE_NATIVE_WIN32
+#elif defined(NTSHENGN_OS_LINUX)
+#define GLFW_EXPOSE_NATIVE_X11
 #endif
+#include "../external/glfw/include/GLFW/glfw3native.h"
 #include <string>
 #include <unordered_map>
 
@@ -34,8 +35,8 @@ public:
 
 	void setTitle(const std::string& title);
 
-	Ntsh::InputState getKeyState(Ntsh::InputKeyboardKey key);
-	Ntsh::InputState getMouseButtonState(Ntsh::InputMouseButton mouseButton);
+	NtshEngn::InputState getKeyState(NtshEngn::InputKeyboardKey key);
+	NtshEngn::InputState getMouseButtonState(NtshEngn::InputMouseButton mouseButton);
 
 	void setCursorPosition(int x, int y);
 	int getCursorPositionX();
@@ -44,10 +45,10 @@ public:
 	void setCursorVisibility(bool visible);
 	bool isCursorVisible();
 
-#if defined(NTSH_OS_WINDOWS)
+#if defined(NTSHENGN_OS_WINDOWS)
 	// Returns the native Win32 window handle
 	HWND getNativeHandle();
-#elif defined(NTSH_OS_LINUX)
+#elif defined(NTSHENGN_OS_LINUX)
 	// Returns the native X window handle
 	Window getNativeHandle();
 #endif
@@ -72,7 +73,7 @@ private:
 	void windowCloseInternal();
 
 	// Returns the next input state (Pressed -> Held, Released -> None)
-	Ntsh::InputState nextInputState(Ntsh::InputState inputState);
+	NtshEngn::InputState nextInputState(NtshEngn::InputState inputState);
 
 private:
 	// Position callback
@@ -89,15 +90,15 @@ private:
 
 	// Keyboard key callback
 	static void keyboardKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-		NTSH_UNUSED(scancode);
-		NTSH_UNUSED(mods);
+		NTSHENGN_UNUSED(scancode);
+		NTSHENGN_UNUSED(mods);
 		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->keyboardKeyInternal(key, action);
 	}
 
 	// Mouse button callback
 	static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
-		NTSH_UNUSED(mods);
+		NTSHENGN_UNUSED(mods);
 		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->mouseButtonInternal(button, action);
 	}
@@ -124,148 +125,148 @@ private:
 	int m_cursorY = 0;
 	bool m_cursorVisible = true;
 
-	std::unordered_map<Ntsh::InputKeyboardKey, int> m_keyMap = { { Ntsh::InputKeyboardKey::A, GLFW_KEY_A },
-		{ Ntsh::InputKeyboardKey::B, GLFW_KEY_B },
-		{ Ntsh::InputKeyboardKey::C, GLFW_KEY_C },
-		{ Ntsh::InputKeyboardKey::D, GLFW_KEY_D },
-		{ Ntsh::InputKeyboardKey::E, GLFW_KEY_E },
-		{ Ntsh::InputKeyboardKey::F, GLFW_KEY_F },
-		{ Ntsh::InputKeyboardKey::G, GLFW_KEY_G },
-		{ Ntsh::InputKeyboardKey::H, GLFW_KEY_H },
-		{ Ntsh::InputKeyboardKey::I, GLFW_KEY_I },
-		{ Ntsh::InputKeyboardKey::J, GLFW_KEY_J },
-		{ Ntsh::InputKeyboardKey::K, GLFW_KEY_K },
-		{ Ntsh::InputKeyboardKey::L, GLFW_KEY_L },
-		{ Ntsh::InputKeyboardKey::M, GLFW_KEY_M },
-		{ Ntsh::InputKeyboardKey::N, GLFW_KEY_N },
-		{ Ntsh::InputKeyboardKey::O, GLFW_KEY_O },
-		{ Ntsh::InputKeyboardKey::P, GLFW_KEY_P },
-		{ Ntsh::InputKeyboardKey::Q, GLFW_KEY_Q },
-		{ Ntsh::InputKeyboardKey::R, GLFW_KEY_R },
-		{ Ntsh::InputKeyboardKey::S, GLFW_KEY_S },
-		{ Ntsh::InputKeyboardKey::T, GLFW_KEY_T },
-		{ Ntsh::InputKeyboardKey::U, GLFW_KEY_U },
-		{ Ntsh::InputKeyboardKey::V, GLFW_KEY_V },
-		{ Ntsh::InputKeyboardKey::W, GLFW_KEY_W },
-		{ Ntsh::InputKeyboardKey::X, GLFW_KEY_X },
-		{ Ntsh::InputKeyboardKey::Y, GLFW_KEY_Y },
-		{ Ntsh::InputKeyboardKey::Z, GLFW_KEY_Z },
-		{ Ntsh::InputKeyboardKey::Space, GLFW_KEY_SPACE },
-		{ Ntsh::InputKeyboardKey::Shift, GLFW_KEY_LEFT_SHIFT },
-		{ Ntsh::InputKeyboardKey::LeftCtrl, GLFW_KEY_LEFT_CONTROL },
-		{ Ntsh::InputKeyboardKey::RightCtrl, GLFW_KEY_RIGHT_CONTROL },
-		{ Ntsh::InputKeyboardKey::Alt, GLFW_KEY_LEFT_ALT },
-		{ Ntsh::InputKeyboardKey::Escape, GLFW_KEY_ESCAPE },
-		{ Ntsh::InputKeyboardKey::Tab, GLFW_KEY_TAB },
-		{ Ntsh::InputKeyboardKey::Backspace, GLFW_KEY_BACKSPACE },
-		{ Ntsh::InputKeyboardKey::Return, GLFW_KEY_ENTER },
-		{ Ntsh::InputKeyboardKey::Enter, GLFW_KEY_ENTER },
-		{ Ntsh::InputKeyboardKey::Num0, GLFW_KEY_KP_0 },
-		{ Ntsh::InputKeyboardKey::Num1, GLFW_KEY_KP_1 },
-		{ Ntsh::InputKeyboardKey::Num2, GLFW_KEY_KP_2 },
-		{ Ntsh::InputKeyboardKey::Num3, GLFW_KEY_KP_3 },
-		{ Ntsh::InputKeyboardKey::Num4, GLFW_KEY_KP_4 },
-		{ Ntsh::InputKeyboardKey::Num5, GLFW_KEY_KP_5 },
-		{ Ntsh::InputKeyboardKey::Num6, GLFW_KEY_KP_6 },
-		{ Ntsh::InputKeyboardKey::Num7, GLFW_KEY_KP_7 },
-		{ Ntsh::InputKeyboardKey::Num8, GLFW_KEY_KP_8 },
-		{ Ntsh::InputKeyboardKey::Num9, GLFW_KEY_KP_9 },
-		{ Ntsh::InputKeyboardKey::Left, GLFW_KEY_LEFT },
-		{ Ntsh::InputKeyboardKey::Right, GLFW_KEY_RIGHT },
-		{ Ntsh::InputKeyboardKey::Up, GLFW_KEY_UP },
-		{ Ntsh::InputKeyboardKey::Down, GLFW_KEY_DOWN },
-		{ Ntsh::InputKeyboardKey::F1, GLFW_KEY_F1 },
-		{ Ntsh::InputKeyboardKey::F2, GLFW_KEY_F2 },
-		{ Ntsh::InputKeyboardKey::F3, GLFW_KEY_F3 },
-		{ Ntsh::InputKeyboardKey::F4, GLFW_KEY_F4 },
-		{ Ntsh::InputKeyboardKey::F5, GLFW_KEY_F5 },
-		{ Ntsh::InputKeyboardKey::F6, GLFW_KEY_F6 },
-		{ Ntsh::InputKeyboardKey::F7, GLFW_KEY_F7 },
-		{ Ntsh::InputKeyboardKey::F8, GLFW_KEY_F8 },
-		{ Ntsh::InputKeyboardKey::F9, GLFW_KEY_F9 },
-		{ Ntsh::InputKeyboardKey::F10, GLFW_KEY_F10 },
-		{ Ntsh::InputKeyboardKey::F11, GLFW_KEY_F11 },
-		{ Ntsh::InputKeyboardKey::F12, GLFW_KEY_F12 }
+	std::unordered_map<NtshEngn::InputKeyboardKey, int> m_keyMap = { { NtshEngn::InputKeyboardKey::A, GLFW_KEY_A },
+		{ NtshEngn::InputKeyboardKey::B, GLFW_KEY_B },
+		{ NtshEngn::InputKeyboardKey::C, GLFW_KEY_C },
+		{ NtshEngn::InputKeyboardKey::D, GLFW_KEY_D },
+		{ NtshEngn::InputKeyboardKey::E, GLFW_KEY_E },
+		{ NtshEngn::InputKeyboardKey::F, GLFW_KEY_F },
+		{ NtshEngn::InputKeyboardKey::G, GLFW_KEY_G },
+		{ NtshEngn::InputKeyboardKey::H, GLFW_KEY_H },
+		{ NtshEngn::InputKeyboardKey::I, GLFW_KEY_I },
+		{ NtshEngn::InputKeyboardKey::J, GLFW_KEY_J },
+		{ NtshEngn::InputKeyboardKey::K, GLFW_KEY_K },
+		{ NtshEngn::InputKeyboardKey::L, GLFW_KEY_L },
+		{ NtshEngn::InputKeyboardKey::M, GLFW_KEY_M },
+		{ NtshEngn::InputKeyboardKey::N, GLFW_KEY_N },
+		{ NtshEngn::InputKeyboardKey::O, GLFW_KEY_O },
+		{ NtshEngn::InputKeyboardKey::P, GLFW_KEY_P },
+		{ NtshEngn::InputKeyboardKey::Q, GLFW_KEY_Q },
+		{ NtshEngn::InputKeyboardKey::R, GLFW_KEY_R },
+		{ NtshEngn::InputKeyboardKey::S, GLFW_KEY_S },
+		{ NtshEngn::InputKeyboardKey::T, GLFW_KEY_T },
+		{ NtshEngn::InputKeyboardKey::U, GLFW_KEY_U },
+		{ NtshEngn::InputKeyboardKey::V, GLFW_KEY_V },
+		{ NtshEngn::InputKeyboardKey::W, GLFW_KEY_W },
+		{ NtshEngn::InputKeyboardKey::X, GLFW_KEY_X },
+		{ NtshEngn::InputKeyboardKey::Y, GLFW_KEY_Y },
+		{ NtshEngn::InputKeyboardKey::Z, GLFW_KEY_Z },
+		{ NtshEngn::InputKeyboardKey::Space, GLFW_KEY_SPACE },
+		{ NtshEngn::InputKeyboardKey::Shift, GLFW_KEY_LEFT_SHIFT },
+		{ NtshEngn::InputKeyboardKey::LeftCtrl, GLFW_KEY_LEFT_CONTROL },
+		{ NtshEngn::InputKeyboardKey::RightCtrl, GLFW_KEY_RIGHT_CONTROL },
+		{ NtshEngn::InputKeyboardKey::Alt, GLFW_KEY_LEFT_ALT },
+		{ NtshEngn::InputKeyboardKey::Escape, GLFW_KEY_ESCAPE },
+		{ NtshEngn::InputKeyboardKey::Tab, GLFW_KEY_TAB },
+		{ NtshEngn::InputKeyboardKey::Backspace, GLFW_KEY_BACKSPACE },
+		{ NtshEngn::InputKeyboardKey::Return, GLFW_KEY_ENTER },
+		{ NtshEngn::InputKeyboardKey::Enter, GLFW_KEY_ENTER },
+		{ NtshEngn::InputKeyboardKey::Num0, GLFW_KEY_KP_0 },
+		{ NtshEngn::InputKeyboardKey::Num1, GLFW_KEY_KP_1 },
+		{ NtshEngn::InputKeyboardKey::Num2, GLFW_KEY_KP_2 },
+		{ NtshEngn::InputKeyboardKey::Num3, GLFW_KEY_KP_3 },
+		{ NtshEngn::InputKeyboardKey::Num4, GLFW_KEY_KP_4 },
+		{ NtshEngn::InputKeyboardKey::Num5, GLFW_KEY_KP_5 },
+		{ NtshEngn::InputKeyboardKey::Num6, GLFW_KEY_KP_6 },
+		{ NtshEngn::InputKeyboardKey::Num7, GLFW_KEY_KP_7 },
+		{ NtshEngn::InputKeyboardKey::Num8, GLFW_KEY_KP_8 },
+		{ NtshEngn::InputKeyboardKey::Num9, GLFW_KEY_KP_9 },
+		{ NtshEngn::InputKeyboardKey::Left, GLFW_KEY_LEFT },
+		{ NtshEngn::InputKeyboardKey::Right, GLFW_KEY_RIGHT },
+		{ NtshEngn::InputKeyboardKey::Up, GLFW_KEY_UP },
+		{ NtshEngn::InputKeyboardKey::Down, GLFW_KEY_DOWN },
+		{ NtshEngn::InputKeyboardKey::F1, GLFW_KEY_F1 },
+		{ NtshEngn::InputKeyboardKey::F2, GLFW_KEY_F2 },
+		{ NtshEngn::InputKeyboardKey::F3, GLFW_KEY_F3 },
+		{ NtshEngn::InputKeyboardKey::F4, GLFW_KEY_F4 },
+		{ NtshEngn::InputKeyboardKey::F5, GLFW_KEY_F5 },
+		{ NtshEngn::InputKeyboardKey::F6, GLFW_KEY_F6 },
+		{ NtshEngn::InputKeyboardKey::F7, GLFW_KEY_F7 },
+		{ NtshEngn::InputKeyboardKey::F8, GLFW_KEY_F8 },
+		{ NtshEngn::InputKeyboardKey::F9, GLFW_KEY_F9 },
+		{ NtshEngn::InputKeyboardKey::F10, GLFW_KEY_F10 },
+		{ NtshEngn::InputKeyboardKey::F11, GLFW_KEY_F11 },
+		{ NtshEngn::InputKeyboardKey::F12, GLFW_KEY_F12 }
 	};
-	std::unordered_map<int, Ntsh::InputState> m_keyStateMap = { { GLFW_KEY_A, Ntsh::InputState::None },
-		{ GLFW_KEY_B, Ntsh::InputState::None },
-		{ GLFW_KEY_C, Ntsh::InputState::None },
-		{ GLFW_KEY_D, Ntsh::InputState::None },
-		{ GLFW_KEY_E, Ntsh::InputState::None },
-		{ GLFW_KEY_F, Ntsh::InputState::None },
-		{ GLFW_KEY_G, Ntsh::InputState::None },
-		{ GLFW_KEY_H, Ntsh::InputState::None },
-		{ GLFW_KEY_I, Ntsh::InputState::None },
-		{ GLFW_KEY_J, Ntsh::InputState::None },
-		{ GLFW_KEY_K, Ntsh::InputState::None },
-		{ GLFW_KEY_L, Ntsh::InputState::None },
-		{ GLFW_KEY_M, Ntsh::InputState::None },
-		{ GLFW_KEY_N, Ntsh::InputState::None },
-		{ GLFW_KEY_O, Ntsh::InputState::None },
-		{ GLFW_KEY_P, Ntsh::InputState::None },
-		{ GLFW_KEY_Q, Ntsh::InputState::None },
-		{ GLFW_KEY_R, Ntsh::InputState::None },
-		{ GLFW_KEY_S, Ntsh::InputState::None },
-		{ GLFW_KEY_T, Ntsh::InputState::None },
-		{ GLFW_KEY_U, Ntsh::InputState::None },
-		{ GLFW_KEY_V, Ntsh::InputState::None },
-		{ GLFW_KEY_W, Ntsh::InputState::None },
-		{ GLFW_KEY_X, Ntsh::InputState::None },
-		{ GLFW_KEY_Y, Ntsh::InputState::None },
-		{ GLFW_KEY_Z, Ntsh::InputState::None },
-		{ GLFW_KEY_SPACE, Ntsh::InputState::None },
-		{ GLFW_KEY_LEFT_SHIFT, Ntsh::InputState::None },
-		{ GLFW_KEY_LEFT_CONTROL, Ntsh::InputState::None },
-		{ GLFW_KEY_RIGHT_CONTROL, Ntsh::InputState::None },
-		{ GLFW_KEY_LEFT_ALT, Ntsh::InputState::None },
-		{ GLFW_KEY_ESCAPE, Ntsh::InputState::None },
-		{ GLFW_KEY_TAB, Ntsh::InputState::None },
-		{ GLFW_KEY_BACKSPACE, Ntsh::InputState::None },
-		{ GLFW_KEY_ENTER, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_0, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_1, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_2, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_3, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_4, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_5, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_6, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_7, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_8, Ntsh::InputState::None },
-		{ GLFW_KEY_KP_9, Ntsh::InputState::None },
-		{ GLFW_KEY_LEFT, Ntsh::InputState::None },
-		{ GLFW_KEY_RIGHT, Ntsh::InputState::None },
-		{ GLFW_KEY_UP, Ntsh::InputState::None },
-		{ GLFW_KEY_DOWN, Ntsh::InputState::None },
-		{ GLFW_KEY_F1, Ntsh::InputState::None },
-		{ GLFW_KEY_F2, Ntsh::InputState::None },
-		{ GLFW_KEY_F3, Ntsh::InputState::None },
-		{ GLFW_KEY_F4, Ntsh::InputState::None },
-		{ GLFW_KEY_F5, Ntsh::InputState::None },
-		{ GLFW_KEY_F6, Ntsh::InputState::None },
-		{ GLFW_KEY_F7, Ntsh::InputState::None },
-		{ GLFW_KEY_F8, Ntsh::InputState::None },
-		{ GLFW_KEY_F9, Ntsh::InputState::None },
-		{ GLFW_KEY_F10, Ntsh::InputState::None },
-		{ GLFW_KEY_F11, Ntsh::InputState::None },
-		{ GLFW_KEY_F12, Ntsh::InputState::None }
+	std::unordered_map<int, NtshEngn::InputState> m_keyStateMap = { { GLFW_KEY_A, NtshEngn::InputState::None },
+		{ GLFW_KEY_B, NtshEngn::InputState::None },
+		{ GLFW_KEY_C, NtshEngn::InputState::None },
+		{ GLFW_KEY_D, NtshEngn::InputState::None },
+		{ GLFW_KEY_E, NtshEngn::InputState::None },
+		{ GLFW_KEY_F, NtshEngn::InputState::None },
+		{ GLFW_KEY_G, NtshEngn::InputState::None },
+		{ GLFW_KEY_H, NtshEngn::InputState::None },
+		{ GLFW_KEY_I, NtshEngn::InputState::None },
+		{ GLFW_KEY_J, NtshEngn::InputState::None },
+		{ GLFW_KEY_K, NtshEngn::InputState::None },
+		{ GLFW_KEY_L, NtshEngn::InputState::None },
+		{ GLFW_KEY_M, NtshEngn::InputState::None },
+		{ GLFW_KEY_N, NtshEngn::InputState::None },
+		{ GLFW_KEY_O, NtshEngn::InputState::None },
+		{ GLFW_KEY_P, NtshEngn::InputState::None },
+		{ GLFW_KEY_Q, NtshEngn::InputState::None },
+		{ GLFW_KEY_R, NtshEngn::InputState::None },
+		{ GLFW_KEY_S, NtshEngn::InputState::None },
+		{ GLFW_KEY_T, NtshEngn::InputState::None },
+		{ GLFW_KEY_U, NtshEngn::InputState::None },
+		{ GLFW_KEY_V, NtshEngn::InputState::None },
+		{ GLFW_KEY_W, NtshEngn::InputState::None },
+		{ GLFW_KEY_X, NtshEngn::InputState::None },
+		{ GLFW_KEY_Y, NtshEngn::InputState::None },
+		{ GLFW_KEY_Z, NtshEngn::InputState::None },
+		{ GLFW_KEY_SPACE, NtshEngn::InputState::None },
+		{ GLFW_KEY_LEFT_SHIFT, NtshEngn::InputState::None },
+		{ GLFW_KEY_LEFT_CONTROL, NtshEngn::InputState::None },
+		{ GLFW_KEY_RIGHT_CONTROL, NtshEngn::InputState::None },
+		{ GLFW_KEY_LEFT_ALT, NtshEngn::InputState::None },
+		{ GLFW_KEY_ESCAPE, NtshEngn::InputState::None },
+		{ GLFW_KEY_TAB, NtshEngn::InputState::None },
+		{ GLFW_KEY_BACKSPACE, NtshEngn::InputState::None },
+		{ GLFW_KEY_ENTER, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_0, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_1, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_2, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_3, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_4, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_5, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_6, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_7, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_8, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_9, NtshEngn::InputState::None },
+		{ GLFW_KEY_LEFT, NtshEngn::InputState::None },
+		{ GLFW_KEY_RIGHT, NtshEngn::InputState::None },
+		{ GLFW_KEY_UP, NtshEngn::InputState::None },
+		{ GLFW_KEY_DOWN, NtshEngn::InputState::None },
+		{ GLFW_KEY_F1, NtshEngn::InputState::None },
+		{ GLFW_KEY_F2, NtshEngn::InputState::None },
+		{ GLFW_KEY_F3, NtshEngn::InputState::None },
+		{ GLFW_KEY_F4, NtshEngn::InputState::None },
+		{ GLFW_KEY_F5, NtshEngn::InputState::None },
+		{ GLFW_KEY_F6, NtshEngn::InputState::None },
+		{ GLFW_KEY_F7, NtshEngn::InputState::None },
+		{ GLFW_KEY_F8, NtshEngn::InputState::None },
+		{ GLFW_KEY_F9, NtshEngn::InputState::None },
+		{ GLFW_KEY_F10, NtshEngn::InputState::None },
+		{ GLFW_KEY_F11, NtshEngn::InputState::None },
+		{ GLFW_KEY_F12, NtshEngn::InputState::None }
 	};
 
-	std::unordered_map<Ntsh::InputMouseButton, int> m_mouseButtonMap = { { Ntsh::InputMouseButton::One, GLFW_MOUSE_BUTTON_1 },
-		{ Ntsh::InputMouseButton::Two, GLFW_MOUSE_BUTTON_2 },
-		{ Ntsh::InputMouseButton::Three, GLFW_MOUSE_BUTTON_3 },
-		{ Ntsh::InputMouseButton::Four, GLFW_MOUSE_BUTTON_4 },
-		{ Ntsh::InputMouseButton::Five, GLFW_MOUSE_BUTTON_5 },
-		{ Ntsh::InputMouseButton::Six, GLFW_MOUSE_BUTTON_6 },
-		{ Ntsh::InputMouseButton::Seven, GLFW_MOUSE_BUTTON_7 },
-		{ Ntsh::InputMouseButton::Eight, GLFW_MOUSE_BUTTON_8 },
+	std::unordered_map<NtshEngn::InputMouseButton, int> m_mouseButtonMap = { { NtshEngn::InputMouseButton::One, GLFW_MOUSE_BUTTON_1 },
+		{ NtshEngn::InputMouseButton::Two, GLFW_MOUSE_BUTTON_2 },
+		{ NtshEngn::InputMouseButton::Three, GLFW_MOUSE_BUTTON_3 },
+		{ NtshEngn::InputMouseButton::Four, GLFW_MOUSE_BUTTON_4 },
+		{ NtshEngn::InputMouseButton::Five, GLFW_MOUSE_BUTTON_5 },
+		{ NtshEngn::InputMouseButton::Six, GLFW_MOUSE_BUTTON_6 },
+		{ NtshEngn::InputMouseButton::Seven, GLFW_MOUSE_BUTTON_7 },
+		{ NtshEngn::InputMouseButton::Eight, GLFW_MOUSE_BUTTON_8 },
 	};
-	std::unordered_map<int, Ntsh::InputState> m_mouseButtonStateMap = { { GLFW_MOUSE_BUTTON_1, Ntsh::InputState::None },
-		{ GLFW_MOUSE_BUTTON_2, Ntsh::InputState::None },
-		{ GLFW_MOUSE_BUTTON_3, Ntsh::InputState::None },
-		{ GLFW_MOUSE_BUTTON_4, Ntsh::InputState::None },
-		{ GLFW_MOUSE_BUTTON_5, Ntsh::InputState::None },
-		{ GLFW_MOUSE_BUTTON_6, Ntsh::InputState::None },
-		{ GLFW_MOUSE_BUTTON_7, Ntsh::InputState::None },
-		{ GLFW_MOUSE_BUTTON_8, Ntsh::InputState::None },
+	std::unordered_map<int, NtshEngn::InputState> m_mouseButtonStateMap = { { GLFW_MOUSE_BUTTON_1, NtshEngn::InputState::None },
+		{ GLFW_MOUSE_BUTTON_2, NtshEngn::InputState::None },
+		{ GLFW_MOUSE_BUTTON_3, NtshEngn::InputState::None },
+		{ GLFW_MOUSE_BUTTON_4, NtshEngn::InputState::None },
+		{ GLFW_MOUSE_BUTTON_5, NtshEngn::InputState::None },
+		{ GLFW_MOUSE_BUTTON_6, NtshEngn::InputState::None },
+		{ GLFW_MOUSE_BUTTON_7, NtshEngn::InputState::None },
+		{ GLFW_MOUSE_BUTTON_8, NtshEngn::InputState::None },
 	};
 };

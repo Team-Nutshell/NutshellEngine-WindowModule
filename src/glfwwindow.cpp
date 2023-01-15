@@ -1,14 +1,8 @@
-#include "ntsh_window_module.h"
-#include "../external/Module/utils/ntsh_module_defines.h"
-#include "../external/Module/utils/ntsh_dynamic_library.h"
-#include "../external/Common/utils/ntsh_engine_defines.h"
-#include "../external/Common/utils/ntsh_engine_enums.h"
-#if defined(NTSH_OS_WINDOWS)
-#define GLFW_EXPOSE_NATIVE_WIN32
-#elif defined(NTSH_OS_LINUX)
-#define GLFW_EXPOSE_NATIVE_X11
-#endif
-#include "../external/glfw/include/GLFW/glfw3native.h"
+#include "glfwwindow.h"
+#include "../external/Module/utils/ntshengn_module_defines.h"
+#include "../external/Module/utils/ntshengn_dynamic_library.h"
+#include "../external/Common/utils/ntshengn_defines.h"
+#include "../external/Common/utils/ntshengn_enums.h"
 
 GLFWWindow::GLFWWindow(int width, int height, const std::string& title) {
 	m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
@@ -38,7 +32,7 @@ bool GLFWWindow::shouldClose() {
 }
 
 void GLFWWindow::updateInputs(double dt) {
-	NTSH_UNUSED(dt);
+	NTSHENGN_UNUSED(dt);
 
 	for (auto& key : m_keyStateMap) {
 		key.second = nextInputState(key.second);
@@ -100,11 +94,11 @@ void GLFWWindow::setTitle(const std::string& title) {
 	glfwSetWindowTitle(m_window, title.c_str());
 }
 
-Ntsh::InputState GLFWWindow::getKeyState(Ntsh::InputKeyboardKey key) {
+NtshEngn::InputState GLFWWindow::getKeyState(NtshEngn::InputKeyboardKey key) {
 	return m_keyStateMap[m_keyMap[key]];
 }
 
-Ntsh::InputState GLFWWindow::getMouseButtonState(Ntsh::InputMouseButton mouseButton) {
+NtshEngn::InputState GLFWWindow::getMouseButtonState(NtshEngn::InputMouseButton mouseButton) {
 	return m_mouseButtonStateMap[m_mouseButtonMap[mouseButton]];
 }
 
@@ -149,24 +143,24 @@ void GLFWWindow::resizeInternal(int newWidth, int newHeight) {
 
 void GLFWWindow::keyboardKeyInternal(int key, int action) {
 	if (m_keyStateMap.find(key) != m_keyStateMap.end()) {
-		Ntsh::InputState currentState = m_keyStateMap[key];
-		if ((currentState == Ntsh::InputState::None || currentState == Ntsh::InputState::Released) && action == GLFW_PRESS) {
-			m_keyStateMap[key] = Ntsh::InputState::Pressed;
+		NtshEngn::InputState currentState = m_keyStateMap[key];
+		if ((currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) && action == GLFW_PRESS) {
+			m_keyStateMap[key] = NtshEngn::InputState::Pressed;
 		}
-		else if ((currentState == Ntsh::InputState::Pressed || currentState == Ntsh::InputState::Held) && action == GLFW_RELEASE) {
-			m_keyStateMap[key] = Ntsh::InputState::Released;
+		else if ((currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) && action == GLFW_RELEASE) {
+			m_keyStateMap[key] = NtshEngn::InputState::Released;
 		}
 	}
 }
 
 void GLFWWindow::mouseButtonInternal(int button, int action) {
 	if (m_mouseButtonStateMap.find(button) != m_mouseButtonStateMap.end()) {
-		Ntsh::InputState currentState = m_mouseButtonStateMap[button];
-		if ((currentState == Ntsh::InputState::None || currentState == Ntsh::InputState::Released) && action == GLFW_PRESS) {
-			m_mouseButtonStateMap[button] = Ntsh::InputState::Pressed;
+		NtshEngn::InputState currentState = m_mouseButtonStateMap[button];
+		if ((currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) && action == GLFW_PRESS) {
+			m_mouseButtonStateMap[button] = NtshEngn::InputState::Pressed;
 		}
-		else if ((currentState == Ntsh::InputState::Pressed || currentState == Ntsh::InputState::Held) && action == GLFW_RELEASE) {
-			m_mouseButtonStateMap[button] = Ntsh::InputState::Released;
+		else if ((currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) && action == GLFW_RELEASE) {
+			m_mouseButtonStateMap[button] = NtshEngn::InputState::Released;
 		}
 	}
 }
@@ -180,22 +174,22 @@ void GLFWWindow::windowCloseInternal() {
 	close();
 }
 
-Ntsh::InputState GLFWWindow::nextInputState(Ntsh::InputState inputState) {
-	if (inputState == Ntsh::InputState::Pressed) {
-		return Ntsh::InputState::Held;
+NtshEngn::InputState GLFWWindow::nextInputState(NtshEngn::InputState inputState) {
+	if (inputState == NtshEngn::InputState::Pressed) {
+		return NtshEngn::InputState::Held;
 	}
-	else if (inputState == Ntsh::InputState::Released) {
-		return Ntsh::InputState::None;
+	else if (inputState == NtshEngn::InputState::Released) {
+		return NtshEngn::InputState::None;
 	}
 
 	return inputState;
 }
 
-#if defined(NTSH_OS_WINDOWS)
+#if defined(NTSHENGN_OS_WINDOWS)
 HWND GLFWWindow::getNativeHandle() {
 	return glfwGetWin32Window(m_window);
 }
-#elif defined(NTSH_OS_LINUX)
+#elif defined(NTSHENGN_OS_LINUX)
 Window GLFWWindow::getNativeHandle() {
 	return glfwGetX11Window(m_window);
 }
