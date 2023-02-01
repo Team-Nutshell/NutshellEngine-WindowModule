@@ -3,6 +3,7 @@
 #include "../external/Module/utils/ntshengn_dynamic_library.h"
 #include "../external/Common/utils/ntshengn_defines.h"
 #include "../external/Common/utils/ntshengn_enums.h"
+#include <limits>
 
 void NtshEngn::WindowModule::init() {
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
@@ -22,12 +23,14 @@ NtshEngn::WindowId NtshEngn::WindowModule::open(int width, int height, const std
 	NTSHENGN_UNUSED(height);
 	NTSHENGN_UNUSED(title);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return 0;
+
+	return std::numeric_limits<NtshEngn::WindowId>::max();
 }
 
 bool NtshEngn::WindowModule::isOpen(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return false;
 }
 
@@ -38,6 +41,7 @@ void NtshEngn::WindowModule::close(NtshEngn::WindowId windowId) {
 
 uint64_t NtshEngn::WindowModule::windowCount() {
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return 0;
 }
 
@@ -51,12 +55,14 @@ void NtshEngn::WindowModule::setSize(NtshEngn::WindowId windowId, int width, int
 int NtshEngn::WindowModule::getWidth(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return 0;
 }
 
 int NtshEngn::WindowModule::getHeight(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return 0;
 }
 
@@ -70,12 +76,14 @@ void NtshEngn::WindowModule::setPosition(NtshEngn::WindowId windowId, int x, int
 int NtshEngn::WindowModule::getPositionX(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return -1;
 }
 
 int NtshEngn::WindowModule::getPositionY(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return -1;
 }
 
@@ -88,6 +96,7 @@ void NtshEngn::WindowModule::setFullscreen(NtshEngn::WindowId windowId, bool ful
 bool NtshEngn::WindowModule::isFullscreen(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return false;
 }
 
@@ -105,6 +114,7 @@ NtshEngn::InputState NtshEngn::WindowModule::getKeyState(NtshEngn::WindowId wind
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_UNUSED(key);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return NtshEngn::InputState::None;
 }
 
@@ -112,6 +122,7 @@ NtshEngn::InputState NtshEngn::WindowModule::getMouseButtonState(NtshEngn::Windo
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_UNUSED(mouseButton);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return NtshEngn::InputState::None;
 }
 
@@ -125,12 +136,14 @@ void NtshEngn::WindowModule::setCursorPosition(NtshEngn::WindowId windowId, int 
 int NtshEngn::WindowModule::getCursorPositionX(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return -1;
 }
 
 int NtshEngn::WindowModule::getCursorPositionY(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return -1;
 }
 
@@ -143,6 +156,7 @@ void NtshEngn::WindowModule::setCursorVisibility(NtshEngn::WindowId windowId, bo
 bool NtshEngn::WindowModule::isCursorVisible(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return false;
 }
 
@@ -150,13 +164,15 @@ bool NtshEngn::WindowModule::isCursorVisible(NtshEngn::WindowId windowId) {
 HWND NtshEngn::WindowModule::getNativeHandle(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
 	return nullptr;
 }
 #elif defined(NTSHENGN_OS_LINUX)
 Window NtshEngn::WindowModule::getNativeHandle(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
-	return 0;
+
+	return std::numeric_limits<Window>::max();
 }
 #endif
 
