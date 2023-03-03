@@ -8,6 +8,10 @@
 #define GLFW_EXPOSE_NATIVE_X11
 #endif
 #include "../external/glfw/include/GLFW/glfw3native.h"
+#if defined(NTSHENGN_OS_LINUX)
+#undef None
+#undef Success
+#endif
 #include <string>
 #include <unordered_map>
 
