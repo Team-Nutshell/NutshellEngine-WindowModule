@@ -49,13 +49,8 @@ public:
 	void setCursorVisibility(bool visible);
 	bool isCursorVisible();
 
-#if defined(NTSHENGN_OS_WINDOWS)
-	// Returns the native Win32 window handle
-	HWND getNativeHandle();
-#elif defined(NTSHENGN_OS_LINUX)
-	// Returns the native X window handle
-	Window getNativeHandle();
-#endif
+	NtshEngn::NativeWindowHandle getNativeHandle();
+	NtshEngn::NativeWindowAdditionalInformation getNativeAdditionalInformation();
 
 private:
 	// Window position internal function used by callback
