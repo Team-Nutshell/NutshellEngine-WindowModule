@@ -160,21 +160,19 @@ bool NtshEngn::WindowModule::isCursorVisible(NtshEngn::WindowId windowId) {
 	return false;
 }
 
-#if defined(NTSHENGN_OS_WINDOWS)
-HWND NtshEngn::WindowModule::getNativeHandle(NtshEngn::WindowId windowId) {
+NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 
 	return nullptr;
 }
-#elif defined(NTSHENGN_OS_LINUX)
-Window NtshEngn::WindowModule::getNativeHandle(NtshEngn::WindowId windowId) {
+
+NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getNativeAdditionalInformation(NtshEngn::WindowId windowId) {
 	NTSHENGN_UNUSED(windowId);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 
-	return std::numeric_limits<Window>::max();
+	return nullptr;
 }
-#endif
 
 extern "C" NTSHENGN_MODULE_API NtshEngn::WindowModuleInterface* createModule() {
 	return new NtshEngn::WindowModule;

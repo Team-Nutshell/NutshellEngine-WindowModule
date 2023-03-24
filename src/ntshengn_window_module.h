@@ -63,13 +63,10 @@ namespace NtshEngn {
 		// Returns true if the mouse cursor is visible in the window with identifier windowId, else, returns false
 		bool isCursorVisible(NtshEngn::WindowId windowId);
 
-#if defined(NTSHENGN_OS_WINDOWS)
-		// Returns the native Win32 window handle of the window with identifier windowId
-		HWND getNativeHandle(NtshEngn::WindowId windowId);
-#elif defined(NTSHENGN_OS_LINUX)
-		// Returns the native X window handle of the window with identifier windowId
-		Window getNativeHandle(NtshEngn::WindowId windowId);
-#endif
+		// Returns the native window handle of the window with identifier windowId
+		NtshEngn::NativeWindowHandle getNativeHandle(NtshEngn::WindowId windowId);
+		// Returns the native window additional information of the window with identifier windowId
+		NtshEngn::NativeWindowAdditionalInformation getNativeAdditionalInformation(NtshEngn::WindowId windowId);
 	};
 
 }
