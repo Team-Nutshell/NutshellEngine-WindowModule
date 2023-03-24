@@ -1,4 +1,9 @@
 #include "ntshengn_window_module.h"
+#if defined(NTSHENGN_OS_WINDOWS)
+#include <windows.h>
+#elif defined(NTSHENGN_OS_LINUX)
+#include <QX11Info>
+#endif
 #include "../external/Module/utils/ntshengn_module_defines.h"
 #include "../external/Module/utils/ntshengn_dynamic_library.h"
 #include "../external/Common/utils/ntshengn_defines.h"
@@ -155,17 +160,19 @@ bool NtshEngn::WindowModule::isCursorVisible(NtshEngn::WindowId windowId) {
 	return m_windows[windowId]->isCursorVisible();
 }
 
+NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(NtshEngn::WindowId windowId) {
+	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return reinterpret_cast<NtshEngn::NativeWindowHandle>(m_windows[windowId]->winId());
+}
+
+NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getNativeAdditionalInformation(NtshEngn::WindowId windowId) {
+	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 #if defined(NTSHENGN_OS_WINDOWS)
-HWND NtshEngn::WindowModule::getNativeHandle(NtshEngn::WindowId windowId) {
-	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
-	return reinterpret_cast<HWND>(m_windows[windowId]->winId());
-}
-#elif defined(NTSHENGN_OS_LINUX)
-Window NtshEngn::WindowModule::getNativeHandle(NtshEngn::WindowId windowId) {
-	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
-	return reinterpret_cast<Window>(m_windows[windowId]->winId());
-}
+	return reinterpret_cast<NtshEngn::NativeWindowAdditionalInformation>(GetWindowLongPtr(reinterpret_cast<HWND>(m_windows[windowId]->winId()), GWLP_HINSTANCE));
+#elif defined (NTSHENGN_OS_LINUX)
+	return reinterpret_cast<NtshEngn::NativeWindowAdditionalInformation>(QX11Info::display());
 #endif
+}
 
 extern "C" NTSHENGN_MODULE_API NtshEngn::WindowModuleInterface* createModule() {
 	return new NtshEngn::WindowModule;
