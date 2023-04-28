@@ -257,7 +257,7 @@ private:
 		{ NtshEngn::InputMouseButton::Five, GLFW_MOUSE_BUTTON_5 },
 		{ NtshEngn::InputMouseButton::Six, GLFW_MOUSE_BUTTON_6 },
 		{ NtshEngn::InputMouseButton::Seven, GLFW_MOUSE_BUTTON_7 },
-		{ NtshEngn::InputMouseButton::Eight, GLFW_MOUSE_BUTTON_8 },
+		{ NtshEngn::InputMouseButton::Eight, GLFW_MOUSE_BUTTON_8 }
 	};
 	std::unordered_map<int, NtshEngn::InputState> m_mouseButtonStateMap = { { GLFW_MOUSE_BUTTON_1, NtshEngn::InputState::None },
 		{ GLFW_MOUSE_BUTTON_2, NtshEngn::InputState::None },
@@ -266,6 +266,6 @@ private:
 		{ GLFW_MOUSE_BUTTON_5, NtshEngn::InputState::None },
 		{ GLFW_MOUSE_BUTTON_6, NtshEngn::InputState::None },
 		{ GLFW_MOUSE_BUTTON_7, NtshEngn::InputState::None },
-		{ GLFW_MOUSE_BUTTON_8, NtshEngn::InputState::None },
+		{ GLFW_MOUSE_BUTTON_8, NtshEngn::InputState::None }
 	};
 };
