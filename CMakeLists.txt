@@ -27,9 +27,9 @@ endif()
 
 add_subdirectory(external/Module)
 
-list(APPEND NTSHENGN_DEFINES NTSHENGN_CURRENT_MODULE_WINDOW)
-
 add_subdirectory(external/glfw)
+
+list(APPEND NTSHENGN_DEFINES NTSHENGN_CURRENT_MODULE_WINDOW)
 
 set(MODULE_SOURCES
 	src/ntshengn_window_module.cpp src/glfwwindow.cpp)	
