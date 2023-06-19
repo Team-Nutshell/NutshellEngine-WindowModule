@@ -27,9 +27,9 @@ endif()
 
 add_subdirectory(external/Module)
 
-list(APPEND NTSHENGN_DEFINES NTSHENGN_CURRENT_MODULE_WINDOW)
-
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
+
+list(APPEND NTSHENGN_DEFINES NTSHENGN_CURRENT_MODULE_WINDOW)
 
 set(MODULE_SOURCES
 	src/ntshengn_window_module.cpp src/qtwindow.cpp)	
