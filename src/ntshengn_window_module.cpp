@@ -100,6 +100,32 @@ bool NtshEngn::WindowModule::isFullscreen(NtshEngn::WindowId windowId) {
 	return false;
 }
 
+void NtshEngn::WindowModule::setBorderless(NtshEngn::WindowId windowId, bool borderless) {
+	NTSHENGN_UNUSED(windowId);
+	NTSHENGN_UNUSED(borderless);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+bool NtshEngn::WindowModule::isBorderless(NtshEngn::WindowId windowId) {
+	NTSHENGN_UNUSED(windowId);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return false;
+}
+
+void NtshEngn::WindowModule::setResizable(NtshEngn::WindowId windowId, bool resizable) {
+	NTSHENGN_UNUSED(windowId);
+	NTSHENGN_UNUSED(resizable);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+bool NtshEngn::WindowModule::isResizable(NtshEngn::WindowId windowId) {
+	NTSHENGN_UNUSED(windowId);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return false;
+}
+
 void NtshEngn::WindowModule::pollEvents() {
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
