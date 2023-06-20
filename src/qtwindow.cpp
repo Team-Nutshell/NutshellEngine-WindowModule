@@ -42,12 +42,12 @@ bool QtWindow::isBorderless() {
 }
 
 void QtWindow::setResizable(bool resizable) {
-	setWindowFlags(windowFlags().setFlag(Qt::MSWindowsFixedSizeDialogHint, resizable));
+	setWindowFlags(windowFlags().setFlag(Qt::MSWindowsFixedSizeDialogHint, !resizable));
 	show();
 }
 
 bool QtWindow::isResizable() {
-	return windowFlags().testFlag(Qt::MSWindowsFixedSizeDialogHint);
+	return !windowFlags().testFlag(Qt::MSWindowsFixedSizeDialogHint);
 }
 
 NtshEngn::InputState QtWindow::getKeyState(NtshEngn::InputKeyboardKey key) {
