@@ -90,6 +90,22 @@ bool GLFWWindow::isFullscreen() {
 	return glfwGetWindowMonitor(m_window) != nullptr;
 }
 
+void GLFWWindow::setBorderless(bool borderless) {
+	glfwSetWindowAttrib(m_window, GLFW_DECORATED, borderless ? GLFW_FALSE : GLFW_TRUE);
+}
+
+bool GLFWWindow::isBorderless() {
+	return glfwGetWindowAttrib(m_window, GLFW_DECORATED) == GLFW_FALSE;
+}
+
+void GLFWWindow::setResizable(bool resizable) {
+	glfwSetWindowAttrib(m_window, GLFW_RESIZABLE, resizable ? GLFW_TRUE : GLFW_FALSE);
+}
+
+bool GLFWWindow::isResizable() {
+	return glfwGetWindowAttrib(m_window, GLFW_RESIZABLE) == GLFW_TRUE;
+}
+
 void GLFWWindow::setTitle(const std::string& title) {
 	glfwSetWindowTitle(m_window, title.c_str());
 }

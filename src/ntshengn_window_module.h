@@ -44,6 +44,16 @@ namespace NtshEngn {
 		// Returns true if the window with identifier windowId is in fullscreen mode, else, returns false
 		bool isFullscreen(NtshEngn::WindowId windowId);
 
+		// If the borderless parameter is true, puts the window with identifier windowId in borderless, else, adds borders to the window with identifier windowId
+		void setBorderless(WindowId windowId, bool borderless);
+		// Returns true if the window with identifier windowId is in borderless mode, else, returns false
+		bool isBorderless(WindowId windowId);
+
+		// If the resizable parameter is true, makes the window with identifier windowId resizable, else, makes the window with identifier windowId not resizable
+		void setResizable(WindowId windowId, bool resizable);
+		// Returns true if the window with identifier windowId is resizable, else, returns false
+		bool isResizable(WindowId windowId);
+
 		// Polls events of the window with identifier windowId
 		void pollEvents();
 

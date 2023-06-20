@@ -98,6 +98,26 @@ bool NtshEngn::WindowModule::isFullscreen(NtshEngn::WindowId windowId) {
 	return m_windows[windowId]->isFullscreen();
 }
 
+void NtshEngn::WindowModule::setBorderless(WindowId windowId, bool borderless) {
+	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
+	m_windows[windowId]->setBorderless(borderless);
+}
+
+bool NtshEngn::WindowModule::isBorderless(WindowId windowId) {
+	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->isBorderless();
+}
+
+void NtshEngn::WindowModule::setResizable(WindowId windowId, bool resizable) {
+	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
+	m_windows[windowId]->setResizable(resizable);
+}
+
+bool NtshEngn::WindowModule::isResizable(WindowId windowId) {
+	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
+	return m_windows[windowId]->isResizable();
+}
+
 void NtshEngn::WindowModule::pollEvents() {
 	glfwPollEvents();
 }

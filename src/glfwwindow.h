@@ -37,6 +37,12 @@ public:
 	void setFullscreen(bool fullscreen);
 	bool isFullscreen();
 
+	void setBorderless(bool borderless);
+	bool isBorderless();
+
+	void setResizable(bool resizable);
+	bool isResizable();
+
 	void setTitle(const std::string& title);
 
 	NtshEngn::InputState getKeyState(NtshEngn::InputKeyboardKey key);
