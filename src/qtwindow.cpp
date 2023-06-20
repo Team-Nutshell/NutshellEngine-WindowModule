@@ -32,6 +32,24 @@ void QtWindow::updateInputs(double dt) {
 	}
 }
 
+void QtWindow::setBorderless(bool borderless) {
+	setWindowFlags(windowFlags().setFlag(Qt::FramelessWindowHint, borderless));
+	show();
+}
+
+bool QtWindow::isBorderless() {
+	return windowFlags().testFlag(Qt::FramelessWindowHint);
+}
+
+void QtWindow::setResizable(bool resizable) {
+	setWindowFlags(windowFlags().setFlag(Qt::MSWindowsFixedSizeDialogHint, resizable));
+	show();
+}
+
+bool QtWindow::isResizable() {
+	return windowFlags().testFlag(Qt::MSWindowsFixedSizeDialogHint);
+}
+
 NtshEngn::InputState QtWindow::getKeyState(NtshEngn::InputKeyboardKey key) {
 	return m_keyStateMap[m_keyMap[key]];
 }

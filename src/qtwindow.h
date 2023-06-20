@@ -16,6 +16,12 @@ public:
 
 	void updateInputs(double dt);
 
+	void setBorderless(bool borderless);
+	bool isBorderless();
+
+	void setResizable(bool resizable);
+	bool isResizable();
+
 	NtshEngn::InputState getKeyState(NtshEngn::InputKeyboardKey key);
 	NtshEngn::InputState getMouseButtonState(NtshEngn::InputMouseButton mouseButton);
 
