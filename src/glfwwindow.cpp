@@ -162,9 +162,11 @@ void GLFWWindow::keyboardKeyInternal(int key, int action) {
 		NtshEngn::InputState currentState = m_keyStateMap[key];
 		if ((currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) && action == GLFW_PRESS) {
 			m_keyStateMap[key] = NtshEngn::InputState::Pressed;
+			m_keyStateMap[GLFW_KEY_LAST + 1] = NtshEngn::InputState::Pressed; // Any
 		}
 		else if ((currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) && action == GLFW_RELEASE) {
 			m_keyStateMap[key] = NtshEngn::InputState::Released;
+			m_keyStateMap[GLFW_KEY_LAST + 1] = NtshEngn::InputState::Released; // Any
 		}
 	}
 }
@@ -174,9 +176,11 @@ void GLFWWindow::mouseButtonInternal(int button, int action) {
 		NtshEngn::InputState currentState = m_mouseButtonStateMap[button];
 		if ((currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) && action == GLFW_PRESS) {
 			m_mouseButtonStateMap[button] = NtshEngn::InputState::Pressed;
+			m_mouseButtonStateMap[GLFW_KEY_LAST + 1] = NtshEngn::InputState::Pressed; // Any
 		}
 		else if ((currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) && action == GLFW_RELEASE) {
 			m_mouseButtonStateMap[button] = NtshEngn::InputState::Released;
+			m_mouseButtonStateMap[GLFW_KEY_LAST + 1] = NtshEngn::InputState::Released; // Any
 		}
 	}
 }

@@ -130,7 +130,8 @@ private:
 	int m_cursorY = 0;
 	bool m_cursorVisible = true;
 
-	std::unordered_map<NtshEngn::InputKeyboardKey, int> m_keyMap = { { NtshEngn::InputKeyboardKey::A, GLFW_KEY_A },
+	std::unordered_map<NtshEngn::InputKeyboardKey, int> m_keyMap = { { NtshEngn::InputKeyboardKey::Any, GLFW_KEY_LAST + 1 },
+		{ NtshEngn::InputKeyboardKey::A, GLFW_KEY_A },
 		{ NtshEngn::InputKeyboardKey::B, GLFW_KEY_B },
 		{ NtshEngn::InputKeyboardKey::C, GLFW_KEY_C },
 		{ NtshEngn::InputKeyboardKey::D, GLFW_KEY_D },
@@ -176,6 +177,10 @@ private:
 		{ NtshEngn::InputKeyboardKey::Num7, GLFW_KEY_KP_7 },
 		{ NtshEngn::InputKeyboardKey::Num8, GLFW_KEY_KP_8 },
 		{ NtshEngn::InputKeyboardKey::Num9, GLFW_KEY_KP_9 },
+		{ NtshEngn::InputKeyboardKey::NumPlus, GLFW_KEY_KP_ADD },
+		{ NtshEngn::InputKeyboardKey::NumMinus, GLFW_KEY_KP_SUBTRACT },
+		{ NtshEngn::InputKeyboardKey::NumTimes, GLFW_KEY_KP_MULTIPLY },
+		{ NtshEngn::InputKeyboardKey::NumDivision, GLFW_KEY_KP_DIVIDE },
 		{ NtshEngn::InputKeyboardKey::Left, GLFW_KEY_LEFT },
 		{ NtshEngn::InputKeyboardKey::Right, GLFW_KEY_RIGHT },
 		{ NtshEngn::InputKeyboardKey::Up, GLFW_KEY_UP },
@@ -193,7 +198,8 @@ private:
 		{ NtshEngn::InputKeyboardKey::F11, GLFW_KEY_F11 },
 		{ NtshEngn::InputKeyboardKey::F12, GLFW_KEY_F12 }
 	};
-	std::unordered_map<int, NtshEngn::InputState> m_keyStateMap = { { GLFW_KEY_A, NtshEngn::InputState::None },
+	std::unordered_map<int, NtshEngn::InputState> m_keyStateMap = { { GLFW_KEY_LAST + 1, NtshEngn::InputState::None },
+		{ GLFW_KEY_A, NtshEngn::InputState::None },
 		{ GLFW_KEY_B, NtshEngn::InputState::None },
 		{ GLFW_KEY_C, NtshEngn::InputState::None },
 		{ GLFW_KEY_D, NtshEngn::InputState::None },
@@ -238,6 +244,10 @@ private:
 		{ GLFW_KEY_KP_7, NtshEngn::InputState::None },
 		{ GLFW_KEY_KP_8, NtshEngn::InputState::None },
 		{ GLFW_KEY_KP_9, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_ADD, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_SUBTRACT, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_MULTIPLY, NtshEngn::InputState::None },
+		{ GLFW_KEY_KP_DIVIDE, NtshEngn::InputState::None },
 		{ GLFW_KEY_LEFT, NtshEngn::InputState::None },
 		{ GLFW_KEY_RIGHT, NtshEngn::InputState::None },
 		{ GLFW_KEY_UP, NtshEngn::InputState::None },
@@ -256,7 +266,8 @@ private:
 		{ GLFW_KEY_F12, NtshEngn::InputState::None }
 	};
 
-	std::unordered_map<NtshEngn::InputMouseButton, int> m_mouseButtonMap = { { NtshEngn::InputMouseButton::One, GLFW_MOUSE_BUTTON_1 },
+	std::unordered_map<NtshEngn::InputMouseButton, int> m_mouseButtonMap = { { NtshEngn::InputMouseButton::Any, GLFW_MOUSE_BUTTON_LAST + 1 },
+		{ NtshEngn::InputMouseButton::One, GLFW_MOUSE_BUTTON_1 },
 		{ NtshEngn::InputMouseButton::Two, GLFW_MOUSE_BUTTON_2 },
 		{ NtshEngn::InputMouseButton::Three, GLFW_MOUSE_BUTTON_3 },
 		{ NtshEngn::InputMouseButton::Four, GLFW_MOUSE_BUTTON_4 },
@@ -265,7 +276,8 @@ private:
 		{ NtshEngn::InputMouseButton::Seven, GLFW_MOUSE_BUTTON_7 },
 		{ NtshEngn::InputMouseButton::Eight, GLFW_MOUSE_BUTTON_8 }
 	};
-	std::unordered_map<int, NtshEngn::InputState> m_mouseButtonStateMap = { { GLFW_MOUSE_BUTTON_1, NtshEngn::InputState::None },
+	std::unordered_map<int, NtshEngn::InputState> m_mouseButtonStateMap = { { GLFW_MOUSE_BUTTON_LAST + 1, NtshEngn::InputState::None },
+		{ GLFW_MOUSE_BUTTON_1, NtshEngn::InputState::None },
 		{ GLFW_MOUSE_BUTTON_2, NtshEngn::InputState::None },
 		{ GLFW_MOUSE_BUTTON_3, NtshEngn::InputState::None },
 		{ GLFW_MOUSE_BUTTON_4, NtshEngn::InputState::None },
