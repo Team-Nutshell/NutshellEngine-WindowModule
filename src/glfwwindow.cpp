@@ -176,11 +176,11 @@ void GLFWWindow::mouseButtonInternal(int button, int action) {
 		NtshEngn::InputState currentState = m_mouseButtonStateMap[button];
 		if ((currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) && action == GLFW_PRESS) {
 			m_mouseButtonStateMap[button] = NtshEngn::InputState::Pressed;
-			m_mouseButtonStateMap[GLFW_KEY_LAST + 1] = NtshEngn::InputState::Pressed; // Any
+			m_mouseButtonStateMap[GLFW_MOUSE_BUTTON_LAST + 1] = NtshEngn::InputState::Pressed; // Any
 		}
 		else if ((currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) && action == GLFW_RELEASE) {
 			m_mouseButtonStateMap[button] = NtshEngn::InputState::Released;
-			m_mouseButtonStateMap[GLFW_KEY_LAST + 1] = NtshEngn::InputState::Released; // Any
+			m_mouseButtonStateMap[GLFW_MOUSE_BUTTON_LAST + 1] = NtshEngn::InputState::Released; // Any
 		}
 	}
 }
