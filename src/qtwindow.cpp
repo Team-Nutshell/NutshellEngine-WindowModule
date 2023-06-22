@@ -110,6 +110,7 @@ void QtWindow::keyPressEvent(QKeyEvent* event) {
 		NtshEngn::InputState currentState = m_keyStateMap[key];
 		if (currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) {
 			m_keyStateMap[key] = NtshEngn::InputState::Pressed;
+			m_keyStateMap[Qt::Key_unknown] = NtshEngn::InputState::Pressed; // Any
 		}
 	}
 }
@@ -120,6 +121,7 @@ void QtWindow::keyReleaseEvent(QKeyEvent* event) {
 		NtshEngn::InputState currentState = m_keyStateMap[key];
 		if (currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) {
 			m_keyStateMap[key] = NtshEngn::InputState::Released;
+			m_keyStateMap[Qt::Key_unknown] = NtshEngn::InputState::Released; // Any
 		}
 	}
 }
@@ -130,6 +132,7 @@ void QtWindow::mousePressEvent(QMouseEvent* event) {
 		NtshEngn::InputState currentState = m_mouseButtonStateMap[button];
 		if (currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) {
 			m_mouseButtonStateMap[button] = NtshEngn::InputState::Pressed;
+			m_mouseButtonStateMap[Qt::MouseButtonMask] = NtshEngn::InputState::Pressed; // Any
 		}
 	}
 }
@@ -140,6 +143,7 @@ void QtWindow::mouseReleaseEvent(QMouseEvent* event) {
 		NtshEngn::InputState currentState = m_mouseButtonStateMap[button];
 		if (currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) {
 			m_mouseButtonStateMap[button] = NtshEngn::InputState::Released;
+			m_mouseButtonStateMap[Qt::MouseButtonMask] = NtshEngn::InputState::Released; // Any
 		}
 	}
 }

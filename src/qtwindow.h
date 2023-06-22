@@ -51,7 +51,8 @@ private:
 
 	bool m_cursorVisible = true;
 	
-	std::unordered_map<NtshEngn::InputKeyboardKey, Qt::Key> m_keyMap = { { NtshEngn::InputKeyboardKey::A, Qt::Key_A },
+	std::unordered_map<NtshEngn::InputKeyboardKey, Qt::Key> m_keyMap = { { NtshEngn::InputKeyboardKey::Any, Qt::Key_unknown },
+		{ NtshEngn::InputKeyboardKey::A, Qt::Key_A },
 		{ NtshEngn::InputKeyboardKey::B, Qt::Key_B },
 		{ NtshEngn::InputKeyboardKey::C, Qt::Key_C },
 		{ NtshEngn::InputKeyboardKey::D, Qt::Key_D },
@@ -97,6 +98,10 @@ private:
 		{ NtshEngn::InputKeyboardKey::Num7, Qt::Key_7 },
 		{ NtshEngn::InputKeyboardKey::Num8, Qt::Key_8 },
 		{ NtshEngn::InputKeyboardKey::Num9, Qt::Key_9 },
+		{ NtshEngn::InputKeyboardKey::NumPlus, Qt::Key_Plus },
+		{ NtshEngn::InputKeyboardKey::NumMinus, Qt::Key_Minus },
+		{ NtshEngn::InputKeyboardKey::NumTimes, Qt::Key_Asterisk },
+		{ NtshEngn::InputKeyboardKey::NumDivision, Qt::Key_Slash },
 		{ NtshEngn::InputKeyboardKey::Left, Qt::Key_Left },
 		{ NtshEngn::InputKeyboardKey::Right, Qt::Key_Right },
 		{ NtshEngn::InputKeyboardKey::Up, Qt::Key_Up },
@@ -114,7 +119,8 @@ private:
 		{ NtshEngn::InputKeyboardKey::F11, Qt::Key_F11 },
 		{ NtshEngn::InputKeyboardKey::F12, Qt::Key_F12 }
 	};
-	std::unordered_map<Qt::Key, NtshEngn::InputState> m_keyStateMap = { { Qt::Key_A, NtshEngn::InputState::None },
+	std::unordered_map<Qt::Key, NtshEngn::InputState> m_keyStateMap = { { Qt::Key_unknown, NtshEngn::InputState::None },
+		{ Qt::Key_A, NtshEngn::InputState::None },
 		{ Qt::Key_B, NtshEngn::InputState::None },
 		{ Qt::Key_C, NtshEngn::InputState::None },
 		{ Qt::Key_D, NtshEngn::InputState::None },
@@ -159,6 +165,10 @@ private:
 		{ Qt::Key_7, NtshEngn::InputState::None },
 		{ Qt::Key_8, NtshEngn::InputState::None },
 		{ Qt::Key_9, NtshEngn::InputState::None },
+		{ Qt::Key_Plus, NtshEngn::InputState::None },
+		{ Qt::Key_Minus, NtshEngn::InputState::None },
+		{ Qt::Key_Asterisk, NtshEngn::InputState::None },
+		{ Qt::Key_Slash, NtshEngn::InputState::None },
 		{ Qt::Key_Left, NtshEngn::InputState::None },
 		{ Qt::Key_Right, NtshEngn::InputState::None },
 		{ Qt::Key_Up, NtshEngn::InputState::None },
@@ -177,7 +187,8 @@ private:
 		{ Qt::Key_F12, NtshEngn::InputState::None }
 	};
 
-	std::unordered_map<NtshEngn::InputMouseButton, Qt::MouseButton> m_mouseButtonMap = { { NtshEngn::InputMouseButton::One, Qt::LeftButton },
+	std::unordered_map<NtshEngn::InputMouseButton, Qt::MouseButton> m_mouseButtonMap = { { NtshEngn::InputMouseButton::Any, Qt::MouseButtonMask },
+		{ NtshEngn::InputMouseButton::One, Qt::LeftButton },
 		{ NtshEngn::InputMouseButton::Two, Qt::RightButton },
 		{ NtshEngn::InputMouseButton::Three, Qt::MiddleButton },
 		{ NtshEngn::InputMouseButton::Four, Qt::ExtraButton1 },
@@ -186,7 +197,8 @@ private:
 		{ NtshEngn::InputMouseButton::Seven, Qt::ExtraButton4 },
 		{ NtshEngn::InputMouseButton::Eight, Qt::ExtraButton5 },
 	};
-	std::unordered_map<Qt::MouseButton, NtshEngn::InputState> m_mouseButtonStateMap = { { Qt::LeftButton, NtshEngn::InputState::None },
+	std::unordered_map<Qt::MouseButton, NtshEngn::InputState> m_mouseButtonStateMap = { { Qt::MouseButtonMask, NtshEngn::InputState::None },
+		{ Qt::LeftButton, NtshEngn::InputState::None },
 		{ Qt::RightButton, NtshEngn::InputState::None },
 		{ Qt::MiddleButton, NtshEngn::InputState::None },
 		{ Qt::ExtraButton1, NtshEngn::InputState::None },
