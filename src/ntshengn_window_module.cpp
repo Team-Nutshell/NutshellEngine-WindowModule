@@ -45,11 +45,11 @@ NtshEngn::WindowId NtshEngn::WindowModule::open(int width, int height, const std
 	return m_id++;
 }
 
-bool NtshEngn::WindowModule::isOpen(NtshEngn::WindowId windowId) {
+bool NtshEngn::WindowModule::isOpen(WindowId windowId) {
 	return (m_windows.find(windowId) != m_windows.end()) ? !m_windows[windowId]->shouldClose() : false;
 }
 
-void NtshEngn::WindowModule::close(NtshEngn::WindowId windowId) {
+void NtshEngn::WindowModule::close(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->closeWindow();
 }
@@ -65,12 +65,12 @@ uint64_t NtshEngn::WindowModule::windowCount() {
 	return count;
 }
 
-void NtshEngn::WindowModule::setSize(NtshEngn::WindowId windowId, int width, int height) {
+void NtshEngn::WindowModule::setSize(WindowId windowId, int width, int height) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->resize(width, height);
 }
 
-int NtshEngn::WindowModule::getWidth(NtshEngn::WindowId windowId) {
+int NtshEngn::WindowModule::getWidth(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	if (m_windows[windowId]->isMinimized()) {
 		return 0;
@@ -78,7 +78,7 @@ int NtshEngn::WindowModule::getWidth(NtshEngn::WindowId windowId) {
 	return m_windows[windowId]->width();
 }
 
-int NtshEngn::WindowModule::getHeight(NtshEngn::WindowId windowId) {
+int NtshEngn::WindowModule::getHeight(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	if (m_windows[windowId]->isMinimized()) {
 		return 0;
@@ -86,22 +86,22 @@ int NtshEngn::WindowModule::getHeight(NtshEngn::WindowId windowId) {
 	return m_windows[windowId]->height();
 }
 
-void NtshEngn::WindowModule::setPosition(NtshEngn::WindowId windowId, int x, int y) {
+void NtshEngn::WindowModule::setPosition(WindowId windowId, int x, int y) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->move(x, y);
 }
 
-int NtshEngn::WindowModule::getPositionX(NtshEngn::WindowId windowId) {
+int NtshEngn::WindowModule::getPositionX(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->x();
 }
 
-int NtshEngn::WindowModule::getPositionY(NtshEngn::WindowId windowId) {
+int NtshEngn::WindowModule::getPositionY(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->y();
 }
 
-void NtshEngn::WindowModule::setFullscreen(NtshEngn::WindowId windowId, bool fullscreen) {
+void NtshEngn::WindowModule::setFullscreen(WindowId windowId, bool fullscreen) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	if (fullscreen) {
 		m_windows[windowId]->showFullScreen();
@@ -111,7 +111,7 @@ void NtshEngn::WindowModule::setFullscreen(NtshEngn::WindowId windowId, bool ful
 	}
 }
 
-bool NtshEngn::WindowModule::isFullscreen(NtshEngn::WindowId windowId) {
+bool NtshEngn::WindowModule::isFullscreen(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->isFullScreen();
 }
@@ -140,57 +140,57 @@ void NtshEngn::WindowModule::pollEvents() {
 	m_application->processEvents();
 }
 
-void NtshEngn::WindowModule::setTitle(NtshEngn::WindowId windowId, const std::string& title) {
+void NtshEngn::WindowModule::setTitle(WindowId windowId, const std::string& title) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->setWindowTitle(QString::fromStdString(title));
 }
 
-NtshEngn::InputState NtshEngn::WindowModule::getKeyState(NtshEngn::WindowId windowId, NtshEngn::InputKeyboardKey key) {
+NtshEngn::InputState NtshEngn::WindowModule::getKeyState(WindowId windowId, InputKeyboardKey key) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getKeyState(key);
 }
 
-NtshEngn::InputState NtshEngn::WindowModule::getMouseButtonState(NtshEngn::WindowId windowId, NtshEngn::InputMouseButton mouseButton) {
+NtshEngn::InputState NtshEngn::WindowModule::getMouseButtonState(WindowId windowId, InputMouseButton mouseButton) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getMouseButtonState(mouseButton);
 }
 
-void NtshEngn::WindowModule::setCursorPosition(NtshEngn::WindowId windowId, int x, int y) {
+void NtshEngn::WindowModule::setCursorPosition(WindowId windowId, int x, int y) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->setCursorPosition(x, y);
 }
 
-int NtshEngn::WindowModule::getCursorPositionX(NtshEngn::WindowId windowId) {
+int NtshEngn::WindowModule::getCursorPositionX(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getCursorXPosition();
 }
 
-int NtshEngn::WindowModule::getCursorPositionY(NtshEngn::WindowId windowId) {
+int NtshEngn::WindowModule::getCursorPositionY(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->getCursorYPosition();
 }
 
-void NtshEngn::WindowModule::setCursorVisibility(NtshEngn::WindowId windowId, bool visible) {
+void NtshEngn::WindowModule::setCursorVisibility(WindowId windowId, bool visible) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	m_windows[windowId]->setCursorVisibility(visible);
 }
 
-bool NtshEngn::WindowModule::isCursorVisible(NtshEngn::WindowId windowId) {
+bool NtshEngn::WindowModule::isCursorVisible(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 	return m_windows[windowId]->isCursorVisible();
 }
 
-NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(NtshEngn::WindowId windowId) {
+NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
-	return reinterpret_cast<NtshEngn::NativeWindowHandle>(m_windows[windowId]->winId());
+	return reinterpret_cast<NativeWindowHandle>(m_windows[windowId]->winId());
 }
 
-NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getNativeAdditionalInformation(NtshEngn::WindowId windowId) {
+NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getNativeAdditionalInformation(WindowId windowId) {
 	NTSHENGN_ASSERT(m_windows.find(windowId) != m_windows.end());
 #if defined(NTSHENGN_OS_WINDOWS)
-	return reinterpret_cast<NtshEngn::NativeWindowAdditionalInformation>(GetWindowLongPtr(reinterpret_cast<HWND>(m_windows[windowId]->winId()), GWLP_HINSTANCE));
+	return reinterpret_cast<NativeWindowAdditionalInformation>(GetWindowLongPtr(reinterpret_cast<HWND>(m_windows[windowId]->winId()), GWLP_HINSTANCE));
 #elif defined (NTSHENGN_OS_LINUX)
-	return reinterpret_cast<NtshEngn::NativeWindowAdditionalInformation>(QX11Info::display());
+	return reinterpret_cast<NativeWindowAdditionalInformation>(QX11Info::display());
 #endif
 }
 
