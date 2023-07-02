@@ -3,6 +3,7 @@
 #include "../external/Module/utils/ntshengn_dynamic_library.h"
 #include "../external/Common/utils/ntshengn_defines.h"
 #include "../external/Common/utils/ntshengn_enums.h"
+#include "../external/Common/resources/ntshengn_resources_graphics.h"
 #include <limits>
 
 void NtshEngn::WindowModule::init() {
