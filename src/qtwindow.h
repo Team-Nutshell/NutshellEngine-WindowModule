@@ -1,5 +1,5 @@
 #pragma once
-#include "qwidget.h"
+#include <QWidget>
 #include "../external/Common/resources/ntshengn_resources_window.h"
 #include <QCloseEvent>
 #include <QKeyEvent>

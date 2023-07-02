@@ -8,6 +8,7 @@
 #include "../external/Module/utils/ntshengn_dynamic_library.h"
 #include "../external/Common/utils/ntshengn_defines.h"
 #include "../external/Common/utils/ntshengn_enums.h"
+#include <QIcon>
 #include <limits>
 
 void NtshEngn::WindowModule::init() {
@@ -151,6 +152,14 @@ void NtshEngn::WindowModule::pollEvents() {
 void NtshEngn::WindowModule::setTitle(WindowID windowID, const std::string& title) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 	m_windows[windowID]->setWindowTitle(QString::fromStdString(title));
+}
+
+void NtshEngn::WindowModule::setIcon(WindowID windowID, const Image& image) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	QImage im(image.data.data(), image.width, image.height, QImage::Format_RGBA8888);
+	QPixmap pixmap = QPixmap::fromImage(im);
+	QIcon icon(pixmap);
+	m_windows[windowID]->setWindowIcon(icon);
 }
 
 NtshEngn::InputState NtshEngn::WindowModule::getKeyState(WindowID windowID, InputKeyboardKey key) {
