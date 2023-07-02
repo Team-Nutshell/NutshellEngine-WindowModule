@@ -142,6 +142,12 @@ void NtshEngn::WindowModule::setTitle(WindowID windowID, const std::string& titl
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
+void NtshEngn::WindowModule::setIcon(WindowID windowID, const Image& image) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_UNUSED(image);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
 NtshEngn::InputState NtshEngn::WindowModule::getKeyState(WindowID windowID, InputKeyboardKey key) {
 	NTSHENGN_UNUSED(windowID);
 	NTSHENGN_UNUSED(key);
