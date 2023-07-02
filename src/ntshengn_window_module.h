@@ -64,9 +64,9 @@ namespace NtshEngn {
 		// Sets the icon of the window with identifier windowID
 		void setIcon(WindowID windowID, const Image& image);
 
-		// Gets the state of the keyboard key. None is the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
+		// Gets the state of the keyboard key. None if the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
 		InputState getKeyState(WindowID windowID, InputKeyboardKey key);
-		// Gets the state of the mouse button. None is the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
+		// Gets the state of the mouse button. None if the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
 		InputState getMouseButtonState(WindowID windowID, InputMouseButton mouseButton);
 
 		// Sets the mouse cursor position
