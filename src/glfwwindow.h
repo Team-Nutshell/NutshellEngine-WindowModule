@@ -2,6 +2,7 @@
 #include "../external/glfw/include/GLFW/glfw3.h"
 #include "../external/Common/utils/ntshengn_defines.h"
 #include "../external/Common/resources/ntshengn_resources_window.h"
+#include "../external/Common/resources/ntshengn_resources_graphics.h"
 #if defined(NTSHENGN_OS_WINDOWS)
 #define GLFW_EXPOSE_NATIVE_WIN32
 #elif defined(NTSHENGN_OS_LINUX)
@@ -44,6 +45,7 @@ public:
 	bool isResizable();
 
 	void setTitle(const std::string& title);
+	void setIcon(const NtshEngn::Image& image);
 
 	NtshEngn::InputState getKeyState(NtshEngn::InputKeyboardKey key);
 	NtshEngn::InputState getMouseButtonState(NtshEngn::InputMouseButton mouseButton);

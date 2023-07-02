@@ -110,6 +110,14 @@ void GLFWWindow::setTitle(const std::string& title) {
 	glfwSetWindowTitle(m_window, title.c_str());
 }
 
+void GLFWWindow::setIcon(const NtshEngn::Image& image) {
+	GLFWimage glfwImage;
+	glfwImage.width = image.width;
+	glfwImage.height = image.height;
+	glfwImage.pixels = const_cast<uint8_t*>(image.data.data());
+	glfwSetWindowIcon(m_window, 1, &glfwImage);
+}
+
 NtshEngn::InputState GLFWWindow::getKeyState(NtshEngn::InputKeyboardKey key) {
 	return m_keyStateMap[m_keyMap[key]];
 }

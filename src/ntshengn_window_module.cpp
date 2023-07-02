@@ -3,6 +3,7 @@
 #include "../external/Module/utils/ntshengn_dynamic_library.h"
 #include "../external/Common/utils/ntshengn_defines.h"
 #include "../external/Common/utils/ntshengn_enums.h"
+#include "../external/Common/resources/ntshengn_resources_graphics.h"
 
 void NtshEngn::WindowModule::init() {
 	glfwInit();
@@ -133,6 +134,11 @@ void NtshEngn::WindowModule::pollEvents() {
 void NtshEngn::WindowModule::setTitle(WindowID windowID, const std::string& title) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 	m_windows[windowID]->setTitle(title);
+}
+
+void NtshEngn::WindowModule::setIcon(WindowID windowID, const Image& image) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	m_windows[windowID]->setIcon(image);
 }
 
 NtshEngn::InputState NtshEngn::WindowModule::getKeyState(WindowID windowID, InputKeyboardKey key) {
