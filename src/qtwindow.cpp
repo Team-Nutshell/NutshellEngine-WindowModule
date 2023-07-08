@@ -1,5 +1,5 @@
 #include "qtwindow.h"
-#include "../external/Common/utils/ntshengn_defines.h"
+#include "../Common/utils/ntshengn_defines.h"
 #include <QCursor>
 
 QtWindow::QtWindow(QWidget* parent) : QWidget(parent) {

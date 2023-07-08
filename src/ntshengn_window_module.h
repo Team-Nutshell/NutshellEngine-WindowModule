@@ -1,5 +1,5 @@
 #pragma once
-#include "../external/Common/module_interfaces/ntshengn_window_module_interface.h"
+#include "../Common/module_interfaces/ntshengn_window_module_interface.h"
 #include "qtwindow.h"
 #include <qapplication.h>
 #include <memory>
