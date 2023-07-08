@@ -1,9 +1,9 @@
 #include "ntshengn_window_module.h"
-#include "../external/Module/utils/ntshengn_module_defines.h"
-#include "../external/Module/utils/ntshengn_dynamic_library.h"
-#include "../external/Common/utils/ntshengn_defines.h"
-#include "../external/Common/utils/ntshengn_enums.h"
-#include "../external/Common/resources/ntshengn_resources_graphics.h"
+#include "../Module/utils/ntshengn_module_defines.h"
+#include "../Module/utils/ntshengn_dynamic_library.h"
+#include "../Common/utils/ntshengn_defines.h"
+#include "../Common/utils/ntshengn_enums.h"
+#include "../Common/resources/ntshengn_resources_graphics.h"
 
 void NtshEngn::WindowModule::init() {
 	glfwInit();
