@@ -136,13 +136,18 @@ private:
 
 private:
 	GLFWwindow* m_window = nullptr;
+
 	int m_width;
 	int m_height;
+
 	int m_x = 0;
 	int m_y = 0;
+
 	int m_cursorX = 0;
 	int m_cursorY = 0;
+
 	bool m_cursorVisible = true;
+
 	float m_scrollX = 0.0f;
 	float m_scrollY = 0.0f;
 
