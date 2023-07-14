@@ -4,6 +4,7 @@
 #include <QCloseEvent>
 #include <QKeyEvent>
 #include <QMouseEvent>
+#include <QWheelEvent>
 #include <unordered_map>
 
 class QtWindow : public QWidget {
@@ -32,6 +33,9 @@ public:
 	void setCursorVisibility(bool visible);
 	bool isCursorVisible();
 
+	float getMouseScrollOffsetX();
+	float getMouseScrollOffsetY();
+
 private:
 	NtshEngn::InputState nextInputState(NtshEngn::InputState inputState);
 
@@ -42,6 +46,7 @@ protected:
 	void mousePressEvent(QMouseEvent* event);
 	void mouseReleaseEvent(QMouseEvent* event);
 	void mouseMoveEvent(QMouseEvent* event);
+	void wheelEvent(QWheelEvent* event);
 
 private:
 	bool m_shouldClose = false;
@@ -50,6 +55,9 @@ private:
 	int m_cursorY = 0;
 
 	bool m_cursorVisible = true;
+
+	float m_scrollX = 0.0f;
+	float m_scrollY = 0.0f;
 	
 	std::unordered_map<NtshEngn::InputKeyboardKey, Qt::Key> m_keyMap = { { NtshEngn::InputKeyboardKey::Any, Qt::Key_unknown },
 		{ NtshEngn::InputKeyboardKey::A, Qt::Key_A },

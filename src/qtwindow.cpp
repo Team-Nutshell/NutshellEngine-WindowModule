@@ -30,6 +30,9 @@ void QtWindow::updateInputs(double dt) {
 	for (auto& key : m_mouseButtonStateMap) {
 		key.second = nextInputState(key.second);
 	}
+
+	m_scrollX = 0.0f;
+	m_scrollY = 0.0f;
 }
 
 void QtWindow::setBorderless(bool borderless) {
@@ -86,6 +89,14 @@ void QtWindow::setCursorVisibility(bool visible) {
 
 bool QtWindow::isCursorVisible() {
 	return m_cursorVisible;
+}
+
+float QtWindow::getMouseScrollOffsetX() {
+	return m_scrollX;
+}
+
+float QtWindow::getMouseScrollOffsetY() {
+	return m_scrollY;
 }
 
 NtshEngn::InputState QtWindow::nextInputState(NtshEngn::InputState inputState) {
@@ -151,4 +162,9 @@ void QtWindow::mouseReleaseEvent(QMouseEvent* event) {
 void QtWindow::mouseMoveEvent(QMouseEvent* event) {
 	m_cursorX = event->pos().x();
 	m_cursorY = event->pos().y();
+}
+
+void QtWindow::wheelEvent(QWheelEvent* event) {
+	m_scrollX = static_cast<float>(event->angleDelta().x()) / 120.0f;
+	m_scrollY = static_cast<float>(event->angleDelta().y()) / 120.0f;
 }
