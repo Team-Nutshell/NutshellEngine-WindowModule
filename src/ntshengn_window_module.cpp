@@ -199,6 +199,20 @@ bool NtshEngn::WindowModule::isCursorVisible(WindowID windowID) {
 	return false;
 }
 
+float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
+float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(WindowID windowID) {
 	NTSHENGN_UNUSED(windowID);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
