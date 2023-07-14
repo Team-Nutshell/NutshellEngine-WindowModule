@@ -176,6 +176,16 @@ bool NtshEngn::WindowModule::isCursorVisible(WindowID windowID) {
 	return m_windows[windowID]->isCursorVisible();
 }
 
+float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	return m_windows[windowID]->getMouseScrollOffsetX();
+}
+
+float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	return m_windows[windowID]->getMouseScrollOffsetY();
+}
+
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 	return m_windows[windowID]->getNativeHandle();

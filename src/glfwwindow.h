@@ -54,6 +54,9 @@ public:
 	int getCursorPositionX();
 	int getCursorPositionY();
 
+	float getMouseScrollOffsetX();
+	float getMouseScrollOffsetY();
+
 	void setCursorVisibility(bool visible);
 	bool isCursorVisible();
 
@@ -73,8 +76,11 @@ private:
 	// Mouse button input internal function used by callback
 	void mouseButtonInternal(int button, int action);
 
-	// Mouse position internal function used by callback
+	// Mouse cursor position internal function used by callback
 	void cursorPositionInternal(int x, int y);
+	
+	// Scroll internal function used by callback
+	void scrollInternal(float x, float y);
 
 	// Window close internal function used by callback
 	void windowCloseInternal();
@@ -116,6 +122,12 @@ private:
 		ptr->cursorPositionInternal(static_cast<int>(x), static_cast<int>(y));
 	}
 
+	// Scroll callback
+	static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		ptr->scrollInternal(static_cast<float>(xoffset), static_cast<float>(yoffset));
+	}
+
 	// Window close callback
 	static void windowCloseCallback(GLFWwindow* window) {
 		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
@@ -131,6 +143,8 @@ private:
 	int m_cursorX = 0;
 	int m_cursorY = 0;
 	bool m_cursorVisible = true;
+	float m_scrollX = 0.0f;
+	float m_scrollY = 0.0f;
 
 	std::unordered_map<NtshEngn::InputKeyboardKey, int> m_keyMap = { { NtshEngn::InputKeyboardKey::Any, GLFW_KEY_LAST + 1 },
 		{ NtshEngn::InputKeyboardKey::A, GLFW_KEY_A },

@@ -16,6 +16,7 @@ GLFWWindow::GLFWWindow(int width, int height, const std::string& title) {
 	glfwSetKeyCallback(m_window, keyboardKeyCallback);
 	glfwSetMouseButtonCallback(m_window, mouseButtonCallback);
 	glfwSetCursorPosCallback(m_window, cursorPositionCallback);
+	glfwSetScrollCallback(m_window, scrollCallback);
 	glfwSetWindowCloseCallback(m_window, windowCloseCallback);
 }
 
@@ -41,6 +42,9 @@ void GLFWWindow::updateInputs(double dt) {
 	for (auto& key : m_mouseButtonStateMap) {
 		key.second = nextInputState(key.second);
 	}
+
+	m_scrollX = 0.0f;
+	m_scrollY = 0.0f;
 }
 
 void GLFWWindow::setSize(int width, int height) {
@@ -140,6 +144,14 @@ int GLFWWindow::getCursorPositionY() {
 	return m_cursorY;
 }
 
+float GLFWWindow::getMouseScrollOffsetX() {
+	return m_scrollX;
+}
+
+float GLFWWindow::getMouseScrollOffsetY() {
+	return m_scrollY;
+}
+
 void GLFWWindow::setCursorVisibility(bool visible) {
 	if (!isCursorVisible() && visible) {
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -196,6 +208,11 @@ void GLFWWindow::mouseButtonInternal(int button, int action) {
 void GLFWWindow::cursorPositionInternal(int x, int y) {
 	m_cursorX = x;
 	m_cursorY = y;
+}
+
+void GLFWWindow::scrollInternal(float x, float y) {
+	m_scrollX = x;
+	m_scrollY = y;
 }
 
 void GLFWWindow::windowCloseInternal() {
