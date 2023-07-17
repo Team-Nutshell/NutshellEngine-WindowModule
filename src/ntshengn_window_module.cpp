@@ -221,7 +221,7 @@ int NtshEngn::WindowModule::getMonitorRefreshRate() {
 }
 
 float NtshEngn::WindowModule::getMonitorDisplayScaling() {
-	return static_cast<float>(m_application->devicePixelRatio());
+	return static_cast<float>(m_application->primaryScreen()->devicePixelRatio());
 }
 
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(WindowID windowID) {
