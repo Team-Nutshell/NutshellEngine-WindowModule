@@ -186,6 +186,24 @@ int NtshEngn::WindowModule::getCursorPositionY(WindowID windowID) {
 	return -1;
 }
 
+int NtshEngn::WindowModule::getMonitorWidth() {
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0;
+}
+
+int NtshEngn::WindowModule::getMonitorHeight() {
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0;
+}
+
+float NtshEngn::WindowModule::getDisplayScaling() {
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
 void NtshEngn::WindowModule::setCursorVisibility(WindowID windowID, bool visible) {
 	NTSHENGN_UNUSED(windowID);
 	NTSHENGN_UNUSED(visible);
