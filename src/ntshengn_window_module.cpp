@@ -209,11 +209,11 @@ float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
 }
 
 int NtshEngn::WindowModule::getMonitorWidth() {
-	return m_application->primaryScreen()->availableGeometry().width();
+	return m_application->primaryScreen()->geometry().width();
 }
 
 int NtshEngn::WindowModule::getMonitorHeight() {
-	return m_application->primaryScreen()->availableGeometry().height();
+	return m_application->primaryScreen()->geometry().height();
 }
 
 int NtshEngn::WindowModule::getMonitorRefreshRate() {
