@@ -198,7 +198,13 @@ int NtshEngn::WindowModule::getMonitorHeight() {
 	return 0;
 }
 
-float NtshEngn::WindowModule::getDisplayScaling() {
+int NtshEngn::WindowModule::getMonitorRefreshRate() {
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0;
+}
+
+float NtshEngn::WindowModule::getMonitorDisplayScaling() {
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 
 	return 0.0f;
