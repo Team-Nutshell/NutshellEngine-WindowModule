@@ -86,6 +86,15 @@ namespace NtshEngn {
 		// Returns the vertical mouse scroll offset between the last and current frame
 		float getMouseScrollOffsetY(WindowID windowID);
 
+		// Returns the width of the main monitor
+		int getMonitorWidth();
+		// Returns the height of the main monitor
+		int getMonitorHeight();
+		// Returns the refresh rate of the main monitor
+		int getMonitorRefreshRate();
+		// Returns the display scaling ratio of the main monitor
+		float getMonitorDisplayScaling();
+
 		// Returns the native window handle of the window with identifier windowID
 		NativeWindowHandle getNativeHandle(WindowID windowID);
 		// Returns the native window additional information of the window with identifier windowID

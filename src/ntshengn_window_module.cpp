@@ -8,6 +8,7 @@
 #include "../Module/utils/ntshengn_dynamic_library.h"
 #include "../Common/utils/ntshengn_defines.h"
 #include "../Common/utils/ntshengn_enums.h"
+#include <QScreen>
 #include <QIcon>
 #include <limits>
 
@@ -205,6 +206,22 @@ float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
 float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 	return m_windows[windowID]->getMouseScrollOffsetY();
+}
+
+int NtshEngn::WindowModule::getMonitorWidth() {
+	return m_application->primaryScreen()->availableGeometry().width();
+}
+
+int NtshEngn::WindowModule::getMonitorHeight() {
+	return m_application->primaryScreen()->availableGeometry().height();
+}
+
+int NtshEngn::WindowModule::getMonitorRefreshRate() {
+	return static_cast<int>(m_application->primaryScreen()->refreshRate());
+}
+
+float NtshEngn::WindowModule::getMonitorDisplayScaling() {
+	return static_cast<float>(m_application->devicePixelRatio());
 }
 
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(WindowID windowID) {
