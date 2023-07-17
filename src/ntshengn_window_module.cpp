@@ -186,6 +186,35 @@ float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
 	return m_windows[windowID]->getMouseScrollOffsetY();
 }
 
+int NtshEngn::WindowModule::getMonitorWidth() {
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
+
+	return videoMode->width;
+}
+
+int NtshEngn::WindowModule::getMonitorHeight() {
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
+
+	return videoMode->height;
+}
+
+int NtshEngn::WindowModule::getMonitorRefreshRate() {
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
+
+	return videoMode->refreshRate;
+}
+
+float NtshEngn::WindowModule::getMonitorDisplayScaling() {
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	float scaleX;
+	glfwGetMonitorContentScale(monitor, &scaleX, NULL);
+
+	return scaleX;
+}
+
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 	return m_windows[windowID]->getNativeHandle();
