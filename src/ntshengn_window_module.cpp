@@ -223,6 +223,50 @@ bool NtshEngn::WindowModule::isCursorVisible(WindowID windowID) {
 	return false;
 }
 
+std::vector<NtshEngn::GamepadID> NtshEngn::WindowModule::getConnectedGamepads() {
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return std::vector<GamepadID>();
+}
+
+NtshEngn::InputState NtshEngn::WindowModule::getGamepadButtonState(GamepadID gamepadID, InputGamepadButton button) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_UNUSED(button);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return InputState::None;
+}
+
+float NtshEngn::WindowModule::getGamepadStickAxisX(GamepadID gamepadID, InputGamepadStick stick) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_UNUSED(stick);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
+float NtshEngn::WindowModule::getGamepadStickAxisY(GamepadID gamepadID, InputGamepadStick stick) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_UNUSED(stick);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
+float NtshEngn::WindowModule::getGamepadLeftTrigger(GamepadID gamepadID) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
+float NtshEngn::WindowModule::getGamepadRightTrigger(GamepadID gamepadID) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
 float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
 	NTSHENGN_UNUSED(windowID);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
