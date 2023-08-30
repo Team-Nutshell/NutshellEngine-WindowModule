@@ -292,13 +292,13 @@ float NtshEngn::WindowModule::getMonitorDisplayScaling() {
 	return static_cast<float>(m_application->primaryScreen()->devicePixelRatio());
 }
 
-NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(WindowID windowID) {
+NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getWindowNativeHandle(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	return reinterpret_cast<NativeWindowHandle>(m_windows[windowID]->winId());
 }
 
-NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getNativeAdditionalInformation(WindowID windowID) {
+NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getWindowNativeAdditionalInformation(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 #if defined(NTSHENGN_OS_WINDOWS)
