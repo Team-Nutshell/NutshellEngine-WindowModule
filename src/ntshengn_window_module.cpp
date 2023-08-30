@@ -276,6 +276,13 @@ float NtshEngn::WindowModule::getGamepadRightTrigger(GamepadID gamepadID) {
 	return 0.0f;
 }
 
+std::string NtshEngn::WindowModule::getGamepadName(GamepadID gamepadID) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return std::string();
+}
+
 int NtshEngn::WindowModule::getMonitorWidth() {
 	return m_application->primaryScreen()->geometry().width();
 }
