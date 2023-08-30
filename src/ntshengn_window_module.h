@@ -16,11 +16,11 @@ namespace NtshEngn {
 		void destroy();
 
 		// Opens a new window and returns a unique identifier
-		WindowID open(int width, int height, const std::string& title);
+		WindowID openWindow(int width, int height, const std::string& title);
 		// Returns true if the window with identifier windowID is open, else, returns false
-		bool isOpen(WindowID windowID);
+		bool isWindowOpen(WindowID windowID);
 		// Flags the window to be closed at the next update
-		void close(WindowID windowID);
+		void closeWindow(WindowID windowID);
 
 		// Returns the main window identifier
 		WindowID getMainWindowID();
@@ -28,41 +28,41 @@ namespace NtshEngn {
 		uint64_t windowCount();
 
 		// Changes the size of the window with identifier windowID to width and height
-		void setSize(WindowID windowID, int width, int height);
+		void setWindowSize(WindowID windowID, int width, int height);
 		// Returns the width of the window with identifier windowID
-		int getWidth(WindowID windowID);
+		int getWindowWidth(WindowID windowID);
 		// Returns the height of the window with identifier windowID
-		int getHeight(WindowID windowID);
+		int getWindowHeight(WindowID windowID);
 
 		// Changes the position of the window with identifier windowID to x and y
-		void setPosition(WindowID windowID, int x, int y);
+		void setWindowPosition(WindowID windowID, int x, int y);
 		// Returns the horizontal position of the window with identifier windowID
-		int getPositionX(WindowID windowID);
+		int getWindowPositionX(WindowID windowID);
 		// Returns the vertical position of the window with identifier windowID
-		int getPositionY(WindowID windowID);
+		int getWindowPositionY(WindowID windowID);
 
 		// If the fullscreen parameter is true, puts the window with identifier windowID in fullscreen, else, puts the window with identifier windowID in windowed
-		void setFullscreen(WindowID windowID, bool fullscreen);
+		void setWindowFullscreen(WindowID windowID, bool fullscreen);
 		// Returns true if the window with identifier windowID is in fullscreen mode, else, returns false
-		bool isFullscreen(WindowID windowID);
+		bool isWindowFullscreen(WindowID windowID);
 
 		// If the borderless parameter is true, puts the window with identifier windowID in borderless, else, adds borders to the window with identifier windowID
-		void setBorderless(WindowID windowID, bool borderless);
+		void setWindowBorderless(WindowID windowID, bool borderless);
 		// Returns true if the window with identifier windowID is in borderless mode, else, returns false
-		bool isBorderless(WindowID windowID);
+		bool isWindowBorderless(WindowID windowID);
 
 		// If the resizable parameter is true, makes the window with identifier windowID resizable, else, makes the window with identifier windowID not resizable
-		void setResizable(WindowID windowID, bool resizable);
+		void setWindowResizable(WindowID windowID, bool resizable);
 		// Returns true if the window with identifier windowID is resizable, else, returns false
-		bool isResizable(WindowID windowID);
+		bool isWindowResizable(WindowID windowID);
 
 		// Polls events of the windows
 		void pollEvents();
 
 		// Sets the title of the window with identifier windowID
-		void setTitle(WindowID windowID, const std::string& title);
+		void setWindowTitle(WindowID windowID, const std::string& title);
 		// Sets the icon of the window with identifier windowID
-		void setIcon(WindowID windowID, const Image& image);
+		void setWindowIcon(WindowID windowID, const Image& image);
 
 		// Returns the state of the keyboard key. None if the input is neutral, Pressed the first frame it is being pressed, Held from the second frame it is pressed, Released the frame it is being released
 		InputState getKeyState(WindowID windowID, InputKeyboardKey key);

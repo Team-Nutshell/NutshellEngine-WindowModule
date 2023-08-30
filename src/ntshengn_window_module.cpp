@@ -40,7 +40,7 @@ void NtshEngn::WindowModule::destroy() {
 	}
 }
 
-NtshEngn::WindowID NtshEngn::WindowModule::open(int width, int height, const std::string& title) {
+NtshEngn::WindowID NtshEngn::WindowModule::openWindow(int width, int height, const std::string& title) {
 	m_windows[m_id] = std::make_unique<QtWindow>();
 	m_windows[m_id]->open(width, height, title);
 
@@ -51,11 +51,11 @@ NtshEngn::WindowID NtshEngn::WindowModule::open(int width, int height, const std
 	return m_id++;
 }
 
-bool NtshEngn::WindowModule::isOpen(WindowID windowID) {
+bool NtshEngn::WindowModule::isWindowOpen(WindowID windowID) {
 	return (m_windows.find(windowID) != m_windows.end()) ? !m_windows[windowID]->shouldClose() : false;
 }
 
-void NtshEngn::WindowModule::close(WindowID windowID) {
+void NtshEngn::WindowModule::closeWindow(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 	
 	m_windows[windowID]->closeWindow();
@@ -76,13 +76,13 @@ uint64_t NtshEngn::WindowModule::windowCount() {
 	return count;
 }
 
-void NtshEngn::WindowModule::setSize(WindowID windowID, int width, int height) {
+void NtshEngn::WindowModule::setWindowSize(WindowID windowID, int width, int height) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	m_windows[windowID]->resize(width, height);
 }
 
-int NtshEngn::WindowModule::getWidth(WindowID windowID) {
+int NtshEngn::WindowModule::getWindowWidth(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	if (m_windows[windowID]->isMinimized()) {
@@ -91,7 +91,7 @@ int NtshEngn::WindowModule::getWidth(WindowID windowID) {
 	return m_windows[windowID]->width();
 }
 
-int NtshEngn::WindowModule::getHeight(WindowID windowID) {
+int NtshEngn::WindowModule::getWindowHeight(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	if (m_windows[windowID]->isMinimized()) {
@@ -100,25 +100,25 @@ int NtshEngn::WindowModule::getHeight(WindowID windowID) {
 	return m_windows[windowID]->height();
 }
 
-void NtshEngn::WindowModule::setPosition(WindowID windowID, int x, int y) {
+void NtshEngn::WindowModule::setWindowPosition(WindowID windowID, int x, int y) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	m_windows[windowID]->move(x, y);
 }
 
-int NtshEngn::WindowModule::getPositionX(WindowID windowID) {
+int NtshEngn::WindowModule::getWindowPositionX(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	return m_windows[windowID]->x();
 }
 
-int NtshEngn::WindowModule::getPositionY(WindowID windowID) {
+int NtshEngn::WindowModule::getWindowPositionY(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	return m_windows[windowID]->y();
 }
 
-void NtshEngn::WindowModule::setFullscreen(WindowID windowID, bool fullscreen) {
+void NtshEngn::WindowModule::setWindowFullscreen(WindowID windowID, bool fullscreen) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	if (fullscreen) {
@@ -129,31 +129,31 @@ void NtshEngn::WindowModule::setFullscreen(WindowID windowID, bool fullscreen) {
 	}
 }
 
-bool NtshEngn::WindowModule::isFullscreen(WindowID windowID) {
+bool NtshEngn::WindowModule::isWindowFullscreen(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	return m_windows[windowID]->isFullScreen();
 }
 
-void NtshEngn::WindowModule::setBorderless(WindowID windowID, bool borderless) {
+void NtshEngn::WindowModule::setWindowBorderless(WindowID windowID, bool borderless) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	m_windows[windowID]->setBorderless(borderless);
 }
 
-bool NtshEngn::WindowModule::isBorderless(WindowID windowID) {
+bool NtshEngn::WindowModule::isWindowBorderless(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	return m_windows[windowID]->isBorderless();
 }
 
-void NtshEngn::WindowModule::setResizable(WindowID windowID, bool resizable) {
+void NtshEngn::WindowModule::setWindowResizable(WindowID windowID, bool resizable) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	m_windows[windowID]->setResizable(resizable);
 }
 
-bool NtshEngn::WindowModule::isResizable(WindowID windowID) {
+bool NtshEngn::WindowModule::isWindowResizable(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	return m_windows[windowID]->isResizable();
@@ -163,13 +163,13 @@ void NtshEngn::WindowModule::pollEvents() {
 	m_application->processEvents();
 }
 
-void NtshEngn::WindowModule::setTitle(WindowID windowID, const std::string& title) {
+void NtshEngn::WindowModule::setWindowTitle(WindowID windowID, const std::string& title) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	m_windows[windowID]->setWindowTitle(QString::fromStdString(title));
 }
 
-void NtshEngn::WindowModule::setIcon(WindowID windowID, const Image& image) {
+void NtshEngn::WindowModule::setWindowIcon(WindowID windowID, const Image& image) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	QImage im(image.data.data(), image.width, image.height, QImage::Format_RGBA8888);
