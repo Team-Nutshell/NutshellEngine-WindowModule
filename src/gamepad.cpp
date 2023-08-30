@@ -16,7 +16,7 @@ void Gamepad::updateInputs(double dt) {
 		if (m_currentState.buttons[button.first] == GLFW_PRESS) {
 			if ((button.second == NtshEngn::InputState::None) || (button.second == NtshEngn::InputState::Released)) {
 				button.second = NtshEngn::InputState::Pressed;
-				m_gamepadButtonStateMap[GLFW_GAMEPAD_BUTTON_LAST] = NtshEngn::InputState::Pressed; // Any
+				m_gamepadButtonStateMap[GLFW_GAMEPAD_BUTTON_LAST + 1] = NtshEngn::InputState::Pressed; // Any
 			}
 			else if (button.second == NtshEngn::InputState::Pressed) {
 				button.second = NtshEngn::InputState::Held;
@@ -25,7 +25,7 @@ void Gamepad::updateInputs(double dt) {
 		else if (m_currentState.buttons[button.first] == GLFW_RELEASE) {
 			if ((button.second == NtshEngn::InputState::Pressed) || (button.second == NtshEngn::InputState::Held)) {
 				button.second = NtshEngn::InputState::Released;
-				m_gamepadButtonStateMap[GLFW_GAMEPAD_BUTTON_LAST] = NtshEngn::InputState::Released; // Any
+				m_gamepadButtonStateMap[GLFW_GAMEPAD_BUTTON_LAST + 1] = NtshEngn::InputState::Released; // Any
 			}
 			else if (button.second == NtshEngn::InputState::Released) {
 				button.second = NtshEngn::InputState::None;
