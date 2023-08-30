@@ -1,8 +1,5 @@
 #include "glfwwindow.h"
-#include "../Module/utils/ntshengn_module_defines.h"
-#include "../Module/utils/ntshengn_dynamic_library.h"
 #include "../Common/utils/ntshengn_defines.h"
-#include "../Common/utils/ntshengn_enums.h"
 
 GLFWWindow::GLFWWindow(int width, int height, const std::string& title) {
 	m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
@@ -39,8 +36,8 @@ void GLFWWindow::updateInputs(double dt) {
 		key.second = nextInputState(key.second);
 	}
 
-	for (auto& key : m_mouseButtonStateMap) {
-		key.second = nextInputState(key.second);
+	for (auto& button : m_mouseButtonStateMap) {
+		button.second = nextInputState(button.second);
 	}
 
 	m_scrollX = 0.0f;

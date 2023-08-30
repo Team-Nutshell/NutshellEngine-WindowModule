@@ -50,9 +50,13 @@ add_subdirectory(external/glfw)
 list(APPEND NTSHENGN_DEFINES NTSHENGN_CURRENT_MODULE_WINDOW)
 
 set(MODULE_SOURCES
-	src/ntshengn_window_module.cpp src/glfwwindow.cpp)	
+	src/ntshengn_window_module.cpp
+	src/gamepad.cpp
+	src/glfwwindow.cpp)	
 set(MODULE_HEADERS
-	src/ntshengn_window_module.h src/glfwwindow.h)
+	src/ntshengn_window_module.h
+	src/gamepad.h
+	src/glfwwindow.h)
 
 set(SOURCES ${MODULE_SOURCES})
 set(HEADERS ${MODULE_HEADERS})

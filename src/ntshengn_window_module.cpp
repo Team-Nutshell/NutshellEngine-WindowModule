@@ -4,6 +4,7 @@
 #include "../Common/utils/ntshengn_defines.h"
 #include "../Common/utils/ntshengn_enums.h"
 #include "../Common/resources/ntshengn_resources_graphics.h"
+#include <algorithm>
 
 void NtshEngn::WindowModule::init() {
 	glfwInit();
@@ -24,6 +25,25 @@ void NtshEngn::WindowModule::update(double dt) {
 	}
 
 	pollEvents();
+
+	for (uint8_t i = GLFW_JOYSTICK_1; i < GLFW_JOYSTICK_LAST + 1; i++) {
+		if (m_gamepadIDs.find(i) != m_gamepadIDs.end()) {
+			if (!glfwJoystickPresent(i)) {
+				m_gamepads.erase(m_gamepadIDs[i]);
+				m_gamepadIDs.erase(i);
+			}
+		}
+		else {
+			if (glfwJoystickPresent(i)) {
+				m_gamepads[m_gamepadID++] = std::make_unique<Gamepad>(i);
+				m_gamepadIDs[i] = m_gamepadID - 1;
+			}
+		}
+	}
+
+	for (auto& gamepad : m_gamepads) {
+		gamepad.second->updateInputs(dt);
+	}
 }
 
 void NtshEngn::WindowModule::destroy() {
@@ -34,13 +54,13 @@ void NtshEngn::WindowModule::destroy() {
 }
 
 NtshEngn::WindowID NtshEngn::WindowModule::open(int width, int height, const std::string& title) {
-	m_windows[m_id] = std::make_unique<GLFWWindow>(width, height, title);
+	m_windows[m_windowID] = std::make_unique<GLFWWindow>(width, height, title);
 
 	if (m_mainWindow == std::numeric_limits<WindowID>::max()) {
-		m_mainWindow = m_id;
+		m_mainWindow = m_windowID;
 	}
 
-	return m_id++;
+	return m_windowID++;
 }
 
 bool NtshEngn::WindowModule::isOpen(WindowID windowID) {
@@ -186,6 +206,18 @@ int NtshEngn::WindowModule::getCursorPositionY(WindowID windowID) {
 	return m_windows[windowID]->getCursorPositionY();
 }
 
+float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+
+	return m_windows[windowID]->getMouseScrollOffsetX();
+}
+
+float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+
+	return m_windows[windowID]->getMouseScrollOffsetY();
+}
+
 void NtshEngn::WindowModule::setCursorVisibility(WindowID windowID, bool visible) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
@@ -198,16 +230,44 @@ bool NtshEngn::WindowModule::isCursorVisible(WindowID windowID) {
 	return m_windows[windowID]->isCursorVisible();
 }
 
-float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+std::vector<NtshEngn::GamepadID> NtshEngn::WindowModule::getConnectedGamepads() {
+	std::vector<GamepadID> gamepads;
 
-	return m_windows[windowID]->getMouseScrollOffsetX();
+	for (auto it = m_gamepads.begin(); it != m_gamepads.end(); it++) {
+		gamepads.push_back(it->first);
+	}
+
+	return gamepads;
 }
 
-float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+NtshEngn::InputState NtshEngn::WindowModule::getGamepadButtonState(GamepadID gamepadID, InputGamepadButton button) {
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
 
-	return m_windows[windowID]->getMouseScrollOffsetY();
+	return m_gamepads[gamepadID]->getGamepadButtonState(button);
+}
+
+float NtshEngn::WindowModule::getGamepadStickAxisX(GamepadID gamepadID, InputGamepadStick stick) {
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+
+	return m_gamepads[gamepadID]->getGamepadStickAxisX(stick);
+}
+
+float NtshEngn::WindowModule::getGamepadStickAxisY(GamepadID gamepadID, InputGamepadStick stick) {
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+
+	return m_gamepads[gamepadID]->getGamepadStickAxisY(stick);
+}
+
+float NtshEngn::WindowModule::getGamepadLeftTrigger(GamepadID gamepadID) {
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+
+	return m_gamepads[gamepadID]->getGamepadLeftTrigger();
+}
+
+float NtshEngn::WindowModule::getGamepadRightTrigger(GamepadID gamepadID) {
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+
+	return m_gamepads[gamepadID]->getGamepadRightTrigger();
 }
 
 int NtshEngn::WindowModule::getMonitorWidth() {
