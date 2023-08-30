@@ -96,6 +96,9 @@ namespace NtshEngn {
 		// Returns the value of the stick's right trigger, with 0.0 being neutral and 1.0 being fully pressed
 		float getGamepadRightTrigger(GamepadID gamepadID);
 
+		// Returns the name of the gamepad with identifier gamepadID
+		std::string getGamepadName(GamepadID gamepadID);
+
 		// Returns the width of the main monitor
 		int getMonitorWidth();
 		// Returns the height of the main monitor
