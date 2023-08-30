@@ -299,13 +299,13 @@ float NtshEngn::WindowModule::getMonitorDisplayScaling() {
 	return scaleX;
 }
 
-NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getNativeHandle(WindowID windowID) {
+NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getWindowNativeHandle(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	return m_windows[windowID]->getNativeHandle();
 }
 
-NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getNativeAdditionalInformation(WindowID windowID) {
+NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getWindowNativeAdditionalInformation(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 	
 	return m_windows[windowID]->getNativeAdditionalInformation();
