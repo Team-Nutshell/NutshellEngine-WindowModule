@@ -208,6 +208,18 @@ int NtshEngn::WindowModule::getCursorPositionY(WindowID windowID) {
 	return m_windows[windowID]->getCursorYPosition();
 }
 
+float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+
+	return m_windows[windowID]->getMouseScrollOffsetX();
+}
+
+float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+
+	return m_windows[windowID]->getMouseScrollOffsetY();
+}
+
 void NtshEngn::WindowModule::setCursorVisibility(WindowID windowID, bool visible) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
@@ -220,16 +232,48 @@ bool NtshEngn::WindowModule::isCursorVisible(WindowID windowID) {
 	return m_windows[windowID]->isCursorVisible();
 }
 
-float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+std::vector<NtshEngn::GamepadID> NtshEngn::WindowModule::getConnectedGamepads() {
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 
-	return m_windows[windowID]->getMouseScrollOffsetX();
+	return std::vector<GamepadID>();
 }
 
-float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+NtshEngn::InputState NtshEngn::WindowModule::getGamepadButtonState(GamepadID gamepadID, InputGamepadButton button) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_UNUSED(button);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 
-	return m_windows[windowID]->getMouseScrollOffsetY();
+	return InputState::None;
+}
+
+float NtshEngn::WindowModule::getGamepadStickAxisX(GamepadID gamepadID, InputGamepadStick stick) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_UNUSED(stick);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
+float NtshEngn::WindowModule::getGamepadStickAxisY(GamepadID gamepadID, InputGamepadStick stick) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_UNUSED(stick);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
+float NtshEngn::WindowModule::getGamepadLeftTrigger(GamepadID gamepadID) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
+float NtshEngn::WindowModule::getGamepadRightTrigger(GamepadID gamepadID) {
+	NTSHENGN_UNUSED(gamepadID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
 }
 
 int NtshEngn::WindowModule::getMonitorWidth() {

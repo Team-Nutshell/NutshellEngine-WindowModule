@@ -76,15 +76,29 @@ namespace NtshEngn {
 		// Returns the mouse cursor vertical position
 		int getCursorPositionY(WindowID windowID);
 
+		// Returns the horizontal mouse scroll offset between the last and current frame
+		float getMouseScrollOffsetX(WindowID windowID);
+		// Returns the vertical mouse scroll offset between the last and current frame
+		float getMouseScrollOffsetY(WindowID windowID);
+
 		// Sets the mouse cursor's visibility in the window with identifier windowID
 		void setCursorVisibility(WindowID windowID, bool visible);
 		// Returns true if the mouse cursor is visible in the window with identifier windowID, else, returns false
 		bool isCursorVisible(WindowID windowID);
 
-		// Returns the horizontal mouse scroll offset between the last and current frame
-		float getMouseScrollOffsetX(WindowID windowID);
-		// Returns the vertical mouse scroll offset between the last and current frame
-		float getMouseScrollOffsetY(WindowID windowID);
+		// Returns the list of connected gamepads
+		std::vector<GamepadID> getConnectedGamepads();
+
+		// Returns the state of the gamepad with identifier gamepadID
+		InputState getGamepadButtonState(GamepadID gamepadID, InputGamepadButton button);
+		// Returns the value of the stick's horizontal axis, with -1.0 being left, 0.0 neutral and 1.0 right
+		float getGamepadStickAxisX(GamepadID gamepadID, InputGamepadStick stick);
+		// Returns the value of the stick's vertical axis, with -1.0 being up, 0.0 neutral and 1.0 down
+		float getGamepadStickAxisY(GamepadID gamepadID, InputGamepadStick stick);
+		// Returns the value of the stick's left trigger, with 0.0 being neutral and 1.0 being fully pressed
+		float getGamepadLeftTrigger(GamepadID gamepadID);
+		// Returns the value of the stick's right trigger, with 0.0 being neutral and 1.0 being fully pressed
+		float getGamepadRightTrigger(GamepadID gamepadID);
 
 		// Returns the width of the main monitor
 		int getMonitorWidth();
