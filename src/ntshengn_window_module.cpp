@@ -210,6 +210,20 @@ float NtshEngn::WindowModule::getMonitorDisplayScaling() {
 	return 0.0f;
 }
 
+float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
+float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
 void NtshEngn::WindowModule::setCursorVisibility(WindowID windowID, bool visible) {
 	NTSHENGN_UNUSED(windowID);
 	NTSHENGN_UNUSED(visible);
@@ -262,20 +276,6 @@ float NtshEngn::WindowModule::getGamepadLeftTrigger(GamepadID gamepadID) {
 
 float NtshEngn::WindowModule::getGamepadRightTrigger(GamepadID gamepadID) {
 	NTSHENGN_UNUSED(gamepadID);
-	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
-
-	return 0.0f;
-}
-
-float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
-	NTSHENGN_UNUSED(windowID);
-	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
-
-	return 0.0f;
-}
-
-float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
-	NTSHENGN_UNUSED(windowID);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 
 	return 0.0f;
