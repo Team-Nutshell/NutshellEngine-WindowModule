@@ -270,6 +270,12 @@ float NtshEngn::WindowModule::getGamepadRightTrigger(GamepadID gamepadID) {
 	return m_gamepads[gamepadID]->getGamepadRightTrigger();
 }
 
+std::string NtshEngn::WindowModule::getGamepadName(GamepadID gamepadID) {
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+
+	return m_gamepads[gamepadID]->getGamepadName();
+}
+
 int NtshEngn::WindowModule::getMonitorWidth() {
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);

@@ -3,6 +3,7 @@
 #include "../Common/utils/ntshengn_defines.h"
 #include "../Common/resources/ntshengn_resources_window.h"
 #include <unordered_map>
+#include <string>
 
 class Gamepad {
 public:
@@ -15,6 +16,8 @@ public:
 	float getGamepadStickAxisY(NtshEngn::InputGamepadStick stick);
 	float getGamepadLeftTrigger();
 	float getGamepadRightTrigger();
+
+	std::string getGamepadName();
 
 private:
 	int m_id;
@@ -54,4 +57,6 @@ private:
 		{ GLFW_GAMEPAD_BUTTON_DPAD_UP, NtshEngn::InputState::None },
 		{ GLFW_GAMEPAD_BUTTON_DPAD_DOWN, NtshEngn::InputState::None }
 	};
+
+	std::string m_name;
 };

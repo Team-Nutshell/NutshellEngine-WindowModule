@@ -1,7 +1,15 @@
 #include "gamepad.h"
 #include "../Common/utils/ntshengn_defines.h"
 
-Gamepad::Gamepad(int id) : m_id(id) {}
+Gamepad::Gamepad(int id) : m_id(id) {
+	const char* gamepadName = glfwGetGamepadName(id);
+	if (gamepadName) {
+		m_name = std::string(gamepadName);
+	}
+	else {
+		m_name = "Unknown Gamepad";
+	}
+}
 
 void Gamepad::updateInputs(double dt) {
 	NTSHENGN_UNUSED(dt);
@@ -66,4 +74,8 @@ float Gamepad::getGamepadLeftTrigger() {
 
 float Gamepad::getGamepadRightTrigger() {
 	return (m_currentState.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] + 1.0f) / 2.0f;
+}
+
+std::string Gamepad::getGamepadName() {
+	return m_name;
 }
