@@ -61,9 +61,9 @@ float Gamepad::getGamepadStickAxisY(NtshEngn::InputGamepadStick stick) {
 }
 
 float Gamepad::getGamepadLeftTrigger() {
-	return m_currentState.axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER] + 1.0f / 2.0f;
+	return (m_currentState.axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER] + 1.0f) / 2.0f;
 }
 
 float Gamepad::getGamepadRightTrigger() {
-	return m_currentState.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] + 1.0f / 2.0f;
+	return (m_currentState.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] + 1.0f) / 2.0f;
 }
