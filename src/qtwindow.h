@@ -30,11 +30,11 @@ public:
 	int getCursorXPosition();
 	int getCursorYPosition();
 
-	void setCursorVisibility(bool visible);
-	bool isCursorVisible();
-
 	float getMouseScrollOffsetX();
 	float getMouseScrollOffsetY();
+
+	void setCursorVisibility(bool visible);
+	bool isCursorVisible();
 
 private:
 	NtshEngn::InputState nextInputState(NtshEngn::InputState inputState);

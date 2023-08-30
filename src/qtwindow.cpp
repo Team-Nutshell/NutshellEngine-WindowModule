@@ -76,6 +76,14 @@ int QtWindow::getCursorYPosition() {
 	return m_cursorY;
 }
 
+float QtWindow::getMouseScrollOffsetX() {
+	return m_scrollX;
+}
+
+float QtWindow::getMouseScrollOffsetY() {
+	return m_scrollY;
+}
+
 void QtWindow::setCursorVisibility(bool visible) {
 	if (!isCursorVisible() && visible) {
 		setCursor(QCursor());
@@ -89,14 +97,6 @@ void QtWindow::setCursorVisibility(bool visible) {
 
 bool QtWindow::isCursorVisible() {
 	return m_cursorVisible;
-}
-
-float QtWindow::getMouseScrollOffsetX() {
-	return m_scrollX;
-}
-
-float QtWindow::getMouseScrollOffsetY() {
-	return m_scrollY;
 }
 
 NtshEngn::InputState QtWindow::nextInputState(NtshEngn::InputState inputState) {
