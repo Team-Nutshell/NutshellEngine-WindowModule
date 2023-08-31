@@ -25,7 +25,7 @@ NtshEngn::WindowID NtshEngn::WindowModule::openWindow(int width, int height, con
 	NTSHENGN_UNUSED(title);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 
-	return std::numeric_limits<WindowID>::max();
+	return NTSHENGN_WINDOW_UNKNOWN;
 }
 
 bool NtshEngn::WindowModule::isWindowOpen(WindowID windowID) {
@@ -43,7 +43,7 @@ void NtshEngn::WindowModule::closeWindow(WindowID windowID) {
 NtshEngn::WindowID NtshEngn::WindowModule::getMainWindowID() {
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 
-	return std::numeric_limits<WindowID>::max();
+	return NTSHENGN_WINDOW_UNKNOWN;
 }
 
 uint64_t NtshEngn::WindowModule::windowCount() {
@@ -285,7 +285,7 @@ std::string NtshEngn::WindowModule::getGamepadName(GamepadID gamepadID) {
 	NTSHENGN_UNUSED(gamepadID);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 
-	return std::string();
+	return "";
 }
 
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getWindowNativeHandle(WindowID windowID) {
