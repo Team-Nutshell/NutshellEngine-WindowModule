@@ -121,7 +121,7 @@ namespace NtshEngn {
 	private:
 		std::unordered_map<WindowID, std::unique_ptr<GLFWWindow>> m_windows;
 
-		WindowID m_mainWindow = std::numeric_limits<WindowID>::max();
+		WindowID m_mainWindow = NTSHENGN_WINDOW_UNKNOWN;
 		WindowID m_windowID = 0;
 
 		std::unordered_map<GamepadID, std::unique_ptr<Gamepad>> m_gamepads;

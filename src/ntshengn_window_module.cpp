@@ -56,7 +56,7 @@ void NtshEngn::WindowModule::destroy() {
 NtshEngn::WindowID NtshEngn::WindowModule::openWindow(int width, int height, const std::string& title) {
 	m_windows[m_windowID] = std::make_unique<GLFWWindow>(width, height, title);
 
-	if (m_mainWindow == std::numeric_limits<WindowID>::max()) {
+	if (m_mainWindow == NTSHENGN_WINDOW_UNKNOWN) {
 		m_mainWindow = m_windowID;
 	}
 
