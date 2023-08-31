@@ -44,7 +44,7 @@ NtshEngn::WindowID NtshEngn::WindowModule::openWindow(int width, int height, con
 	m_windows[m_id] = std::make_unique<QtWindow>();
 	m_windows[m_id]->open(width, height, title);
 
-	if (m_mainWindow == std::numeric_limits<WindowID>::max()) {
+	if (m_mainWindow == NTSHENGN_WINDOW_UNKNOWN) {
 		m_mainWindow = m_id;
 	}
 

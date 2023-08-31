@@ -122,7 +122,7 @@ namespace NtshEngn {
 
 		std::unordered_map<WindowID, std::unique_ptr<QtWindow>> m_windows;
 
-		WindowID m_mainWindow = std::numeric_limits<WindowID>::max();
+		WindowID m_mainWindow = NTSHENGN_WINDOW_UNKNOWN;
 		WindowID m_id = 0;
 	};
 
