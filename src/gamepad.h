@@ -48,6 +48,7 @@ private:
 		{ GLFW_GAMEPAD_BUTTON_Y, NtshEngn::InputState::None },
 		{ GLFW_GAMEPAD_BUTTON_START, NtshEngn::InputState::None },
 		{ GLFW_GAMEPAD_BUTTON_BACK, NtshEngn::InputState::None },
+		{ GLFW_GAMEPAD_BUTTON_GUIDE, NtshEngn::InputState::None },
 		{ GLFW_GAMEPAD_BUTTON_LEFT_THUMB, NtshEngn::InputState::None },
 		{ GLFW_GAMEPAD_BUTTON_RIGHT_THUMB, NtshEngn::InputState::None },
 		{ GLFW_GAMEPAD_BUTTON_LEFT_BUMPER, NtshEngn::InputState::None },
