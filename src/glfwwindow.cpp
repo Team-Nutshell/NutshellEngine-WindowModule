@@ -29,8 +29,8 @@ bool GLFWWindow::shouldClose() {
 	return glfwWindowShouldClose(m_window);
 }
 
-void GLFWWindow::updateInputs(double dt) {
-	NTSHENGN_UNUSED(dt);
+void GLFWWindow::update() {
+	m_droppedFiles.clear();
 
 	for (auto& key : m_keyStateMap) {
 		key.second = nextInputState(key.second);

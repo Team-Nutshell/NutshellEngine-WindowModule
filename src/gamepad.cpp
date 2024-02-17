@@ -11,9 +11,7 @@ Gamepad::Gamepad(int id) : m_id(id) {
 	}
 }
 
-void Gamepad::updateInputs(double dt) {
-	NTSHENGN_UNUSED(dt);
-
+void Gamepad::update() {
 	glfwGetGamepadState(m_id, &m_currentState);
 
 	for (auto& button : m_gamepadButtonStateMap) {

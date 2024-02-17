@@ -9,7 +9,7 @@ class Gamepad {
 public:
 	Gamepad(int id);
 
-	void updateInputs(double dt);
+	void update();
 
 	NtshEngn::InputState getGamepadButtonState(NtshEngn::InputGamepadButton button);
 	float getGamepadStickAxisX(NtshEngn::InputGamepadStick stick);

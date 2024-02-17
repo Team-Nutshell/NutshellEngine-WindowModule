@@ -19,7 +19,7 @@ void NtshEngn::WindowModule::update(double dt) {
 			it = m_windows.erase(it);
 		}
 		else {
-			it->second->updateInputs(dt);
+			it->second->update();
 			it++;
 		}
 	}
@@ -42,7 +42,7 @@ void NtshEngn::WindowModule::update(double dt) {
 	}
 
 	for (auto& gamepad : m_gamepads) {
-		gamepad.second->updateInputs(dt);
+		gamepad.second->update();
 	}
 }
 

@@ -25,7 +25,7 @@ public:
 	void close();
 	bool shouldClose();
 
-	void updateInputs(double dt);
+	void update();
 
 	void setSize(int width, int height);
 	int getWidth();
