@@ -160,6 +160,12 @@ bool NtshEngn::WindowModule::isWindowResizable(WindowID windowID) {
 	return m_windows[windowID]->isResizable();
 }
 
+std::vector<std::string> NtshEngn::WindowModule::getWindowDroppedFiles(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+
+	return m_windows[windowID]->getDroppedFiles();
+}
+
 void NtshEngn::WindowModule::pollEvents() {
 	glfwPollEvents();
 }

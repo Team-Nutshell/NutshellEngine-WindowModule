@@ -57,6 +57,9 @@ namespace NtshEngn {
 		// Returns true if the window with identifier windowID is resizable, else, returns false
 		bool isWindowResizable(WindowID windowID);
 
+		// Returns the path to the files dropped on the window with identifier windowID
+		std::vector<std::string> getWindowDroppedFiles(WindowID windowID);
+
 		// Polls events of the window with identifier windowID
 		void pollEvents();
 

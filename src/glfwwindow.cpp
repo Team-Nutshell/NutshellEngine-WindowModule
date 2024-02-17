@@ -10,6 +10,7 @@ GLFWWindow::GLFWWindow(int width, int height, const std::string& title) {
 
 	glfwSetWindowPosCallback(m_window, windowPosCallback);
 	glfwSetFramebufferSizeCallback(m_window, framebufferSizeCallback);
+	glfwSetDropCallback(m_window, dropFilesCallback);
 	glfwSetKeyCallback(m_window, keyboardKeyCallback);
 	glfwSetMouseButtonCallback(m_window, mouseButtonCallback);
 	glfwSetCursorPosCallback(m_window, cursorPositionCallback);
@@ -107,6 +108,10 @@ bool GLFWWindow::isResizable() {
 	return glfwGetWindowAttrib(m_window, GLFW_RESIZABLE) == GLFW_TRUE;
 }
 
+std::vector<std::string> GLFWWindow::getDroppedFiles() {
+	return m_droppedFiles;
+}
+
 void GLFWWindow::setTitle(const std::string& title) {
 	glfwSetWindowTitle(m_window, title.c_str());
 }
@@ -172,6 +177,10 @@ void GLFWWindow::windowPosInternal(int newXPos, int newYPos) {
 void GLFWWindow::resizeInternal(int newWidth, int newHeight) {
 	m_width = newWidth;
 	m_height = newHeight;
+}
+
+void GLFWWindow::dropFilesInternal(std::vector<std::string>& droppedFiles) {
+	m_droppedFiles = droppedFiles;
 }
 
 void GLFWWindow::keyboardKeyInternal(int key, int action) {

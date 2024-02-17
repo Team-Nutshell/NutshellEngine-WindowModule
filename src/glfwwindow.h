@@ -13,6 +13,7 @@
 #undef None
 #undef Success
 #endif
+#include <vector>
 #include <string>
 #include <unordered_map>
 
@@ -44,6 +45,8 @@ public:
 	void setResizable(bool resizable);
 	bool isResizable();
 
+	std::vector<std::string> getDroppedFiles();
+
 	void setTitle(const std::string& title);
 	void setIcon(const NtshEngn::Image& image);
 
@@ -69,6 +72,9 @@ private:
 
 	// Window resize internal function used by callback
 	void resizeInternal(int newWidth, int newHeight);
+
+	// Drop files internal function used by callback
+	void dropFilesInternal(std::vector<std::string>& droppedFiles);
 
 	// Keyboard key input internal function used by callback
 	void keyboardKeyInternal(int key, int action);
@@ -100,6 +106,13 @@ private:
 		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->resizeInternal(width, height);
 	}
+
+	// Drop files callback
+	static void dropFilesCallback(GLFWwindow* window, int path_count, const char* paths[]) {
+		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		std::vector<std::string> filePaths(paths, paths + path_count);
+		ptr->dropFilesInternal(filePaths);
+	};
 
 	// Keyboard key callback
 	static void keyboardKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -139,6 +152,8 @@ private:
 
 	int m_width;
 	int m_height;
+
+	std::vector<std::string> m_droppedFiles;
 
 	int m_x = 0;
 	int m_y = 0;
