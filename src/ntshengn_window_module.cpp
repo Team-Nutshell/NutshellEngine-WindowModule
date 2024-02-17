@@ -133,6 +133,13 @@ bool NtshEngn::WindowModule::isWindowResizable(WindowID windowID) {
 	return false;
 }
 
+std::vector<std::string> NtshEngn::WindowModule::getWindowDroppedFiles(WindowID windowID) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return std::vector<std::string>();
+}
+
 void NtshEngn::WindowModule::pollEvents() {
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
