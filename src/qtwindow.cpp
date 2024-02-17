@@ -1,5 +1,6 @@
 #include "qtwindow.h"
 #include "../Common/utils/ntshengn_defines.h"
+#include <QMimeData>
 #include <QCursor>
 
 QtWindow::QtWindow(QWidget* parent) : QWidget(parent) {
@@ -9,6 +10,7 @@ QtWindow::QtWindow(QWidget* parent) : QWidget(parent) {
 void QtWindow::open(int width, int height, const std::string& title) {
 	setWindowTitle(QString::fromStdString(title));
 	resize(width, height);
+	setAcceptDrops(true);
 	show();
 }
 
@@ -20,8 +22,8 @@ void QtWindow::closeWindow() {
 	m_shouldClose = true;
 }
 
-void QtWindow::updateInputs(double dt) {
-	NTSHENGN_UNUSED(dt);
+void QtWindow::update() {
+	m_droppedFiles.clear();
 
 	for (auto& key : m_keyStateMap) {
 		key.second = nextInputState(key.second);
@@ -51,6 +53,10 @@ void QtWindow::setResizable(bool resizable) {
 
 bool QtWindow::isResizable() {
 	return !windowFlags().testFlag(Qt::MSWindowsFixedSizeDialogHint);
+}
+
+std::vector<std::string> QtWindow::getDroppedFiles() {
+	return m_droppedFiles;
 }
 
 NtshEngn::InputState QtWindow::getKeyState(NtshEngn::InputKeyboardKey key) {
@@ -113,6 +119,19 @@ NtshEngn::InputState QtWindow::nextInputState(NtshEngn::InputState inputState) {
 void QtWindow::closeEvent(QCloseEvent* event) {
 	closeWindow();
 	event->ignore();
+}
+
+void QtWindow::dragEnterEvent(QDragEnterEvent* event) {
+	if (event->mimeData()->hasUrls()) {
+		event->acceptProposedAction();
+	}
+}
+
+void QtWindow::dropEvent(QDropEvent* event) {
+	const QMimeData* mimeData = event->mimeData();
+	for (const QUrl& url : mimeData->urls()) {
+		m_droppedFiles.push_back(url.toLocalFile().toStdString());
+	}
 }
 
 void QtWindow::keyPressEvent(QKeyEvent* event) {

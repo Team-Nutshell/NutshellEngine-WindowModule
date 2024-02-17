@@ -25,7 +25,7 @@ void NtshEngn::WindowModule::update(double dt) {
 			it = m_windows.erase(it);
 		}
 		else {
-			it->second->updateInputs(dt);
+			it->second->update();
 			it++;
 		}
 	}
@@ -157,6 +157,12 @@ bool NtshEngn::WindowModule::isWindowResizable(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
 	return m_windows[windowID]->isResizable();
+}
+
+std::vector<std::string> NtshEngn::WindowModule::getWindowDroppedFiles(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+
+	return m_windows[windowID]->getDroppedFiles();
 }
 
 void NtshEngn::WindowModule::pollEvents() {

@@ -15,13 +15,15 @@ public:
 	bool shouldClose();
 	void closeWindow();
 
-	void updateInputs(double dt);
+	void update();
 
 	void setBorderless(bool borderless);
 	bool isBorderless();
 
 	void setResizable(bool resizable);
 	bool isResizable();
+
+	std::vector<std::string> getDroppedFiles();
 
 	NtshEngn::InputState getKeyState(NtshEngn::InputKeyboardKey key);
 	NtshEngn::InputState getMouseButtonState(NtshEngn::InputMouseButton mouseButton);
@@ -41,6 +43,8 @@ private:
 
 protected:
 	void closeEvent(QCloseEvent* event);
+	void dragEnterEvent(QDragEnterEvent* event);
+	void dropEvent(QDropEvent* event);
 	void keyPressEvent(QKeyEvent* event);
 	void keyReleaseEvent(QKeyEvent* event);
 	void mousePressEvent(QMouseEvent* event);
@@ -50,6 +54,8 @@ protected:
 
 private:
 	bool m_shouldClose = false;
+
+	std::vector<std::string> m_droppedFiles;
 
 	int m_cursorX = 0;
 	int m_cursorY = 0;
