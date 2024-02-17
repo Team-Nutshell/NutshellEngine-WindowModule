@@ -153,10 +153,10 @@ private:
 	int m_width;
 	int m_height;
 
-	std::vector<std::string> m_droppedFiles;
-
 	int m_x = 0;
 	int m_y = 0;
+
+	std::vector<std::string> m_droppedFiles;
 
 	int m_cursorX = 0;
 	int m_cursorY = 0;
