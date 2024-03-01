@@ -135,6 +135,10 @@ void QtWindow::dropEvent(QDropEvent* event) {
 }
 
 void QtWindow::keyPressEvent(QKeyEvent* event) {
+	if (event->isAutoRepeat()) {
+		return;
+	}
+
 	Qt::Key key = static_cast<Qt::Key>(event->key());
 	if (m_keyStateMap.find(key) != m_keyStateMap.end()) {
 		NtshEngn::InputState currentState = m_keyStateMap[key];
@@ -146,6 +150,10 @@ void QtWindow::keyPressEvent(QKeyEvent* event) {
 }
 
 void QtWindow::keyReleaseEvent(QKeyEvent* event) {
+	if (event->isAutoRepeat()) {
+		return;
+	}
+
 	Qt::Key key = static_cast<Qt::Key>(event->key());
 	if (m_keyStateMap.find(key) != m_keyStateMap.end()) {
 		NtshEngn::InputState currentState = m_keyStateMap[key];
