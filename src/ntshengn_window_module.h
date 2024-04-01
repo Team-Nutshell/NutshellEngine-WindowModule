@@ -52,6 +52,11 @@ namespace NtshEngn {
 		// Returns true if the window with identifier windowID is resizable, else, returns false
 		bool isWindowResizable(WindowID windowID);
 
+		// Sets the opacity of the window with identifier windowID
+		void setWindowOpacity(WindowID windowID, float opacity);
+		// Returns the opacity of the window with identifier windowID
+		float getWindowOpacity(WindowID windowID);
+
 		// Returns the path to the files dropped on the window with identifier windowID
 		std::vector<std::string> getWindowDroppedFiles(WindowID windowID);
 

@@ -133,6 +133,19 @@ bool NtshEngn::WindowModule::isWindowResizable(WindowID windowID) {
 	return false;
 }
 
+void NtshEngn::WindowModule::setWindowOpacity(WindowID windowID, float opacity) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_UNUSED(opacity);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+float NtshEngn::WindowModule::getWindowOpacity(WindowID windowID) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return 0.0f;
+}
+
 std::vector<std::string> NtshEngn::WindowModule::getWindowDroppedFiles(WindowID windowID) {
 	NTSHENGN_UNUSED(windowID);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
