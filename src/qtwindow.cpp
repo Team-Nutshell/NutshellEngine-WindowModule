@@ -5,12 +5,12 @@
 
 QtWindow::QtWindow(QWidget* parent) : QWidget(parent) {
 	setMouseTracking(true);
+	setAcceptDrops(true);
 }
 
 void QtWindow::open(int width, int height, const std::string& title) {
 	setWindowTitle(QString::fromStdString(title));
 	resize(width, height);
-	setAcceptDrops(true);
 	show();
 }
 
