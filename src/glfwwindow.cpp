@@ -108,6 +108,14 @@ bool GLFWWindow::isResizable() {
 	return glfwGetWindowAttrib(m_window, GLFW_RESIZABLE) == GLFW_TRUE;
 }
 
+void GLFWWindow::setOpacity(float opacity) {
+	glfwSetWindowOpacity(m_window, opacity);
+}
+
+float GLFWWindow::getOpacity() {
+	return glfwGetWindowOpacity(m_window);
+}
+
 std::vector<std::string> GLFWWindow::getDroppedFiles() {
 	return m_droppedFiles;
 }

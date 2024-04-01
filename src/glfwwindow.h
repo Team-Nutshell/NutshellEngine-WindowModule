@@ -45,6 +45,9 @@ public:
 	void setResizable(bool resizable);
 	bool isResizable();
 
+	void setOpacity(float opacity);
+	float getOpacity();
+
 	std::vector<std::string> getDroppedFiles();
 
 	void setTitle(const std::string& title);
