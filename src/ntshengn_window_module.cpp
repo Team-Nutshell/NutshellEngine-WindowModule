@@ -187,6 +187,12 @@ void NtshEngn::WindowModule::setWindowTitle(WindowID windowID, const std::string
 	m_windows[windowID]->setWindowTitle(QString::fromStdString(title));
 }
 
+std::string NtshEngn::WindowModule::getWindowTitle(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+
+	return m_windows[windowID]->windowTitle().toStdString();
+}
+
 void NtshEngn::WindowModule::setWindowIcon(WindowID windowID, const Image& image) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
 
