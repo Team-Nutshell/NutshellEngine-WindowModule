@@ -163,6 +163,13 @@ void NtshEngn::WindowModule::setWindowTitle(WindowID windowID, const std::string
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
+std::string NtshEngn::WindowModule::getWindowTitle(WindowID windowID) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return std::string();
+}
+
 void NtshEngn::WindowModule::setWindowIcon(WindowID windowID, const Image& image) {
 	NTSHENGN_UNUSED(windowID);
 	NTSHENGN_UNUSED(image);
