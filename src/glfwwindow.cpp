@@ -5,6 +5,7 @@ GLFWWindow::GLFWWindow(int width, int height, const std::string& title) {
 	m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 	m_width = width;
 	m_height = height;
+	m_title = title;
 	glfwGetWindowPos(m_window, &m_x, &m_y);
 	glfwSetWindowUserPointer(m_window, this);
 
@@ -121,7 +122,12 @@ std::vector<std::string> GLFWWindow::getDroppedFiles() {
 }
 
 void GLFWWindow::setTitle(const std::string& title) {
+	m_title = title;
 	glfwSetWindowTitle(m_window, title.c_str());
+}
+
+std::string GLFWWindow::getTitle() {
+	return m_title;
 }
 
 void GLFWWindow::setIcon(const NtshEngn::Image& image) {

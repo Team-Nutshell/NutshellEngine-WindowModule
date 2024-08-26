@@ -51,6 +51,7 @@ public:
 	std::vector<std::string> getDroppedFiles();
 
 	void setTitle(const std::string& title);
+	std::string getTitle();
 	void setIcon(const NtshEngn::Image& image);
 
 	NtshEngn::InputState getKeyState(NtshEngn::InputKeyboardKey key);
@@ -160,6 +161,8 @@ private:
 	int m_y = 0;
 
 	std::vector<std::string> m_droppedFiles;
+
+	std::string m_title = "";
 
 	int m_cursorX = 0;
 	int m_cursorY = 0;
