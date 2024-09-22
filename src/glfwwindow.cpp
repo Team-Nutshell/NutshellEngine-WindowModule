@@ -253,7 +253,7 @@ NtshEngn::InputState GLFWWindow::nextInputState(NtshEngn::InputState inputState)
 NtshEngn::NativeWindowHandle GLFWWindow::getNativeHandle() {
 #if defined(NTSHENGN_OS_WINDOWS)
 	return glfwGetWin32Window(m_window);
-#elif defined(NTSHENGN_OS_LINUX)
+#elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
 	return reinterpret_cast<NtshEngn::NativeWindowHandle>(glfwGetX11Window(m_window));
 #endif
 }
@@ -261,7 +261,7 @@ NtshEngn::NativeWindowHandle GLFWWindow::getNativeHandle() {
 NtshEngn::NativeWindowAdditionalInformation GLFWWindow::getNativeAdditionalInformation() {
 #if defined(NTSHENGN_OS_WINDOWS)
 	return reinterpret_cast<NtshEngn::NativeWindowAdditionalInformation>(GetWindowLongPtr(glfwGetWin32Window(m_window), GWLP_HINSTANCE));
-#elif defined(NTSHENGN_OS_LINUX)
+#elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
 	return glfwGetX11Display();
 #endif
 }

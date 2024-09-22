@@ -5,11 +5,11 @@
 #include "../Common/resources/ntshengn_resources_graphics.h"
 #if defined(NTSHENGN_OS_WINDOWS)
 #define GLFW_EXPOSE_NATIVE_WIN32
-#elif defined(NTSHENGN_OS_LINUX)
+#elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
 #define GLFW_EXPOSE_NATIVE_X11
 #endif
 #include "../external/glfw/include/GLFW/glfw3native.h"
-#if defined(NTSHENGN_OS_LINUX)
+#if defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
 #undef None
 #undef Success
 #endif
