@@ -47,6 +47,10 @@ endif()
 
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+	find_package(Qt5 COMPONENTS X11Extras REQUIRED)
+endif()
+
 list(APPEND NTSHENGN_DEFINES NTSHENGN_CURRENT_MODULE_WINDOW)
 
 set(MODULE_SOURCES
@@ -66,6 +70,12 @@ target_link_libraries(${PROJECT_NAME}
 		Qt5::Core
 		Qt5::Gui
 		Qt5::Widgets)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+	target_link_libraries(${PROJECT_NAME}
+		PRIVATE
+			Qt5::X11Extras)
+endif()
 
 target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
