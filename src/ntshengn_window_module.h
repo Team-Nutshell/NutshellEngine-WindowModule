@@ -134,6 +134,8 @@ namespace NtshEngn {
 
 		WindowID m_mainWindow = NTSHENGN_WINDOW_UNKNOWN;
 		WindowID m_id = 0;
+
+		int m_argc = 0;
 	};
 
 }

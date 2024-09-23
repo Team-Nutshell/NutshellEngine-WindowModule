@@ -13,8 +13,7 @@
 #include <limits>
 
 void NtshEngn::WindowModule::init() {
-	int argc = 0;
-	m_application = std::make_unique<QApplication>(argc, nullptr);
+	m_application = std::make_unique<QApplication>(m_argc, nullptr);
 }
 
 void NtshEngn::WindowModule::update(double dt) {
