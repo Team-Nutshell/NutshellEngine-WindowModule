@@ -11,7 +11,7 @@ void NtshEngn::WindowModule::init() {
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 }
 
-void NtshEngn::WindowModule::update(double dt) {
+void NtshEngn::WindowModule::update(float dt) {
 	NTSHENGN_UNUSED(dt);
 
 	for (auto it = m_windows.begin(); it != m_windows.end(); ) {
