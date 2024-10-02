@@ -8,7 +8,7 @@ namespace NtshEngn {
 		WindowModule() : WindowModuleInterface("NutshellEngine Default Window Module") {}
 
 		void init();
-		void update(double dt);
+		void update(float dt);
 		void destroy();
 
 		// Opens a new window and returns a unique identifier

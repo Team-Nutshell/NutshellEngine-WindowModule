@@ -10,7 +10,7 @@ void NtshEngn::WindowModule::init() {
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
 
-void NtshEngn::WindowModule::update(double dt) {
+void NtshEngn::WindowModule::update(float dt) {
 	NTSHENGN_UNUSED(dt);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
