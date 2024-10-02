@@ -16,7 +16,7 @@ void NtshEngn::WindowModule::init() {
 	m_application = std::make_unique<QApplication>(m_argc, nullptr);
 }
 
-void NtshEngn::WindowModule::update(double dt) {
+void NtshEngn::WindowModule::update(float dt) {
 	NTSHENGN_UNUSED(dt);
 
 	for (auto it = m_windows.begin(); it != m_windows.end(); ) {

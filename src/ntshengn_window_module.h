@@ -12,7 +12,7 @@ namespace NtshEngn {
 		WindowModule() : WindowModuleInterface("NutshellEngine Qt5 Window Module") {}
 
 		void init();
-		void update(double dt);
+		void update(float dt);
 		void destroy();
 
 		// Opens a new window and returns a unique identifier
