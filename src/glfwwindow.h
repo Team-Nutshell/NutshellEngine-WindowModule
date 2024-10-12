@@ -160,6 +160,11 @@ private:
 	int m_x = 0;
 	int m_y = 0;
 
+	int m_savedWidth;
+	int m_savedHeight;
+	int m_savedX;
+	int m_savedY;
+
 	std::vector<std::string> m_droppedFiles;
 
 	std::string m_title = "";

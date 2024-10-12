@@ -76,16 +76,15 @@ int GLFWWindow::getPositionY() {
 
 void GLFWWindow::setFullscreen(bool fullscreen) {
 	if (!isFullscreen() && fullscreen) {
-		glfwGetWindowPos(m_window, &m_x, &m_y);
-		glfwGetWindowSize(m_window, &m_width, &m_height);
+		glfwGetWindowPos(m_window, &m_savedX, &m_savedY);
+		glfwGetWindowSize(m_window, &m_savedWidth, &m_savedHeight);
 
 		GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
 		const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
 		glfwSetWindowMonitor(m_window, primaryMonitor, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
 	}
 	else if (!fullscreen && isFullscreen()) {
-		GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
-		glfwSetWindowMonitor(m_window, primaryMonitor, m_x, m_y, m_width, m_height, GLFW_DONT_CARE);
+		glfwSetWindowMonitor(m_window, NULL, m_savedX, m_savedY, m_savedWidth, m_savedHeight, GLFW_DONT_CARE);
 	}
 }
 
