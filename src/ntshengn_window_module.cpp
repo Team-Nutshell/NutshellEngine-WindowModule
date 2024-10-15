@@ -55,7 +55,7 @@ bool NtshEngn::WindowModule::isWindowOpen(WindowID windowID) {
 }
 
 void NtshEngn::WindowModule::closeWindow(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 	
 	m_windows[windowID]->closeWindow();
 }
@@ -76,13 +76,13 @@ uint64_t NtshEngn::WindowModule::windowCount() {
 }
 
 void NtshEngn::WindowModule::setWindowSize(WindowID windowID, int width, int height) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->resize(width, height);
 }
 
 int NtshEngn::WindowModule::getWindowWidth(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	if (m_windows[windowID]->isMinimized()) {
 		return 0;
@@ -91,7 +91,7 @@ int NtshEngn::WindowModule::getWindowWidth(WindowID windowID) {
 }
 
 int NtshEngn::WindowModule::getWindowHeight(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	if (m_windows[windowID]->isMinimized()) {
 		return 0;
@@ -100,25 +100,25 @@ int NtshEngn::WindowModule::getWindowHeight(WindowID windowID) {
 }
 
 void NtshEngn::WindowModule::setWindowPosition(WindowID windowID, int x, int y) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->move(x, y);
 }
 
 int NtshEngn::WindowModule::getWindowPositionX(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->x();
 }
 
 int NtshEngn::WindowModule::getWindowPositionY(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->y();
 }
 
 void NtshEngn::WindowModule::setWindowFullscreen(WindowID windowID, bool fullscreen) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	if (fullscreen) {
 		m_windows[windowID]->showFullScreen();
@@ -129,49 +129,49 @@ void NtshEngn::WindowModule::setWindowFullscreen(WindowID windowID, bool fullscr
 }
 
 bool NtshEngn::WindowModule::isWindowFullscreen(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->isFullScreen();
 }
 
 void NtshEngn::WindowModule::setWindowBorderless(WindowID windowID, bool borderless) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setBorderless(borderless);
 }
 
 bool NtshEngn::WindowModule::isWindowBorderless(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->isBorderless();
 }
 
 void NtshEngn::WindowModule::setWindowResizable(WindowID windowID, bool resizable) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setResizable(resizable);
 }
 
 bool NtshEngn::WindowModule::isWindowResizable(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->isResizable();
 }
 
 void NtshEngn::WindowModule::setWindowOpacity(WindowID windowID, float opacity) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setWindowOpacity(std::clamp(opacity, 0.0f, 1.0f));
 }
 
 float NtshEngn::WindowModule::getWindowOpacity(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return static_cast<float>(m_windows[windowID]->windowOpacity());
 }
 
 std::vector<std::string> NtshEngn::WindowModule::getWindowDroppedFiles(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getDroppedFiles();
 }
@@ -181,19 +181,19 @@ void NtshEngn::WindowModule::pollEvents() {
 }
 
 void NtshEngn::WindowModule::setWindowTitle(WindowID windowID, const std::string& title) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setWindowTitle(QString::fromStdString(title));
 }
 
 std::string NtshEngn::WindowModule::getWindowTitle(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->windowTitle().toStdString();
 }
 
 void NtshEngn::WindowModule::setWindowIcon(WindowID windowID, const Image& image) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	QImage im(image.data.data(), image.width, image.height, QImage::Format_RGBA8888);
 	QPixmap pixmap = QPixmap::fromImage(im);
@@ -202,55 +202,55 @@ void NtshEngn::WindowModule::setWindowIcon(WindowID windowID, const Image& image
 }
 
 NtshEngn::InputState NtshEngn::WindowModule::getKeyState(WindowID windowID, InputKeyboardKey key) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getKeyState(key);
 }
 
 NtshEngn::InputState NtshEngn::WindowModule::getMouseButtonState(WindowID windowID, InputMouseButton mouseButton) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getMouseButtonState(mouseButton);
 }
 
 void NtshEngn::WindowModule::setCursorPosition(WindowID windowID, int x, int y) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setCursorPosition(x, y);
 }
 
 int NtshEngn::WindowModule::getCursorPositionX(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getCursorXPosition();
 }
 
 int NtshEngn::WindowModule::getCursorPositionY(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getCursorYPosition();
 }
 
 float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getMouseScrollOffsetX();
 }
 
 float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getMouseScrollOffsetY();
 }
 
 void NtshEngn::WindowModule::setCursorVisibility(WindowID windowID, bool visible) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setCursorVisibility(visible);
 }
 
 bool NtshEngn::WindowModule::isCursorVisible(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->isCursorVisible();
 }
@@ -323,13 +323,13 @@ float NtshEngn::WindowModule::getMonitorDisplayScaling() {
 }
 
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getWindowNativeHandle(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return reinterpret_cast<NativeWindowHandle>(m_windows[windowID]->winId());
 }
 
 NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getWindowNativeAdditionalInformation(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 #if defined(NTSHENGN_OS_WINDOWS)
 	return reinterpret_cast<NativeWindowAdditionalInformation>(GetWindowLongPtr(reinterpret_cast<HWND>(m_windows[windowID]->winId()), GWLP_HINSTANCE));
