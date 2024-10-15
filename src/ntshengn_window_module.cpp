@@ -68,7 +68,7 @@ bool NtshEngn::WindowModule::isWindowOpen(WindowID windowID) {
 }
 
 void NtshEngn::WindowModule::closeWindow(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->close();
 }
@@ -89,91 +89,91 @@ uint64_t NtshEngn::WindowModule::windowCount() {
 }
 
 void NtshEngn::WindowModule::setWindowSize(WindowID windowID, int width, int height) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setSize(width, height);
 }
 
 int NtshEngn::WindowModule::getWindowWidth(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getWidth();
 }
 
 int NtshEngn::WindowModule::getWindowHeight(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getHeight();
 }
 
 void NtshEngn::WindowModule::setWindowPosition(WindowID windowID, int x, int y) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setPosition(x, y);
 }
 
 int NtshEngn::WindowModule::getWindowPositionX(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getPositionX();
 }
 
 int NtshEngn::WindowModule::getWindowPositionY(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getPositionY();
 }
 
 void NtshEngn::WindowModule::setWindowFullscreen(WindowID windowID, bool fullscreen) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setFullscreen(fullscreen);
 }
 
 bool NtshEngn::WindowModule::isWindowFullscreen(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->isFullscreen();
 }
 
 void NtshEngn::WindowModule::setWindowBorderless(WindowID windowID, bool borderless) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setBorderless(borderless);
 }
 
 bool NtshEngn::WindowModule::isWindowBorderless(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->isBorderless();
 }
 
 void NtshEngn::WindowModule::setWindowResizable(WindowID windowID, bool resizable) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setResizable(resizable);
 }
 
 bool NtshEngn::WindowModule::isWindowResizable(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->isResizable();
 }
 
 void NtshEngn::WindowModule::setWindowOpacity(WindowID windowID, float opacity) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setOpacity(std::clamp(opacity, 0.0f, 1.0f));
 }
 
 float NtshEngn::WindowModule::getWindowOpacity(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getOpacity();
 }
 
 std::vector<std::string> NtshEngn::WindowModule::getWindowDroppedFiles(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getDroppedFiles();
 }
@@ -183,73 +183,73 @@ void NtshEngn::WindowModule::pollEvents() {
 }
 
 void NtshEngn::WindowModule::setWindowTitle(WindowID windowID, const std::string& title) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setTitle(title);
 }
 
 std::string NtshEngn::WindowModule::getWindowTitle(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getTitle();
 }
 
 void NtshEngn::WindowModule::setWindowIcon(WindowID windowID, const Image& image) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setIcon(image);
 }
 
 NtshEngn::InputState NtshEngn::WindowModule::getKeyState(WindowID windowID, InputKeyboardKey key) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getKeyState(key);
 }
 
 NtshEngn::InputState NtshEngn::WindowModule::getMouseButtonState(WindowID windowID, InputMouseButton mouseButton) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getMouseButtonState(mouseButton);
 }
 
 void NtshEngn::WindowModule::setCursorPosition(WindowID windowID, int x, int y) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setCursorPosition(x, y);
 }
 
 int NtshEngn::WindowModule::getCursorPositionX(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getCursorPositionX();
 }
 
 int NtshEngn::WindowModule::getCursorPositionY(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getCursorPositionY();
 }
 
 float NtshEngn::WindowModule::getMouseScrollOffsetX(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getMouseScrollOffsetX();
 }
 
 float NtshEngn::WindowModule::getMouseScrollOffsetY(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getMouseScrollOffsetY();
 }
 
 void NtshEngn::WindowModule::setCursorVisibility(WindowID windowID, bool visible) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	m_windows[windowID]->setCursorVisibility(visible);
 }
 
 bool NtshEngn::WindowModule::isCursorVisible(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->isCursorVisible();
 }
@@ -265,37 +265,37 @@ std::vector<NtshEngn::GamepadID> NtshEngn::WindowModule::getConnectedGamepads() 
 }
 
 NtshEngn::InputState NtshEngn::WindowModule::getGamepadButtonState(GamepadID gamepadID, InputGamepadButton button) {
-	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end(), "GamepadID " + std::to_string(gamepadID) + " does not exist.");
 
 	return m_gamepads[gamepadID]->getGamepadButtonState(button);
 }
 
 float NtshEngn::WindowModule::getGamepadStickAxisX(GamepadID gamepadID, InputGamepadStick stick) {
-	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end(), "GamepadID " + std::to_string(gamepadID) + " does not exist.");
 
 	return m_gamepads[gamepadID]->getGamepadStickAxisX(stick);
 }
 
 float NtshEngn::WindowModule::getGamepadStickAxisY(GamepadID gamepadID, InputGamepadStick stick) {
-	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end(), "GamepadID " + std::to_string(gamepadID) + " does not exist.");
 
 	return m_gamepads[gamepadID]->getGamepadStickAxisY(stick);
 }
 
 float NtshEngn::WindowModule::getGamepadLeftTrigger(GamepadID gamepadID) {
-	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end(), "GamepadID " + std::to_string(gamepadID) + " does not exist.");
 
 	return m_gamepads[gamepadID]->getGamepadLeftTrigger();
 }
 
 float NtshEngn::WindowModule::getGamepadRightTrigger(GamepadID gamepadID) {
-	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end(), "GamepadID " + std::to_string(gamepadID) + " does not exist.");
 
 	return m_gamepads[gamepadID]->getGamepadRightTrigger();
 }
 
 std::string NtshEngn::WindowModule::getGamepadName(GamepadID gamepadID) {
-	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end());
+	NTSHENGN_ASSERT(m_gamepads.find(gamepadID) != m_gamepads.end(), "GamepadID " + std::to_string(gamepadID) + " does not exist.");
 
 	return m_gamepads[gamepadID]->getGamepadName();
 }
@@ -330,13 +330,13 @@ float NtshEngn::WindowModule::getMonitorDisplayScaling() {
 }
 
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getWindowNativeHandle(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
 	return m_windows[windowID]->getNativeHandle();
 }
 
 NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getWindowNativeAdditionalInformation(WindowID windowID) {
-	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end());
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 	
 	return m_windows[windowID]->getNativeAdditionalInformation();
 }
