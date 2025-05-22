@@ -199,11 +199,11 @@ void GLFWWindow::dropFilesInternal(std::vector<std::string>& droppedFiles) {
 void GLFWWindow::keyboardKeyInternal(int key, int action) {
 	if (m_keyStateMap.find(key) != m_keyStateMap.end()) {
 		NtshEngn::InputState currentState = m_keyStateMap[key];
-		if ((currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) && action == GLFW_PRESS) {
+		if (((currentState == NtshEngn::InputState::None) || (currentState == NtshEngn::InputState::Released)) && (action == GLFW_PRESS)) {
 			m_keyStateMap[key] = NtshEngn::InputState::Pressed;
 			m_keyStateMap[GLFW_KEY_LAST + 1] = NtshEngn::InputState::Pressed; // Any
 		}
-		else if ((currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) && action == GLFW_RELEASE) {
+		else if (((currentState == NtshEngn::InputState::Pressed) || (currentState == NtshEngn::InputState::Held)) && (action == GLFW_RELEASE)) {
 			m_keyStateMap[key] = NtshEngn::InputState::Released;
 			m_keyStateMap[GLFW_KEY_LAST + 1] = NtshEngn::InputState::Released; // Any
 		}
@@ -213,11 +213,11 @@ void GLFWWindow::keyboardKeyInternal(int key, int action) {
 void GLFWWindow::mouseButtonInternal(int button, int action) {
 	if (m_mouseButtonStateMap.find(button) != m_mouseButtonStateMap.end()) {
 		NtshEngn::InputState currentState = m_mouseButtonStateMap[button];
-		if ((currentState == NtshEngn::InputState::None || currentState == NtshEngn::InputState::Released) && action == GLFW_PRESS) {
+		if (((currentState == NtshEngn::InputState::None) || (currentState == NtshEngn::InputState::Released)) && (action == GLFW_PRESS)) {
 			m_mouseButtonStateMap[button] = NtshEngn::InputState::Pressed;
 			m_mouseButtonStateMap[GLFW_MOUSE_BUTTON_LAST + 1] = NtshEngn::InputState::Pressed; // Any
 		}
-		else if ((currentState == NtshEngn::InputState::Pressed || currentState == NtshEngn::InputState::Held) && action == GLFW_RELEASE) {
+		else if (((currentState == NtshEngn::InputState::Pressed) || (currentState == NtshEngn::InputState::Held)) && (action == GLFW_RELEASE)) {
 			m_mouseButtonStateMap[button] = NtshEngn::InputState::Released;
 			m_mouseButtonStateMap[GLFW_MOUSE_BUTTON_LAST + 1] = NtshEngn::InputState::Released; // Any
 		}
