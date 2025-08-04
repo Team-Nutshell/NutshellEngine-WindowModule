@@ -120,6 +120,14 @@ std::vector<std::string> GLFWWindow::getDroppedFiles() {
 	return m_droppedFiles;
 }
 
+void GLFWWindow::setWindowFocus() {
+	glfwFocusWindow(m_window);
+}
+
+bool GLFWWindow::isWindowFocused() {
+	return glfwGetWindowAttrib(m_window, GLFW_FOCUSED) == GLFW_TRUE;
+}
+
 void GLFWWindow::setTitle(const std::string& title) {
 	m_title = title;
 	glfwSetWindowTitle(m_window, title.c_str());

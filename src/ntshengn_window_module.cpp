@@ -178,6 +178,18 @@ std::vector<std::string> NtshEngn::WindowModule::getWindowDroppedFiles(WindowID 
 	return m_windows[windowID]->getDroppedFiles();
 }
 
+void NtshEngn::WindowModule::setWindowFocus(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
+
+	m_windows[windowID]->setWindowFocus();
+}
+
+bool NtshEngn::WindowModule::isWindowFocused(WindowID windowID) {
+	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
+
+	return m_windows[windowID]->isWindowFocused();
+}
+
 void NtshEngn::WindowModule::pollEvents() {
 	glfwPollEvents();
 }

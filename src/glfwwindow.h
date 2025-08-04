@@ -17,7 +17,6 @@
 #include <string>
 #include <unordered_map>
 
-
 class GLFWWindow {
 public:
 	GLFWWindow(int width, int height, const std::string& title);
@@ -49,6 +48,9 @@ public:
 	float getOpacity();
 
 	std::vector<std::string> getDroppedFiles();
+
+	void setWindowFocus();
+	bool isWindowFocused();
 
 	void setTitle(const std::string& title);
 	std::string getTitle();
@@ -101,19 +103,19 @@ private:
 private:
 	// Position callback
 	static void windowPosCallback(GLFWwindow* window, int xpos, int ypos) {
-		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		GLFWWindow* ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->windowPosInternal(xpos, ypos);
 	}
 
 	// Resize callback
 	static void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
-		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		GLFWWindow* ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->resizeInternal(width, height);
 	}
 
 	// Drop files callback
 	static void dropFilesCallback(GLFWwindow* window, int path_count, const char* paths[]) {
-		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		GLFWWindow* ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		std::vector<std::string> filePaths(paths, paths + path_count);
 		ptr->dropFilesInternal(filePaths);
 	};
@@ -122,32 +124,32 @@ private:
 	static void keyboardKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 		NTSHENGN_UNUSED(scancode);
 		NTSHENGN_UNUSED(mods);
-		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		GLFWWindow* ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->keyboardKeyInternal(key, action);
 	}
 
 	// Mouse button callback
 	static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
 		NTSHENGN_UNUSED(mods);
-		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		GLFWWindow* ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->mouseButtonInternal(button, action);
 	}
 
 	// Mouse cursor position callback
 	static void cursorPositionCallback(GLFWwindow* window, double x, double y) {
-		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		GLFWWindow* ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->cursorPositionInternal(static_cast<int>(x), static_cast<int>(y));
 	}
 
 	// Scroll callback
 	static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
-		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		GLFWWindow* ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->scrollInternal(static_cast<float>(xoffset), static_cast<float>(yoffset));
 	}
 
 	// Window close callback
 	static void windowCloseCallback(GLFWwindow* window) {
-		auto ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+		GLFWWindow* ptr = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
 		ptr->windowCloseInternal();
 	}
 
