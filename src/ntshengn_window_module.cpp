@@ -153,6 +153,18 @@ std::vector<std::string> NtshEngn::WindowModule::getWindowDroppedFiles(WindowID 
 	return std::vector<std::string>();
 }
 
+void NtshEngn::WindowModule::setWindowFocus(WindowID windowID) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+}
+
+bool NtshEngn::WindowModule::isWindowFocused(WindowID windowID) {
+	NTSHENGN_UNUSED(windowID);
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return false;
+}
+
 void NtshEngn::WindowModule::pollEvents() {
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
 }
