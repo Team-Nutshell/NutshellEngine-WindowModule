@@ -12,31 +12,36 @@ Gamepad::Gamepad(int id) : m_id(id) {
 }
 
 void Gamepad::update() {
-	glfwGetGamepadState(m_id, &m_currentState);
+	if (glfwGetGamepadState(m_id, &m_currentState)) {
+		for (auto& button : m_gamepadButtonStateMap) {
+			if (button.first == GLFW_GAMEPAD_BUTTON_LAST + 1) {
+				continue;
+			}
 
-	for (auto& button : m_gamepadButtonStateMap) {
-		if (button.first == GLFW_GAMEPAD_BUTTON_LAST + 1) {
-			continue;
-		}
-
-		if (m_currentState.buttons[button.first] == GLFW_PRESS) {
-			if ((button.second == NtshEngn::InputState::None) || (button.second == NtshEngn::InputState::Released)) {
-				button.second = NtshEngn::InputState::Pressed;
-				m_gamepadButtonStateMap[GLFW_GAMEPAD_BUTTON_LAST + 1] = NtshEngn::InputState::Pressed; // Any
+			if (m_currentState.buttons[button.first] == GLFW_PRESS) {
+				if ((button.second == NtshEngn::InputState::None) || (button.second == NtshEngn::InputState::Released)) {
+					button.second = NtshEngn::InputState::Pressed;
+					m_gamepadButtonStateMap[GLFW_GAMEPAD_BUTTON_LAST + 1] = NtshEngn::InputState::Pressed; // Any
+				}
+				else if (button.second == NtshEngn::InputState::Pressed) {
+					button.second = NtshEngn::InputState::Held;
+				}
 			}
-			else if (button.second == NtshEngn::InputState::Pressed) {
-				button.second = NtshEngn::InputState::Held;
-			}
-		}
-		else if (m_currentState.buttons[button.first] == GLFW_RELEASE) {
-			if ((button.second == NtshEngn::InputState::Pressed) || (button.second == NtshEngn::InputState::Held)) {
-				button.second = NtshEngn::InputState::Released;
-				m_gamepadButtonStateMap[GLFW_GAMEPAD_BUTTON_LAST + 1] = NtshEngn::InputState::Released; // Any
-			}
-			else if (button.second == NtshEngn::InputState::Released) {
-				button.second = NtshEngn::InputState::None;
+			else if (m_currentState.buttons[button.first] == GLFW_RELEASE) {
+				if ((button.second == NtshEngn::InputState::Pressed) || (button.second == NtshEngn::InputState::Held)) {
+					button.second = NtshEngn::InputState::Released;
+					m_gamepadButtonStateMap[GLFW_GAMEPAD_BUTTON_LAST + 1] = NtshEngn::InputState::Released; // Any
+				}
+				else if (button.second == NtshEngn::InputState::Released) {
+					button.second = NtshEngn::InputState::None;
+				}
 			}
 		}
+	}
+	else {
+		// Gamepad has no mapping, set triggers to -1
+		m_currentState.axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER] = -1.0f;
+		m_currentState.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] = -1.0f;
 	}
 }
 
