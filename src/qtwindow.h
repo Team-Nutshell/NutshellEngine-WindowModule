@@ -117,6 +117,7 @@ private:
 		{ NtshEngn::InputKeyboardKey::NumMinus, Qt::Key_Minus },
 		{ NtshEngn::InputKeyboardKey::NumTimes, Qt::Key_Asterisk },
 		{ NtshEngn::InputKeyboardKey::NumDivision, Qt::Key_Slash },
+		{ NtshEngn::InputKeyboardKey::NumEnter, Qt::Key_Enter },
 		{ NtshEngn::InputKeyboardKey::Left, Qt::Key_Left },
 		{ NtshEngn::InputKeyboardKey::Right, Qt::Key_Right },
 		{ NtshEngn::InputKeyboardKey::Up, Qt::Key_Up },
