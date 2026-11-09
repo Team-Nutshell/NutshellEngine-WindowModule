@@ -82,19 +82,27 @@ void GLFWWindow::setFullscreen(bool fullscreen) {
 
 		GLFWmonitor* monitor = getMonitor();
 		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+#if defined(NTSHENGN_OS_WINDOWS)
 		int monitorX;
 		int monitorY;
 		glfwGetMonitorPos(monitor, &monitorX, &monitorY);
 		setBorderless(true);
 		setPosition(monitorX, monitorY);
 		setSize(mode->width, mode->height);
+#elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
+		glfwSetWindowMonitor(m_window, monitor, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+#endif
 
 		m_isFullscreen = true;
 	}
 	else if (isFullscreen() && !fullscreen) {
+#if defined(NTSHENGN_OS_WINDOWS)
 		setBorderless(m_savedBorderless);
 		setPosition(m_savedX, m_savedY);
 		setSize(m_savedWidth, m_savedHeight);
+#elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
+		glfwSetWindowMonitor(m_window, NULL, m_savedX, m_savedY, m_savedWidth, m_savedHeight, GLFW_DONT_CARE);
+#endif
 
 		m_isFullscreen = false;
 	}
