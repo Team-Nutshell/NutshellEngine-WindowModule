@@ -80,7 +80,7 @@ void GLFWWindow::setFullscreen(bool fullscreen) {
 		glfwGetWindowSize(m_window, &m_savedWidth, &m_savedHeight);
 		m_savedBorderless = isBorderless();
 
-		GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+		GLFWmonitor* monitor = getMonitor();
 		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 		int monitorX;
 		int monitorY;
@@ -267,6 +267,40 @@ NtshEngn::InputState GLFWWindow::nextInputState(NtshEngn::InputState inputState)
 	}
 
 	return inputState;
+}
+
+GLFWmonitor* GLFWWindow::getMonitor() {
+	int monitorCount;
+	GLFWmonitor** monitors = glfwGetMonitors(&monitorCount);
+	if (monitorCount <= 1) {
+		return glfwGetPrimaryMonitor();
+	}
+
+	uint32_t bestOverlap = 0;
+	uint32_t bestMonitor = 0;
+	for (int i = 0; i < monitorCount; i++) {
+		int monitorX0;
+		int monitorY0;
+		int monitorX1;
+		int monitorY1;
+		glfwGetMonitorPos(monitors[i], &monitorX0, &monitorY0);
+		const GLFWvidmode* videoMode = glfwGetVideoMode(monitors[i]);
+		monitorX1 = monitorX0 + videoMode->width;
+		monitorY1 = monitorY0 + videoMode->height;
+
+		int windowX0 = m_x;
+		int windowY0 = m_y;
+		int windowX1 = windowX0 + m_width;
+		int windowY1 = windowY0 + m_height;
+
+		uint32_t overlap = std::max(0, std::min(windowX1, monitorX1) - std::max(windowX0, monitorX0)) * std::max(0, std::min(windowY1, monitorY1) - std::max(windowY0, monitorY0));
+		if (overlap > bestOverlap) {
+			bestOverlap = overlap;
+			bestMonitor = i;
+		}
+	}
+
+	return monitors[bestMonitor];
 }
 
 NtshEngn::NativeWindowHandle GLFWWindow::getNativeHandle() {

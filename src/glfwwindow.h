@@ -100,6 +100,9 @@ private:
 	// Returns the next input state (Pressed -> Held, Released -> None)
 	NtshEngn::InputState nextInputState(NtshEngn::InputState inputState);
 
+	// Returns the monitor the window has the biggest overlap with
+	GLFWmonitor* getMonitor();
+
 private:
 	// Position callback
 	static void windowPosCallback(GLFWwindow* window, int xpos, int ypos) {
