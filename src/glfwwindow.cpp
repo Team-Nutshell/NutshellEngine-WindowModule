@@ -78,18 +78,30 @@ void GLFWWindow::setFullscreen(bool fullscreen) {
 	if (!isFullscreen() && fullscreen) {
 		glfwGetWindowPos(m_window, &m_savedX, &m_savedY);
 		glfwGetWindowSize(m_window, &m_savedWidth, &m_savedHeight);
+		m_savedBorderless = isBorderless();
 
-		GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
-		const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
-		glfwSetWindowMonitor(m_window, primaryMonitor, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+		GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+		int monitorX;
+		int monitorY;
+		glfwGetMonitorPos(monitor, &monitorX, &monitorY);
+		setBorderless(true);
+		setPosition(monitorX, monitorY);
+		setSize(mode->width, mode->height);
+
+		m_isFullscreen = true;
 	}
-	else if (!fullscreen && isFullscreen()) {
-		glfwSetWindowMonitor(m_window, NULL, m_savedX, m_savedY, m_savedWidth, m_savedHeight, GLFW_DONT_CARE);
+	else if (isFullscreen() && !fullscreen) {
+		setBorderless(m_savedBorderless);
+		setPosition(m_savedX, m_savedY);
+		setSize(m_savedWidth, m_savedHeight);
+
+		m_isFullscreen = false;
 	}
 }
 
 bool GLFWWindow::isFullscreen() {
-	return glfwGetWindowMonitor(m_window) != nullptr;
+	return m_isFullscreen;
 }
 
 void GLFWWindow::setBorderless(bool borderless) {

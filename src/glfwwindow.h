@@ -166,6 +166,7 @@ private:
 	int m_savedHeight;
 	int m_savedX;
 	int m_savedY;
+	bool m_savedBorderless;
 
 	std::vector<std::string> m_droppedFiles;
 
@@ -178,6 +179,8 @@ private:
 
 	float m_scrollX = 0.0f;
 	float m_scrollY = 0.0f;
+
+	bool m_isFullscreen = false;
 
 	std::unordered_map<NtshEngn::InputKeyboardKey, int> m_keyMap = { { NtshEngn::InputKeyboardKey::Any, GLFW_KEY_LAST + 1 },
 		{ NtshEngn::InputKeyboardKey::A, GLFW_KEY_A },
