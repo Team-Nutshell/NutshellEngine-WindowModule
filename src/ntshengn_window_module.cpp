@@ -359,9 +359,11 @@ NtshEngn::DisplayProtocol NtshEngn::WindowModule::getDisplayProtocol() {
 	else if (glfwGetPlatform() == GLFW_PLATFORM_X11) {
 		return DisplayProtocol::X11;
 	}
-#endif
 
 	return DisplayProtocol::Unknown;
+#else
+	return DisplayProtocol::Unknown;
+#endif
 }
 
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getWindowNativeHandle(WindowID windowID) {

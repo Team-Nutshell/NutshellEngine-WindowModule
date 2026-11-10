@@ -321,9 +321,12 @@ NtshEngn::NativeWindowHandle GLFWWindow::getNativeHandle() {
 	else if (glfwGetPlatform() == GLFW_PLATFORM_X11) {
 		return reinterpret_cast<NtshEngn::NativeWindowHandle>(glfwGetX11Window(m_window));
 	}
+	
+	return nullptr;
+#else
+	return nullptr;
 #endif
 
-	return nullptr;
 }
 
 NtshEngn::NativeWindowAdditionalInformation GLFWWindow::getNativeAdditionalInformation() {
@@ -336,7 +339,9 @@ NtshEngn::NativeWindowAdditionalInformation GLFWWindow::getNativeAdditionalInfor
 	else if (glfwGetPlatform() == GLFW_PLATFORM_X11) {
 		return glfwGetX11Display();
 	}
-#endif
 
 	return nullptr;
+#else
+	return nullptr;
+#endif
 }
