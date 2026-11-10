@@ -7,6 +7,7 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 #elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
 #define GLFW_EXPOSE_NATIVE_X11
+#define GLFW_EXPOSE_NATIVE_WAYLAND
 #endif
 #include "../external/glfw/include/GLFW/glfw3native.h"
 #if defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)

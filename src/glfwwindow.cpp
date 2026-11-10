@@ -90,7 +90,7 @@ void GLFWWindow::setFullscreen(bool fullscreen) {
 		setPosition(monitorX, monitorY);
 		setSize(mode->width, mode->height);
 #elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
-		glfwSetWindowMonitor(m_window, monitor, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+		glfwSetWindowMonitor(m_window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
 #endif
 
 		m_isFullscreen = true;
@@ -315,14 +315,28 @@ NtshEngn::NativeWindowHandle GLFWWindow::getNativeHandle() {
 #if defined(NTSHENGN_OS_WINDOWS)
 	return glfwGetWin32Window(m_window);
 #elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
-	return reinterpret_cast<NtshEngn::NativeWindowHandle>(glfwGetX11Window(m_window));
+	if (glfwGetPlatform() == GLFW_PLATFORM_WAYLAND) {
+		return reinterpret_cast<NtshEngn::NativeWindowHandle>(glfwGetWaylandWindow(m_window));
+	}
+	else if (glfwGetPlatform() == GLFW_PLATFORM_X11) {
+		return reinterpret_cast<NtshEngn::NativeWindowHandle>(glfwGetX11Window(m_window));
+	}
 #endif
+
+	return nullptr;
 }
 
 NtshEngn::NativeWindowAdditionalInformation GLFWWindow::getNativeAdditionalInformation() {
 #if defined(NTSHENGN_OS_WINDOWS)
 	return reinterpret_cast<NtshEngn::NativeWindowAdditionalInformation>(GetWindowLongPtr(glfwGetWin32Window(m_window), GWLP_HINSTANCE));
 #elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
-	return glfwGetX11Display();
+	if (glfwGetPlatform() == GLFW_PLATFORM_WAYLAND) {
+		return glfwGetWaylandDisplay();
+	}
+	else if (glfwGetPlatform() == GLFW_PLATFORM_X11) {
+		return glfwGetX11Display();
+	}
 #endif
+
+	return nullptr;
 }

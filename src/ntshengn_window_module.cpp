@@ -7,6 +7,14 @@
 #include <algorithm>
 
 void NtshEngn::WindowModule::init() {
+#if defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
+	if (glfwPlatformSupported(GLFW_PLATFORM_WAYLAND)) {
+		glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_WAYLAND);
+	}
+	else {
+		glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
+	}
+#endif
 	glfwInit();
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 }
@@ -339,6 +347,21 @@ float NtshEngn::WindowModule::getMonitorDisplayScaling() {
 	glfwGetMonitorContentScale(monitor, &scaleX, NULL);
 
 	return scaleX;
+}
+
+NtshEngn::DisplayProtocol NtshEngn::WindowModule::getDisplayProtocol() {
+#if defined(NTSHENGN_OS_WINDOWS)
+	return DisplayProtocol::Win32;
+#elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
+	if (glfwGetPlatform() == GLFW_PLATFORM_WAYLAND) {
+		return DisplayProtocol::Wayland;
+	}
+	else if (glfwGetPlatform() == GLFW_PLATFORM_X11) {
+		return DisplayProtocol::X11;
+	}
+#endif
+
+	return DisplayProtocol::Unknown;
 }
 
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getWindowNativeHandle(WindowID windowID) {
