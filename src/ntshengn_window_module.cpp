@@ -334,6 +334,16 @@ float NtshEngn::WindowModule::getMonitorDisplayScaling() {
 	return static_cast<float>(m_application->primaryScreen()->devicePixelRatio());
 }
 
+NtshEngn::DisplayProtocol NtshEngn::WindowModule::getDisplayProtocol() {
+#if defined(NTSHENGN_OS_WINDOWS)
+	return DisplayProtocol::Win32;
+#elif defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
+	return DisplayProtocol::X11;
+#else
+	return DisplayProtocol::Unknown;
+#endif
+}
+
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getWindowNativeHandle(WindowID windowID) {
 	NTSHENGN_ASSERT(m_windows.find(windowID) != m_windows.end(), "WindowID " + std::to_string(windowID) + " does not exist.");
 
@@ -347,6 +357,8 @@ NtshEngn::NativeWindowAdditionalInformation NtshEngn::WindowModule::getWindowNat
 	return reinterpret_cast<NativeWindowAdditionalInformation>(GetWindowLongPtr(reinterpret_cast<HWND>(m_windows[windowID]->winId()), GWLP_HINSTANCE));
 #elif defined (NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
 	return reinterpret_cast<NativeWindowAdditionalInformation>(QX11Info::display());
+#else
+	return nullptr;
 #endif
 }
 
