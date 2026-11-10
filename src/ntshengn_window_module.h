@@ -123,6 +123,8 @@ namespace NtshEngn {
 		// Returns the display scaling ratio of the main monitor
 		float getMonitorDisplayScaling();
 
+		// Returns the display protocol
+		DisplayProtocol getDisplayProtocol();
 		// Returns the native window handle of the window with identifier windowID
 		NativeWindowHandle getWindowNativeHandle(WindowID windowID);
 		// Returns the native window additional information of the window with identifier windowID

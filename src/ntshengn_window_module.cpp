@@ -327,6 +327,12 @@ std::string NtshEngn::WindowModule::getGamepadName(GamepadID gamepadID) {
 	return "";
 }
 
+NtshEngn::DisplayProtocol NtshEngn::WindowModule::getDisplayProtocol() {
+	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
+
+	return DisplayProtocol::Unknown;
+}
+
 NtshEngn::NativeWindowHandle NtshEngn::WindowModule::getWindowNativeHandle(WindowID windowID) {
 	NTSHENGN_UNUSED(windowID);
 	NTSHENGN_MODULE_FUNCTION_NOT_IMPLEMENTED();
