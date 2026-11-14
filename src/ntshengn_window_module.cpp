@@ -8,7 +8,7 @@
 
 void NtshEngn::WindowModule::init() {
 #if defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
-	if (glfwPlatformSupported(GLFW_PLATFORM_WAYLAND)) {
+	if (glfwPlatformSupported(GLFW_PLATFORM_WAYLAND) && (commandLine->get().find("-x11") == commandLine->get().end())) {
 		glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_WAYLAND);
 	}
 	else {
