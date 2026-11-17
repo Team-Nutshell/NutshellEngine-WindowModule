@@ -5,10 +5,11 @@
 #include "../Common/utils/ntshengn_enums.h"
 #include "../Common/resources/ntshengn_resources_graphics.h"
 #include <algorithm>
+#include <cstdlib>
 
 void NtshEngn::WindowModule::init() {
 #if defined(NTSHENGN_OS_LINUX) || defined(NTSHENGN_OS_FREEBSD)
-	if (glfwPlatformSupported(GLFW_PLATFORM_WAYLAND) && (commandLine->get().find("-x11") == commandLine->get().end())) {
+	if (glfwPlatformSupported(GLFW_PLATFORM_WAYLAND) && std::getenv("WAYLAND_DISPLAY") && (commandLine->get().find("-x11") == commandLine->get().end())) {
 		glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_WAYLAND);
 	}
 	else {
